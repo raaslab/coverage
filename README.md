@@ -17,5 +17,7 @@ params.txt
 - \<battery levels\>
 - \<file_name\>
 - \<file_path\>
+- \<polygon width\>
+- \<polygon length\>
 
 Examples can be seen in "./inputFiles" folder
