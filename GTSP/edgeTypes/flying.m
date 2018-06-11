@@ -1,4 +1,4 @@
-% makingSTWType1
+% flying
 % this will make a v_Adj with only UAV flights on it
 % INPUTS
 
