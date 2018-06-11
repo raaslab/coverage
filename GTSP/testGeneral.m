@@ -27,6 +27,7 @@ y1 = reshape(y, 1, [])
 [T, x3d, y3d, z3d] = tableMaking(x1, y1, numBatteryLevels);
 
 % creates 3D plots
+figure('Visible','off');
 h = scatter3(x3d, y3d, z3d);
 % creates new graph with existing points
 [G2, x2, y2] = graphMakingWPoints(h.XData, h.YData);

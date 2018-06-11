@@ -1,13 +1,12 @@
 % downUpFly
 % this will make a v_Adj with UAV land, takeoff, fly on it
-% THIS IS OBSOLETE!!!
 % INPUTS
 
 % OUTPUTS
 
-function [v_AdjNew, distances] = downUpFly(numPoints, numLevels, v_Adj, v_Cluster, timeTO, timeL, distances, v_ClusterLevels, rRate, UGVratio, groupedPoints)
+function [v_AdjNew, distances] = flyDownUp(numPoints, numLevels, v_Adj, v_Cluster, timeTO, timeL, distances, v_ClusterLevels, rRate, UGVratio, groupedPoints)
 
-v_Cluster = cell2mat(v_Cluster);
+% v_Cluster = cell2mat(v_Cluster);
 totalPoints = numPoints * numLevels;
 v_AdjNew(1:totalPoints, 1:totalPoints) = Inf;
 groupedPoints = cell2mat(groupedPoints);
@@ -49,3 +48,6 @@ end
 
 
 end
+
+
+

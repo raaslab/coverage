@@ -21,10 +21,10 @@ v_ClusterLevels = v_ClusterLevels';
 % creating flying edges (only UAV and bat' < bat)
 % edge types: These edges are also internal of clusters
 [F, allDistances] = flying(maxDistance, x, y, numPoints, numLevels, v_Cluster, v_ClusterLevels, groupedPoints); % fly
-% [DUF] = downUpFly(numPoints, numLevels, F, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints);
-% [DUFDU] = downUpFlyDownUp(); % downUpFlyDownUp
-[FDU] = flyDownUp(numPoints, numLevels, F, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints); % flyDownUp
-[DTU] = downTravelUp(numPoints, numLevels, F, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed); % downTravelUp
+[DUF] = downUpFly(numPoints, numLevels, type1, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed); % make these as the different combinations, such as downUpFly
+[DUFDU] = downUpFlyDownUp(); % downUpFlyDownUp
+[FDU] = flyDownUp(); % flyDownUp
+[DTU] = downTravelUp(); % downTravelUp
 
 % make these into functions for each type
 % edge type combos: These edges are only external edges
