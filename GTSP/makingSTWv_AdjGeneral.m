@@ -28,7 +28,7 @@ v_ClusterLevels = v_ClusterLevels';
 
 % make these into functions for each type
 % edge type combos: These edges are only external edges
-typeAEdge = typeA(F) % combinations of edge types above
+typeAEdge = typeA(F, v_Cluster) % combinations of edge types above
 typeBEdge = typeB(F, FDU)
 typeCEdge = typeC(FDU)
 typeDEdge = typeD(F, FDU)

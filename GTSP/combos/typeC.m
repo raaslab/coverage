@@ -1,7 +1,7 @@
 % typeC
 % creates fly, fly edge
 
-function [edge] = typeC(F)
+function [edge] = typeC(FDU)
 
 
 end

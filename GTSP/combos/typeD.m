@@ -1,7 +1,7 @@
 % typeD
 % creates fly, fly edge
 
-function [edge] = typeD(F)
+function [edge] = typeD(F, FDU)
 
 
 end
