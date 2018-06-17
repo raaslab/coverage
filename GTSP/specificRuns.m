@@ -8,6 +8,7 @@ data = readData('sampleInput.txt'); % get the size and shape from the data (this
 x = [data(:,1) data(:,3)]; % check if these are right
 y = [data(:,2) data(:,4)];
 max_Distance = maxDistance(x, y);
+max_Distance = ceil(max_Distance);
 G = 0;
 % x = 0;
 % y = 0;
