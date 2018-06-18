@@ -38,7 +38,6 @@ for j = 1:sites
     
 end
 
-% TODO: create correct adjacancy matrix for the battery level drops.
 maxDistancePerLevel = maxDistance/levels;
 outputEdges = [];
 groupedPoints = cell2mat(groupedPoints);

@@ -1,5 +1,5 @@
 % typeB
-% creates fly, fly edge
+% creates fly, fly, down, up edge
 
 function [edge] = typeB(F, FDU)
 

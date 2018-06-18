@@ -6,6 +6,9 @@
 % UGVSpeed = the time to travel one unit for the UGV (has to be greater than equal to 1)
 % OUTPUTS
 
+% SUPPRESSING ERRORS
+%#ok<*NASGU>
+
 
 function [v_AdjNew, v_Type, sNew, tNew, weights] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints)
 
@@ -41,7 +44,7 @@ clusterDirection = tempV_Cluster(:,2);
 
 % make these into functions for each type
 % edge type combos: These edges are only external edges
-typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints) % combinations of edge types above
+typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % combinations of edge types above
 typeBEdge = typeB(F, FDU)
 typeCEdge = typeC(FDU)
 typeDEdge = typeD(F, FDU)

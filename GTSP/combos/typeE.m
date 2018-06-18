@@ -1,5 +1,5 @@
 % typeE
-% creates fly, fly edge
+% creates fly, down, travel, up edge
 
 function [edge] = typeE(F, DTU)
 
