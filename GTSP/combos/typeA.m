@@ -2,7 +2,7 @@
 % creates fly, fly edge
 
 function [outputEdges] = typeA(F, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints)
-% create all possible fly edges and their costs
+
 sizeF = size(F);
 uniqueClusters = max(unique(v_Cluster));
 % for i = 1:
