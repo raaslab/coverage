@@ -6,7 +6,7 @@ function [distance] = maxDistance(x, y)
 
 distance = 0;
 for i = 1 : h1*w1
-    for j = i : h1*w1
+    for j = 1 : h1*w1
         testPoint  = [x(i), y(i); x(j), y(j)];
         distanceTemp = pdist(testPoint, 'euclidean');
         distance = max(distance, distanceTemp);

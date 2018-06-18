@@ -26,9 +26,22 @@ v_ClusterLevels = v_ClusterLevels';
 [FDU] = flyDownUp(numPoints, numLevels, F, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints); % flyDownUp
 [DTU] = downTravelUp(numPoints, numLevels, F, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints); % downTravelUp
 
+sizeOfv_Cluster = size(v_Cluster);
+tempV_Cluster = cell2mat(v_Cluster);
+for i = 1:sizeOfv_Cluster
+    if i > sizeOfv_Cluster/2
+        tempV_Cluster(i, 2) = 0;
+    else
+        tempV_Cluster(i, 2) = 1;
+    end
+end
+
+v_Cluster = tempV_Cluster(:,1);
+clusterDirection = tempV_Cluster(:,2);
+
 % make these into functions for each type
 % edge type combos: These edges are only external edges
-typeAEdge = typeA(F, v_Cluster) % combinations of edge types above
+typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPoints) % combinations of edge types above
 typeBEdge = typeB(F, FDU)
 typeCEdge = typeC(FDU)
 typeDEdge = typeD(F, FDU)

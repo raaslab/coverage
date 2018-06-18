@@ -37,7 +37,7 @@ totalPoints = numPoints * numLevels;
 tempv_AdjFinal = Inf(totalPoints);
 tempv_Adj(1:totalPoints, 1:numPoints) = 0;
 for i = 1:numPoints
-    fillArray = allDistances(i, :);
+    fillArray = allDistancesRounded(i, :);
     for j = 1:numLevels
         tempv_Adj((i-1)*numLevels+j, 1:numPoints) = fillArray;
     end
