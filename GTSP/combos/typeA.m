@@ -50,7 +50,7 @@ for i = 1:(sites*levels)
             outputEdges(i,j) = Inf;
         else
             numOfLevelsNeeded = ceil(edges(groupedPoints(i),groupedPoints(j))/maxDistancePerLevel);
-            outputEdges(i,j) = 1; % TODO: need to input right cost
+            outputEdges(i,j) = 1; % TODO: need to input right cost and if it is possible or not. This is going through all 24 not just 6.
         end
     end
 end
