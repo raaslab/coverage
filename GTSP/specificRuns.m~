@@ -2,8 +2,8 @@
 % this will run a specific case for if there's an error within "time"
 % variable
 clc; clear all; close all;
-addpath('edgeTypes')
-addpath('combos')
+addpath('edgeTypes)
+addpath(combos)
 data = readData('sampleInput.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
 x = [data(:,1) data(:,3)]; % check if these are right
