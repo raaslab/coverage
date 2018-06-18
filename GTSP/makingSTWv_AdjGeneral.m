@@ -41,7 +41,7 @@ clusterDirection = tempV_Cluster(:,2);
 
 % make these into functions for each type
 % edge type combos: These edges are only external edges
-typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPoints) % combinations of edge types above
+typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints) % combinations of edge types above
 typeBEdge = typeB(F, FDU)
 typeCEdge = typeC(FDU)
 typeDEdge = typeD(F, FDU)

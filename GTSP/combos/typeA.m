@@ -1,7 +1,7 @@
 % typeA
 % creates fly, fly edge
 
-function [edges] = typeA(F, v_Cluster, clusterDirection, distances, levels, sites)
+function [outputEdges] = typeA(F, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints)
 % create all possible fly edges and their costs
 sizeF = size(F);
 uniqueClusters = max(unique(v_Cluster));
@@ -39,4 +39,19 @@ for j = 1:sites
 end
 
 % TODO: create correct adjacancy matrix for the battery level drops.
+maxDistancePerLevel = maxDistance/levels;
+outputEdges = [];
+groupedPoints = cell2mat(groupedPoints);
+for i = 1:(sites*levels)
+    for j = 1:(sites*levels)
+        if v_Cluster(i) == v_Cluster(j)
+            outputEdges(i,j) = Inf;
+        elseif edges(groupedPoints(i),groupedPoints(j)) > maxDistance
+            outputEdges(i,j) = Inf;
+        else
+            numOfLevelsNeeded = ceil(edges(groupedPoints(i),groupedPoints(j))/maxDistancePerLevel);
+            outputEdges(i,j) = 1; % TODO: need to input right cost
+        end
+    end
+end
 end
