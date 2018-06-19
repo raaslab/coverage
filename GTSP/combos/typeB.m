@@ -1,7 +1,7 @@
 % typeB
 % creates fly, fly, down, up edge
 
-function [edge] = typeB(F, FDU, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints)
+function [edge] = typeB(F, FDU, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints, typeA, TO, L, RR)
 
 sizeF = size(F);
 uniqueClusters = max(unique(v_Cluster));
@@ -18,7 +18,7 @@ for j = 1:sites
             if point1 == i || point2 == i
                 edges(point1, i) = Inf;
             else
-                edges(point1, i) = costTemp + distances(point1, i);
+                edges(point1, i) = costTemp + FDU(point1, i);
             end
         end
     else
@@ -31,12 +31,20 @@ for j = 1:sites
             if point1 == i || point2 == i
                 edges(point1, i) = Inf;
             else
-                edges(point1, i) = costTemp + distances(point1, i);
+                edges(point1, i) = costTemp + FDU(point1, i);
             end
         end
     end
     
 end
+
+typeB =  typeA + TO + L;
+for i = 1:(sites*levels)
+    for j = 1:(sites*levels)
+        typeB(i,j) = 
+    end
+end
+rechargeTime = rRate*(k-lowestLevel)
 
 maxDistancePerLevel = maxDistance/levels;
 outputEdges = [];
