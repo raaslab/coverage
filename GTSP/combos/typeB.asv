@@ -42,13 +42,9 @@ typeB =  typeA;
 for i = 1:(sites*levels)
     for j = 1:(sites*levels)
         if v_Cluster(i) == v_Cluster(j)
-            typeB(i,j) = Inf;
-        elseif clusterLevels(i) > clusterLevels(j)
-            typeB(i,j) = Inf;
-        else
-            typeB(i,j) = 
+            type
         end
-        
+        typeB(i,j) = 
     end
 end
 rechargeTime = rRate*(k-lowestLevel)
