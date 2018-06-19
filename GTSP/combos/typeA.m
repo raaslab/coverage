@@ -6,7 +6,7 @@ function [outputEdges] = typeA(F, v_Cluster, clusterDirection, distances, levels
 sizeF = size(F);
 uniqueClusters = max(unique(v_Cluster));
 % for i = 1:
-edges = [];
+edges = zeros(sites);
 for j = 1:sites
     if j > uniqueClusters
         tempFind = (j - uniqueClusters);
@@ -39,7 +39,7 @@ for j = 1:sites
 end
 
 maxDistancePerLevel = maxDistance/levels;
-outputEdges = [];
+outputEdges = zeros(sites*levels);
 groupedPoints = cell2mat(groupedPoints);
 for i = 1:(sites*levels)
     for j = 1:(sites*levels)
@@ -50,7 +50,7 @@ for i = 1:(sites*levels)
         else
             numOfLevelsNeeded = ceil(edges(groupedPoints(i),groupedPoints(j))/maxDistancePerLevel);
             if clusterLevels(i) - clusterLevels(j) == numOfLevelsNeeded-1
-                outputEdges(i,j) = numOfLevelsNeeded;
+                outputEdges(i,j) = edges(groupedPoints(i),groupedPoints(j));
             else
                 outputEdges(i,j) = Inf;
             end
