@@ -57,26 +57,5 @@ for i = 1:(sites*levels)
         
     end
 end
-% rechargeTime = rRate*(k-lowestLevel)
-
-% maxDistancePerLevel = maxDistance/levels;
-% outputEdges = [];
-% groupedPoints = cell2mat(groupedPoints);
-% for i = 1:(sites*levels)
-%     for j = 1:(sites*levels)
-%         if v_Cluster(i) == v_Cluster(j)
-%             outputEdges(i,j) = Inf;
-%         elseif edges(groupedPoints(i),groupedPoints(j)) > maxDistance
-%             outputEdges(i,j) = Inf;
-%         else
-%             numOfLevelsNeeded = ceil(edges(groupedPoints(i),groupedPoints(j))/maxDistancePerLevel);
-%             if clusterLevels(i) - clusterLevels(j) == numOfLevelsNeeded-1
-%                 outputEdges(i,j) = numOfLevelsNeeded;
-%             else
-%                 outputEdges(i,j) = Inf;
-%             end
-%         end
-%     end
-% end
 
 end
