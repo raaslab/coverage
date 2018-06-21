@@ -8,7 +8,7 @@ function [v_AdjNew, distances] = flyDownUp(numPoints, numLevels, v_Adj, v_Cluste
 
 % v_Cluster = cell2mat(v_Cluster);
 totalPoints = numPoints * numLevels;
-v_AdjNew(1:totalPoints, 1:totalPoints) = Inf;
+v_AdjNew = v_Adj;
 groupedPoints = cell2mat(groupedPoints);
 
 for i = 1:totalPoints

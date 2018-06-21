@@ -24,15 +24,15 @@ method = 1;        % 1 = GLNS, 0 = concorde
 
 
 filename = ['rando1'];
-pathName = '/home/klyu/lab/heterogenous_teams/Heterogeneous-Teams/';
+pathName = '/home/klyu/lab/coverage/GTSP/';
 [ansTime,gtspMatrix,gtspTime] = testGeneral(i, j, filename, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName);
 
 
 
 roundedGtspMatrix = round(gtspMatrix);
 roundedGtspMatrix(roundedGtspMatrix == -1) = 999999;
-filename = ['rando2'];
+filename = ['rando2.gtsp'];
 createGTSPFile(filename,roundedGtspMatrix, i, j)
 filename = ['rando3'];
-f = fullfile('/home/klyu/lab/heterogenous_teams/Heterogeneous-Teams/', filename);
+f = fullfile(pathName, filename);
 save(f);
