@@ -6,8 +6,9 @@ addpath('edgeTypes')
 addpath('combos')
 data = readData('sampleInput.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
-x = [data(:,1) data(:,3)]; % check if these are right
-y = [data(:,2) data(:,4)];
+x = [data(:,1), data(:,4)];
+y = [data(:,2), data(:,5)];
+UGVCapable = [data(:,3), data(:,6)];
 max_Distance = maxDistance(x, y);
 max_Distance = ceil(max_Distance);
 G = 0;
