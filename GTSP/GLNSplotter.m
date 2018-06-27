@@ -90,6 +90,12 @@ axis equal
 
 
 hold on
+
+% TODO: transfer GLNS output points to the original graph
+% TODO: highlight edges based on type
+% TODO: add the polygon edges as well so that it is not just the GTSP edges
+
+
 % highlight edges for UAV
 % if isempty(S4) == 0                 %highlight type 2 edges
 %     highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
