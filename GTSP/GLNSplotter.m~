@@ -84,7 +84,7 @@ end
 
 GLNSg = addedge(GLNSg,S8,T8);
 figure(2)
-GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeColor', 'w');
+GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeCoi);
 axis equal
 
 
