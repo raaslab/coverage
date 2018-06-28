@@ -3,9 +3,27 @@ close all
 load rando1.mat
 GLNSSolution = [12, 7, 13, 25]
 
-
+v_Cluster = cell2mat(v_Cluster);
 GLNSSolution = fliplr(GLNSSolution);
 GLNSSolutionOriginalPoints = ceil(GLNSSolution./numBatteryLevels);
+
+orig_V_Cluster = zeros([numPointsInit, 1]);
+for i = 1:numPointsInit
+    orig_V_Cluster(i) = v_Cluster(i*numBatteryLevels);
+end
+
+GLNSSolutionWithAllPoints = GLNSSolutionOriginalPoints;
+counter = 1;
+for i = 1:length(GLNSSolutionOriginalPoints)
+    if GLNSSolutionOriginalPoints(i) > numPointsInit
+    
+    else
+        find(orig_V_Cluster(
+        GLNSSolutionWithAllPoints = [GLNSSolutionWithAllPoints(1:counter+1), tempNewData, GLNSSolutionWithAllPoints(counter+1:end)];
+        counter = counter+1;
+    end
+    
+end
 
 GLNSx = zeros(1,numel(x1)/2);
 GLNSy = zeros(1,numel(y1)/2);
@@ -18,7 +36,8 @@ for a = 1:(numPointsInit)+1
         GLNSy(a) = y1(a-1);
     end
 end
-
+GLNSx = circshift(GLNSx, -1);
+GLNSy = circshift(GLNSy, -1);
 % GLNSx(end+1) = 0;
 % GLNSy(end+1) = 0;
 GLNSg = digraph;
@@ -54,6 +73,10 @@ for a = 1:(numPointsInit/2)
         typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
         if typeChecker == 1
             S3(end+1) = a;
+            %             find(v_Cluster == a);
+            %             T3(end+1) = ;
+            %             S3(end+1) = ;
+            
             T3(end+1) = a+1;
         elseif typeChecker == 2
             S4(end+1) = a;
@@ -84,12 +107,18 @@ end
 
 GLNSg = addedge(GLNSg,S8,T8);
 figure(2)
-GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeCoi);
+GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeColor', 'w');
 axis equal
 
 
 
 hold on
+
+% TODO: transfer GLNS output points to the original graph
+% TODO: highlight edges based on type
+% TODO: add the polygon edges as well so that it is not just the GTSP edges
+
+
 % highlight edges for UAV
 % if isempty(S4) == 0                 %highlight type 2 edges
 %     highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
