@@ -1,10 +1,15 @@
 clear
 close all
+load rando3.mat
 load rando1.mat
-GLNSSolution = [12, 7, 13, 25]
+GLNSSolution = [40, 21, 11, 1, 81]
 
+
+while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
+    GLNSSolution = circshift(GLNSSolution, 1);
+end
 v_Cluster = cell2mat(v_Cluster);
-GLNSSolution = fliplr(GLNSSolution);
+% GLNSSolution = fliplr(GLNSSolution);
 GLNSSolutionOriginalPoints = ceil(GLNSSolution./numBatteryLevels);
 
 orig_V_Cluster = zeros([numPointsInit, 1]);
@@ -71,44 +76,40 @@ T5 = S3;
 T6 = S3;
 T7 = S3;
 
-for a = 1:(numPointsInit/2)
-    if GLNSSolutionOriginalPoints(a) > numel(x1)
-        
-    else
-        typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
-        if typeChecker == 1
-            S3(end+1) = a;
-            %             find(v_Cluster == a);
-            %             T3(end+1) = ;
-            %             S3(end+1) = ;
-            
-            T3(end+1) = a+1;
-        elseif typeChecker == 2
-            S4(end+1) = a;
-            T4(end+1) = a+1;
-        elseif typeChecker == 3
-            S5(end+1) = a;
-            T5(end+1) = a+1;
-        elseif typeChecker == 4
-            S6(end+1) = a;
-            T6(end+1) = a+1;
-        elseif typeChecker == 5
-            S7(end+1) = a;
-            T7(end+1) = a+1;
-        else
-            disp('error')
-        end
-    end
-end
-
-S8 = [];
-T8 = [];
-for i = 1:numel(GLNSx)
-    for j = i+1:numel(GLNSx)
-        S8(end+1) = i;
-        T8(end+1) = j;
-    end
-end
+% for a = 1:(numPointsInit/2)
+%     if GLNSSolutionOriginalPoints(a) > numel(x1)
+%         
+%     else
+%         typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
+%         if typeChecker == 1
+%             S3(end+1) = a;
+%             T3(end+1) = a+1;
+%         elseif typeChecker == 2
+%             S4(end+1) = a;
+%             T4(end+1) = a+1;
+%         elseif typeChecker == 3
+%             S5(end+1) = a;
+%             T5(end+1) = a+1;
+%         elseif typeChecker == 4
+%             S6(end+1) = a;
+%             T6(end+1) = a+1;
+%         elseif typeChecker == 5
+%             S7(end+1) = a;
+%             T7(end+1) = a+1;
+%         else
+%             disp('error')
+%         end
+%     end
+% end
+% 
+% S8 = [];
+% T8 = [];
+% for i = 1:numel(GLNSx)
+%     for j = i+1:numel(GLNSx)
+%         S8(end+1) = i;
+%         T8(end+1) = j;
+%     end
+% end
 
 % GLNSg = addedge(GLNSg,S8,T8);
 figure(2)

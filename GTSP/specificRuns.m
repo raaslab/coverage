@@ -15,9 +15,9 @@ G = 0;
 % x = 0;
 % y = 0;
 i = numClusters*2; % number of vertices needed to be multiplied by battery levels
-j = 4;             % number of battery levels
-tTO = 4;           % take off cost
-tL = 4;            % landing cost
+j = 10;             % number of battery levels
+tTO = 10;           % take off cost
+tL = 10;            % landing cost
 rRate = 0;         % rate of recharge
 UGVS = 1;          % time to travel one unit for the UGV
 method = 1;        % 1 = GLNS, 0 = concorde

@@ -22,8 +22,8 @@ for i = 1:numPointsInit*numBatteryLevels
     nodeArray(end+1) = i;
 end
 nodeArray = nodeArray';
-x1 = reshape(x, 1, [])
-y1 = reshape(y, 1, [])
+x1 = reshape(x, 1, []);
+y1 = reshape(y, 1, []);
 [T, x3d, y3d, z3d] = tableMaking(x1, y1, numBatteryLevels);
 
 % creates 3D plots
