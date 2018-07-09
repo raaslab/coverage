@@ -2,7 +2,8 @@ clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [40, 21, 11, 1, 81]
+GLNSSolution = [50, 51, 21, 71, 81]
+
 
 
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
