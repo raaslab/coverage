@@ -2,15 +2,14 @@ clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [50, 51, 21, 71, 81]
-
+GLNSSolution = [23, 41, 1, 61]
 
 
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
     GLNSSolution = circshift(GLNSSolution, 1);
 end
 v_Cluster = cell2mat(v_Cluster);
-% GLNSSolution = fliplr(GLNSSolution);
+GLNSSolution = fliplr(GLNSSolution);
 GLNSSolutionOriginalPoints = ceil(GLNSSolution./numBatteryLevels);
 
 orig_V_Cluster = zeros([numPointsInit, 1]);

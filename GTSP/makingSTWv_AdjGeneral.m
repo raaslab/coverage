@@ -47,9 +47,10 @@ clusterDirection = tempV_Cluster(:,2);
 % combinations of edge types above
 typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
 typeBEdge = typeB(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
-typeCEdge = typeC(FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
-typeDEdge = typeD(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
-typeEEdge = typeE(F, DTU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
+% typeCEdge = typeC(FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
+% typeDEdge = typeD(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
+% typeEEdge = typeE(F, DTU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
+% TODO: fix typeC, typeD, typeE
 
 % creating charging edges (UAV riding UGV and charging/ bat' >= bat)
 % [type2] = makingSTWType2(numPoints, numLevels, type1, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed);
@@ -65,7 +66,7 @@ v_AdjNew(1:numOfTotalPoints, 1:numOfTotalPoints) = Inf;
 v_Type(1:numOfTotalPoints, 1:numOfTotalPoints) = 0;
 
 for i = 1:numberOfEdges
-    compare = [typeAEdge(i), typeBEdge(i), typeCEdge(i), typeDEdge(i), typeEEdge(i)]; % array of all types of edge
+    compare = [typeAEdge(i), typeBEdge(i)]; % array of all types of edge
     [v_AdjNew(i), v_Type(i)]= min(compare);
 end
 

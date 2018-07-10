@@ -10,9 +10,6 @@ groupedPoints = cell2mat(groupedPoints);
 for i = 1:(sites*levels)
     j = 1;
     while j < (sites*levels)+1
-        if j == 51
-            bEdge;
-        end
         if v_Cluster(i) == v_Cluster(j)
             bEdge(i,j) = Inf;
             j = j+1;

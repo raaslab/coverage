@@ -13,9 +13,6 @@ groupedPoints = cell2mat(groupedPoints);
 
 for i = 1:totalPoints
     for j = 1:numPoints
-        if i == 10
-            numPoints;
-        end
         if groupedPoints(i) ~= j
             pointA = i;
             pointB = find(groupedPoints == j);
@@ -25,6 +22,13 @@ for i = 1:totalPoints
             if lowestLevel == numLevels
                 for k = 1:numLevels
                     rechargeTime = rRate*(k-lowestLevel);
+                    UAVTravelTime = distances(groupedPoints(i), j);
+                    cost = UAVTravelTime + rechargeTime + timeTO + timeL;
+                    v_AdjNew(i, correctPointB(k)) = cost;
+                end
+            elseif ceil(distances(groupedPoints(i),j)) == v_ClusterLevels(i)
+                for k = 1:numLevels
+                    rechargeTime = rRate*(k-0);
                     UAVTravelTime = distances(groupedPoints(i), j);
                     cost = UAVTravelTime + rechargeTime + timeTO + timeL;
                     v_AdjNew(i, correctPointB(k)) = cost;
