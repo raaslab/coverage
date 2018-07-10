@@ -5,57 +5,34 @@
 
 function [bEdge] = typeB(F, FDU, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints, aEdge, TO, L, RR)
 
-sizeF = size(F);
-uniqueClusters = max(unique(v_Cluster));
-% for i = 1:
-edges = [];
-for j = 1:sites
-    if j > uniqueClusters
-        tempFind = (j - uniqueClusters);
-        sameCluster = find(v_Cluster == tempFind);
-        point2 = sameCluster(levels)/levels;
-        point1 = sameCluster(end)/levels;
-        costTemp = distances(point1, point2); % cost to go from one side of polygon to other side of polygon
-        for i = 1:sites
-            if point1 == i || point2 == i
-                edges(point1, i) = Inf;
-            else
-                edges(point1, i) = costTemp + distances(point1, i);
-            end
-        end
-    else
-        tempFind = j;
-        sameCluster = find(v_Cluster == tempFind);
-        point1 = sameCluster(levels)/levels;
-        point2 = sameCluster(end)/levels;
-        costTemp = distances(point1, point2); % cost to go from one side of polygon to other side of polygon
-        for i = 1:sites
-            if point1 == i || point2 == i
-                edges(point1, i) = Inf;
-            else
-                edges(point1, i) = costTemp + distances(point1, i);
-            end
-        end
-    end
-    
-end
-
 bEdge =  aEdge;
 groupedPoints = cell2mat(groupedPoints);
 for i = 1:(sites*levels)
-    for j = 1:(sites*levels)
+    j = 1;
+    while j < (sites*levels)+1
+        if j == 51
+            bEdge;
+        end
         if v_Cluster(i) == v_Cluster(j)
             bEdge(i,j) = Inf;
-        elseif clusterLevels(i) > clusterLevels(j)
-            bEdge(i,j) = Inf;
+            j = j+1;
         else
-            levelDif = abs(clusterLevels(i) - clusterLevels(j));
-            tempPoints = find(groupedPoints == groupedPoints(j));
-            minTempPoints = min(bEdge(i,tempPoints));
-            bEdge(i,j) = minTempPoints + TO + L + (levelDif*RR);
+            tempFind = v_Cluster(i);
+            tempLocations = find((v_Cluster == tempFind) & (groupedPoints ~= groupedPoints(i)));
+            if max(F(i,tempLocations) ~= Inf) == 1
+                tempTempLocations = find(F(i,tempLocations) ~= Inf);
+                middlePoint = tempLocations(tempTempLocations);
+                %                 for k = 1:length(tempLocations)
+                tempPossiblePaths = distances(groupedPoints(i),groupedPoints(middlePoint)) + FDU(middlePoint,j); % F + FDU
+                bEdge(i,j) = tempPossiblePaths;
+                j = j+1;
+                %                 end
+            else
+                bEdge(i,j) = Inf;
+                j = j+1;
+            end
+            
         end
-        
     end
 end
-
 end

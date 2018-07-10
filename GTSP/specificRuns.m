@@ -19,7 +19,7 @@ i = numClusters*2; % number of vertices needed to be multiplied by battery level
 j = 10;             % number of battery levels
 tTO = 10;           % take off cost
 tL = 10;            % landing cost
-rRate = 0;         % rate of recharge
+rRate = 1;         % rate of recharge
 UGVS = 1;          % time to travel one unit for the UGV
 method = 1;        % 1 = GLNS, 0 = concorde
 %     filename = [num2str(i) '_' num2str(j) 'GNLS' num2str(z)];
