@@ -1,6 +1,7 @@
 % specificRuns
 % this will run a specific case for if there's an error within "time"
 % variable
+dbstop error
 clc; clear all; close all;
 addpath('edgeTypes')
 addpath('combos')
