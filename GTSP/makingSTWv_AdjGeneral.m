@@ -44,11 +44,12 @@ clusterDirection = tempV_Cluster(:,2);
 
 % make these into functions for each type
 % edge type combos: These edges are only external edges
-typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % combinations of edge types above
-typeBEdge = typeB(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate);
-typeCEdge = typeC(FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate);
-typeDEdge = typeD(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate);
-typeEEdge = typeE(F, DTU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate);
+% combinations of edge types above
+typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
+typeBEdge = typeB(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
+typeCEdge = typeC(FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
+typeDEdge = typeD(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
+typeEEdge = typeE(F, DTU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
 
 % creating charging edges (UAV riding UGV and charging/ bat' >= bat)
 % [type2] = makingSTWType2(numPoints, numLevels, type1, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed);
