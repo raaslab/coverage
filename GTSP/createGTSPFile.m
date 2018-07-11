@@ -18,14 +18,6 @@ fprintf(fileID, '%d\n', matrix);
 fprintf(fileID, 'GTSP_SET_SECTION:\n');
 
 counter = 1;
-% for a = 1:(vertices)
-%     fprintf(fileID, '%d ', a);
-%     for b = 1:batteryLevels
-%         fprintf(fileID, '%d ', counter);
-%         counter = counter+1;
-%     end
-%     fprintf(fileID, '-1\n');
-% end
 for i = 1:(vertices/2)
     fprintf(fileID, '%d', i);
     tempSites = find(v_Clusters == i);
