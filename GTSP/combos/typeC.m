@@ -6,8 +6,6 @@ function [cType] = typeC(FDU, v_Cluster, clusterDirection, distances, levels, si
 groupedPoints = cell2mat(groupedPoints);
 cType = Inf(sites*levels);
 for i = 1:(sites*levels)
-    %     thisCluster = v_Cluster(i);
-    %     allThisCluster = find(v_Cluster == thisCluster);
     for j = 1:(sites*levels)
         firstLeg = [];
         indexOfFirstLeg = [];

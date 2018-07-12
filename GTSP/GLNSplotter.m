@@ -21,7 +21,7 @@ GLNSSolutionWithAllPoints = GLNSSolutionOriginalPoints;
 counter = 1;
 for i = 1:length(GLNSSolutionOriginalPoints)
     if GLNSSolutionOriginalPoints(i) > numPointsInit
-        counter = counter+1;;
+        counter = counter+1;
     else
         clusterToFind = orig_V_Cluster(GLNSSolutionOriginalPoints(i));
         tempNewData = find(orig_V_Cluster == clusterToFind);
