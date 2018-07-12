@@ -20,7 +20,7 @@ j = 10;             % number of battery levels
 tTO = 10;           % take off cost
 tL = 10;            % landing cost
 rRate = 1;         % rate of recharge
-UGVS = 1;          % time to travel one unit for the UGV
+UGVS = 2;          % time to travel one unit for the UGV (greater than 1 means UGV is slower)
 method = 1;        % 1 = GLNS, 0 = concorde
 %     filename = [num2str(i) '_' num2str(j) 'GNLS' num2str(z)];
 

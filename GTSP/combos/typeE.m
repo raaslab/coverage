@@ -3,30 +3,38 @@
 
 function [eType] = typeE(F, DTU, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints, aEdge, TO, L, RR)
 
-
-
 groupedPoints = cell2mat(groupedPoints);
 eType = Inf(sites*levels);
 for i = 1:(sites*levels)
-    %     thisCluster = v_Cluster(i);
-    %     allThisCluster = find(v_Cluster == thisCluster);
-    for j = 1:(sites*levels)
-        firstLeg = [];
-        indexOfFirstLeg = [];
-        for k = 1:(sites*levels)
-            if v_Cluster(i) == v_Cluster(k) && groupedPoints(i) ~= groupedPoints(k)
-                firstLeg(end+1) = F(i,k);
-                indexOfFirstLeg(end+1) = k;
+    j = 1;
+    while j < (sites*levels)+1
+        if v_Cluster(i) == v_Cluster(j)
+            eType(i,j) = Inf;
+            j = j+1;
+        else
+            tempFind = v_Cluster(i);
+            tempLocations = find((v_Cluster == tempFind) & (groupedPoints ~= groupedPoints(i)));
+            if max(F(i,tempLocations) ~= Inf) == 1
+                tempTempLocations = find(F(i,tempLocations) ~= Inf);
+                middlePoint = tempLocations(tempTempLocations);
+                tempPossiblePath = distances(groupedPoints(i),groupedPoints(middlePoint)) + DTU(middlePoint,j); % F + FDU
+                eType(i,j) = tempPossiblePath;
+                j = j+1;
+            else
+                eType(i,j) = Inf;
+                j = j+1;
             end
+            
         end
-        secondLeg = [];
-        for k = 1:length(firstLeg)
-            secondLeg(end+1) = DTU(indexOfFirstLeg(k),j);
-        end
-        bothLegs = firstLeg + secondLeg;
-        eType(i,j) = min(bothLegs);
     end
 end
 
+for i = 1:(sites*levels)
+    for j = 1:(sites*levels)
+        if groupedPoints(i) == groupedPoints(j)
+            eType(i,j) = Inf;
+        end
+    end
+end
 
 end

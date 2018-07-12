@@ -17,8 +17,8 @@ for i = 1:totalPoints
     for j = 1:totalPoints
         if v_ClusterLevels(j) >= v_ClusterLevels(i)
             rechargeTime = rRate*(v_ClusterLevels(j)-v_ClusterLevels(i));
-            UGVTravelTime = distances(groupedPoints(i), groupedPoints(j));
-            UGVTravelTime = UGVratio * UGVTravelTime;
+            UGVTravelDistance = distances(groupedPoints(i), groupedPoints(j));
+            UGVTravelTime = UGVratio * UGVTravelDistance;
             comparedTimes = [rechargeTime, UGVTravelTime];
             finalComparedTimes = max(comparedTimes);
             if finalComparedTimes ~= 0
@@ -31,8 +31,8 @@ end
 
 for i = 1:totalPoints
     for j = 1:totalPoints
-        if groupedPoints(i) == groupedPoints(j) || v_Cluster(i) == v_Cluster(j)
-            v_AdjNew(i, j) = Inf;
+        if groupedPoints(i) == groupedPoints(j)
+            v_AdjNew(i,j) = Inf;
         end
     end
 end
