@@ -4,7 +4,7 @@
 
 % OUTPUTS
 
-function [v_AdjNew, distances] = flyDownUp(numPoints, numLevels, v_Adj, v_Cluster, timeTO, timeL, distances, v_ClusterLevels, rRate, UGVratio, groupedPoints)
+function [v_AdjNew, distances] = flyDownUp(numPoints, numLevels, v_Adj, v_Cluster, timeTO, timeL, distances, v_ClusterLevels, rRate, UGVratio, groupedPoints, maxDistance)
 
 % v_Cluster = cell2mat(v_Cluster);
 totalPoints = numPoints * numLevels;
@@ -14,6 +14,9 @@ groupedPoints = cell2mat(groupedPoints);
 for i = 1:totalPoints
     for j = 1:numPoints
         if groupedPoints(i) ~= j
+            if j == 2 && i == 8
+                j;
+            end
             pointA = i;
             pointB = find(groupedPoints == j);
             correctPointB = flipud(pointB);
@@ -26,7 +29,7 @@ for i = 1:totalPoints
                     cost = UAVTravelTime + rechargeTime + timeTO + timeL;
                     v_AdjNew(i, correctPointB(k)) = cost;
                 end
-            elseif ceil(distances(groupedPoints(i),j)) == v_ClusterLevels(i)
+            elseif (distances(groupedPoints(i),j)/maxDistance > (v_ClusterLevels(i)-1)/numLevels) && (distances(groupedPoints(i),j)/maxDistance <= v_ClusterLevels(i)/numLevels) % something is wrong with how i find the difference between the values
                 for k = 1:numLevels
                     rechargeTime = rRate*(k-0);
                     UAVTravelTime = distances(groupedPoints(i), j);

@@ -2,7 +2,10 @@ clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [23, 41, 1, 61]
+GLNSSolution = [21, 41, 1, 61]
+
+
+
 
 
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
@@ -65,51 +68,55 @@ end
 
 GLNSg = addedge(GLNSg,S2,T2);
 
-S3 = [];
-S4 = S3;
-S5 = S3;
-S6 = S3;
-S7 = S3;
+S3 = []; % typeA
+S4 = S3; % typeB
+S5 = S3; % typeC
+S6 = S3; % typeD
+S7 = S3; % typeE
 T3 = S3;
 T4 = S3;
 T5 = S3;
 T6 = S3;
 T7 = S3;
 
-% for a = 1:(numPointsInit/2)
-%     if GLNSSolutionOriginalPoints(a) > numel(x1)
-%         
-%     else
-%         typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
-%         if typeChecker == 1
-%             S3(end+1) = a;
-%             T3(end+1) = a+1;
-%         elseif typeChecker == 2
-%             S4(end+1) = a;
-%             T4(end+1) = a+1;
-%         elseif typeChecker == 3
-%             S5(end+1) = a;
-%             T5(end+1) = a+1;
-%         elseif typeChecker == 4
-%             S6(end+1) = a;
-%             T6(end+1) = a+1;
-%         elseif typeChecker == 5
-%             S7(end+1) = a;
-%             T7(end+1) = a+1;
-%         else
-%             disp('error')
-%         end
-%     end
-% end
-% 
-% S8 = [];
-% T8 = [];
-% for i = 1:numel(GLNSx)
-%     for j = i+1:numel(GLNSx)
-%         S8(end+1) = i;
-%         T8(end+1) = j;
-%     end
-% end
+for a = 1:(numPointsInit/2)
+    if GLNSSolutionOriginalPoints(a) > numel(x1) || GLNSSolutionOriginalPoints(a+1) > numel(x1)
+        
+    else
+        typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
+        if typeChecker == 1
+            S3(end+1) = a;
+            T3(end+1) = a+1;
+        elseif typeChecker == 2
+            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
+            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
+            S4(end+1) = GLNSSolutionWithAllPoints(locationStart);
+            T4(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+            S4(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T4(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        elseif typeChecker == 3
+            S5(end+1) = a;
+            T5(end+1) = a+1;
+        elseif typeChecker == 4
+            S6(end+1) = a;
+            T6(end+1) = a+1;
+        elseif typeChecker == 5
+            S7(end+1) = a;
+            T7(end+1) = a+1;
+        else
+            disp('error')
+        end
+    end
+end
+
+S8 = [];
+T8 = [];
+for i = 1:numel(GLNSx)
+    for j = i+1:numel(GLNSx)
+        S8(end+1) = i;
+        T8(end+1) = j;
+    end
+end
 
 % GLNSg = addedge(GLNSg,S8,T8);
 figure(2)
@@ -126,16 +133,16 @@ hold on
 
 
 % highlight edges for UAV
-% if isempty(S4) == 0                 %highlight type 2 edges
-%     highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
-% end
-% if isempty(S5) == 0                 %highlight type 3 edges
-%     highlight(GLNSPlot,S5, T5,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
-% end
-% % highlighting edges for UGV
+if isempty(S4) == 0                 %highlight type 2 edges
+    highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
+end
+if isempty(S5) == 0                 %highlight type 3 edges
+    highlight(GLNSPlot,S5, T5,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
+end
+% highlighting edges for UGV
 % highlight(GLNSPlot, S8, T8, 'EdgeColor', 'r', 'LineWidth', 4)
 
-% highlight(GLNSPlot, S2)             %highlights nodes
-% highlight(GLNSPlot, numel(S2)+1)    %highlights last node
-% % close all;
+highlight(GLNSPlot, S2)             %highlights nodes
+highlight(GLNSPlot, numel(S2)+1)    %highlights last node
+% close all;
 
