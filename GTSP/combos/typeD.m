@@ -10,8 +10,10 @@ for i = 1:(sites*levels)
         firstLeg = [];
         indexOfFirstLeg = [];
         for k = 1:(sites*levels)
-            firstLeg(end+1) = FDU(i,k);
-            indexOfFirstLeg(end+1) = k;
+            if v_Cluster(i) == v_Cluster(k) && groupedPoints(i) ~= groupedPoints(k)
+                firstLeg(end+1) = FDU(i,k);
+                indexOfFirstLeg(end+1) = k;
+            end
         end
         secondLeg = [];
         for k = 1:length(firstLeg)
@@ -19,6 +21,14 @@ for i = 1:(sites*levels)
         end
         bothLegs = firstLeg + secondLeg;
         dType(i,j) = min(bothLegs);
+    end
+end
+
+for i = 1:(sites*levels)
+    for j = 1:(sites*levels)
+        if groupedPoints(i) == groupedPoints(j)
+            dType(i,j) = Inf;
+        end
     end
 end
 

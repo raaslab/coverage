@@ -49,7 +49,7 @@ typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPo
 typeBEdge = typeB(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
 typeCEdge = typeC(FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
 typeDEdge = typeD(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
-% typeEEdge = typeE(F, DTU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
+typeEEdge = typeE(F, DTU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
 % TODO: fix typeC, typeD, typeE
 
 % creating charging edges (UAV riding UGV and charging/ bat' >= bat)
