@@ -2,17 +2,24 @@ clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [21, 41, 1, 61]
+GLNSSolution =[101, 30, 159, 88, 201]
 
 
 
 
 
+
+
+
+
+
+
+% 
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
     GLNSSolution = circshift(GLNSSolution, 1);
 end
 v_Cluster = cell2mat(v_Cluster);
-GLNSSolution = fliplr(GLNSSolution);
+% GLNSSolution = fliplr(GLNSSolution);
 GLNSSolutionOriginalPoints = ceil(GLNSSolution./numBatteryLevels);
 
 orig_V_Cluster = zeros([numPointsInit, 1]);
@@ -51,8 +58,6 @@ for a = 1:(numPointsInit)+1
 end
 GLNSx = circshift(GLNSx, -1);
 GLNSy = circshift(GLNSy, -1);
-% GLNSx(end+1) = 0;
-% GLNSy(end+1) = 0;
 GLNSg = digraph;
 GLNSg = addnode(GLNSg, numPointsInit+1);
 figure(1)
@@ -84,25 +89,49 @@ for a = 1:(numPointsInit/2)
         
     else
         typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
-        if typeChecker == 1
-            S3(end+1) = a;
-            T3(end+1) = a+1;
-        elseif typeChecker == 2
+        if typeChecker == 1 % typeA
+            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
+            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
+            S3(end+1) = GLNSSolutionWithAllPoints(locationStart);
+            T3(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+            S3(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T3(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        elseif typeChecker == 2 % typeB
             locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
             locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
             S4(end+1) = GLNSSolutionWithAllPoints(locationStart);
             T4(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
             S4(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
             T4(end+1) = GLNSSolutionWithAllPoints(locationEnd);
-        elseif typeChecker == 3
-            S5(end+1) = a;
-            T5(end+1) = a+1;
-        elseif typeChecker == 4
-            S6(end+1) = a;
-            T6(end+1) = a+1;
-        elseif typeChecker == 5
-            S7(end+1) = a;
-            T7(end+1) = a+1;
+        elseif typeChecker == 3 % typeC
+            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
+            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
+            S5(end+1) = GLNSSolutionWithAllPoints(locationStart);
+            T5(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+            S5(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T5(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+%             S5(end+1) = a;
+%             T5(end+1) = a+1;
+        elseif typeChecker == 4 % typeD
+            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
+            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
+            S6(end+1) = GLNSSolutionWithAllPoints(locationStart);
+            T6(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+            S6(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T6(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+%             S6(end+1) = a;
+%             T6(end+1) = a+1;
+        elseif typeChecker == 5 % typeE
+            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
+            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
+            S7(end+1) = GLNSSolutionWithAllPoin
+% x = 0;ts(locationStart);
+            T7(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);[50, 11, 30, 71, 81]
+
+            S7(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T7(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+%             S7(end+1) = a;
+%             T7(end+1) = a+1;
         else
             disp('error')
         end
@@ -122,22 +151,29 @@ end
 figure(2)
 GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeColor', 'b');
 axis equal
+groupedPoints = cell2mat(groupedPoints);
 
-
+for i = 2:length(GLNSSolution)
+    text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(numBatteryLevels+1-mod(GLNSSolution(i),numBatteryLevels)), 'FontSize', 16)
+end
 
 hold on
 
-% TODO: transfer GLNS output points to the original graph
-% TODO: highlight edges based on type
-% TODO: add the polygon edges as well so that it is not just the GTSP edges
-
-
 % highlight edges for UAV
-if isempty(S4) == 0                 %highlight type 2 edges
+if isempty(S3) == 0                 %highlight type 1 edges: F-F
+    highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
+end
+if isempty(S4) == 0                 %highlight type 2 edges: F-FDU
     highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
 end
-if isempty(S5) == 0                 %highlight type 3 edges
-    highlight(GLNSPlot,S5, T5,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
+if isempty(S5) == 0                 %highlight type 3 edges: FDU-FDU
+    highlight(GLNSPlot,S5, T5,'EdgeColor','g','LineWidth',4, 'LineStyle', '-')
+end
+if isempty(S6) == 0                 %highlight type 4 edges: FDU-F
+    highlight(GLNSPlot,S6, T6,'EdgeColor','y','LineWidth',4, 'LineStyle', '-')
+end
+if isempty(S7) == 0                 %highlight type 5 edges: F-DTU
+    highlight(GLNSPlot,S7, T7,'EdgeColor','m','LineWidth',4, 'LineStyle', '-')
 end
 % highlighting edges for UGV
 % highlight(GLNSPlot, S8, T8, 'EdgeColor', 'r', 'LineWidth', 4)

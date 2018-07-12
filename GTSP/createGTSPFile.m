@@ -14,7 +14,7 @@ fprintf(fileID, 'GTSP_SETS: %d\n', (vertices/2)+1);
 fprintf(fileID, 'EDGE_WEIGHT_TYPE: EXPLICIT\n');
 fprintf(fileID, 'EDGE_WEIGHT_FORMAT: FULL_MATRIX\n');
 fprintf(fileID, 'EDGE_WEIGHT_SECTION\n');
-fprintf(fileID, '%d\n', matrix);
+fprintf(fileID, '%d\n', matrix');
 fprintf(fileID, 'GTSP_SET_SECTION:\n');
 
 counter = 1;
