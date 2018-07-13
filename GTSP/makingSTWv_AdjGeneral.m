@@ -44,9 +44,9 @@ clusterDirection = tempV_Cluster(:,2);
 % edge type combos: These edges are only external edges
 % combinations of edge types above
 typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
-typeBEdge = typeB(F, FDU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
-typeCEdge = typeC(FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
-typeDEdge = typeD(F, FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
+% typeBEdge = typeB(F, FDU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
+% typeCEdge = typeC(FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
+% typeDEdge = typeD(F, FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
 typeEEdge = typeE(F, DTU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
 
 % creating charging edges (UAV riding UGV and charging/ bat' >= bat)
@@ -63,7 +63,7 @@ v_AdjNew(1:numOfTotalPoints, 1:numOfTotalPoints) = Inf;
 v_Type(1:numOfTotalPoints, 1:numOfTotalPoints) = 0;
 
 for i = 1:numberOfEdges
-    compare = [typeAEdge(i), typeCEdge(i)]; % array of all types of edge
+    compare = [typeAEdge(i), typeEEdge(i)]; % array of all types of edge
     [v_AdjNew(i), v_Type(i)]= min(compare);
 end
 
