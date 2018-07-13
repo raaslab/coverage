@@ -6,7 +6,7 @@
 % OUTPUTS
 
 
-function [v_AdjNew] = downTravelUp(numPoints, numLevels, v_Adj, v_Cluster, timeTO, timeL, distances, v_ClusterLevels, rRate, UGVratio, groupedPoints)
+function [v_AdjNew] = downTravelUp(numPoints, numLevels, ~, v_Cluster, timeTO, timeL, distances, v_ClusterLevels, rRate, UGVratio, groupedPoints)
 
 v_Cluster = cell2mat(v_Cluster);
 totalPoints = numPoints * numLevels;
@@ -16,7 +16,7 @@ groupedPoints = cell2mat(groupedPoints);
 for i = 1:totalPoints
     for j = 1:totalPoints
         if v_ClusterLevels(j) >= v_ClusterLevels(i)
-            rechargeTime = rRate*(v_ClusterLevels(j)-v_ClusterLevels(i));
+            rechargeTime = rRate*(v_ClusterLevels(j)-v_ClusterLevels(i)+1);
             UGVTravelDistance = distances(groupedPoints(i), groupedPoints(j));
             UGVTravelTime = UGVratio * UGVTravelDistance;
             comparedTimes = [rechargeTime, UGVTravelTime];

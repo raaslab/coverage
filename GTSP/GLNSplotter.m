@@ -2,12 +2,7 @@ clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [31, 16, 41, 21, 6]
-
-
-
-
-
+GLNSSolution = [41, 16, 75, 30, 81]
 
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
     GLNSSolution = circshift(GLNSSolution, 1);

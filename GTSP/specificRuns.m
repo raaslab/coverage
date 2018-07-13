@@ -12,7 +12,7 @@ y = [data(:,2), data(:,5)];
 UGVCapable = [data(:,3), data(:,6)];
 max_Distance = maxDistance(x, y);
 max_Distance = ceil(max_Distance);
-max_Distance = 5;   % if max_Distance == j then discharge is unit rate per distance
+max_Distance = 10;   % if max_Distance == j then discharge is unit rate per distance
 G = 0;
 % x = 0;
 % y = 0;
@@ -20,7 +20,7 @@ i = numClusters*2; % number of vertices needed to be multiplied by battery level
 j = max_Distance;             % number of battery levels
 tTO = 10;           % take off cost
 tL = 10;            % landing cost
-rRate = 0;         % rate of recharge
+rRate = 100;         % rate of recharge
 UGVS = 1;          % time to travel one unit for the UGV (greater than 1 means UGV is slower)
 method = 1;        % 1 = GLNS, 0 = concorde
 %     filename = [num2str(i) '_' num2str(j) 'GNLS' num2str(z)];
