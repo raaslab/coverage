@@ -1,7 +1,7 @@
 % typeD
 % creates fly, down, up, fly edge
 
-function [dType] = typeD(F, FDU, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints, aEdge, TO, L, RR)
+function [dType] = typeD(F, FDU, v_Cluster, levels, sites, groupedPoints, aEdge, TO, L, RR)
 
 groupedPoints = cell2mat(groupedPoints);
 dType = Inf(sites*levels);

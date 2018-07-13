@@ -1,7 +1,7 @@
 % typeE
 % creates fly, down, travel, up edge
 
-function [eType] = typeE(F, DTU, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints, aEdge, TO, L, RR)
+function [eType] = typeE(F, DTU, v_Cluster, distances, levels, sites, groupedPoints, aEdge, TO, L, RR)
 
 groupedPoints = cell2mat(groupedPoints);
 eType = Inf(sites*levels);

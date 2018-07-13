@@ -2,14 +2,7 @@ clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution =[101, 30, 159, 88, 201]
-
-
-
-
-
-
-
+GLNSSolution = [1, 56, 25, 80, 81]
 
 
 
@@ -154,9 +147,8 @@ axis equal
 groupedPoints = cell2mat(groupedPoints);
 
 for i = 2:length(GLNSSolution)
-    text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(numBatteryLevels+1-mod(GLNSSolution(i),numBatteryLevels)), 'FontSize', 16)
+    text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(v_ClusterLevels(GLNSSolution(i))), 'FontSize', 16)
 end
-
 hold on
 
 % highlight edges for UAV

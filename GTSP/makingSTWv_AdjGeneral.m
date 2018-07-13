@@ -10,7 +10,7 @@
 %#ok<*NASGU>
 
 
-function [v_AdjNew, v_Type, sNew, tNew, weights] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints)
+function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints)
 
 v_ClusterLevels = [];
 for i = 1:numPoints
@@ -43,11 +43,11 @@ clusterDirection = tempV_Cluster(:,2);
 % make these into functions for each type
 % edge type combos: These edges are only external edges
 % combinations of edge types above
-typeAEdge = typeA(F, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
-% typeBEdge = typeB(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
-typeCEdge = typeC(FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
-% typeDEdge = typeD(F, FDU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
-% typeEEdge = typeE(F, DTU, v_Cluster, clusterDirection, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
+typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
+typeBEdge = typeB(F, FDU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
+typeCEdge = typeC(FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
+typeDEdge = typeD(F, FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
+typeEEdge = typeE(F, DTU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
 
 % creating charging edges (UAV riding UGV and charging/ bat' >= bat)
 % [type2] = makingSTWType2(numPoints, numLevels, type1, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed);

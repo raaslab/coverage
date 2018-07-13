@@ -1,7 +1,7 @@
 % typeC
 % creates fly, down, up, fly, down, up edge
 
-function [cType] = typeC(FDU, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints, aEdge, TO, L, RR)
+function [cType] = typeC(FDU, v_Cluster, levels, sites, groupedPoints, aEdge, TO, L, RR)
 
 groupedPoints = cell2mat(groupedPoints);
 cType = Inf(sites*levels);

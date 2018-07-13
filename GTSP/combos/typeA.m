@@ -1,11 +1,9 @@
 % typeA
 % creates fly, fly edge
 
-function [outputEdges] = typeA(F, v_Cluster, clusterDirection, distances, levels, sites, clusterLevels, maxDistance, groupedPoints)
+function [outputEdges] = typeA(v_Cluster, distances, levels, sites, clusterLevels, maxDistance, groupedPoints)
 
-sizeF = size(F);
 uniqueClusters = max(unique(v_Cluster));
-% for i = 1:
 edges = zeros(sites);
 for i = 1:sites
     if i > uniqueClusters
@@ -48,7 +46,7 @@ for i = 1:(sites*levels)
             outputEdges(i,j) = Inf;
         else
             numOfLevelsNeeded = ceil(edges(groupedPoints(i),groupedPoints(j))/maxDistancePerLevel);
-            if clusterLevels(i) - clusterLevels(j) == numOfLevelsNeeded-1
+            if clusterLevels(i) - clusterLevels(j) == numOfLevelsNeeded
                 outputEdges(i,j) = edges(groupedPoints(i),groupedPoints(j));
             else
                 outputEdges(i,j) = Inf;
