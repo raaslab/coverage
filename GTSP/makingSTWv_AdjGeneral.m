@@ -50,7 +50,7 @@ v_AdjNew(1:numOfTotalPoints, 1:numOfTotalPoints) = Inf;
 v_Type(1:numOfTotalPoints, 1:numOfTotalPoints) = 0;
 
 for i = 1:numberOfEdges
-    compare = [typeAEdge(i),typeBEdge,typeCEdge,typeDEdge,typeEEdge(i)]; % array of all types of edge
+    compare = [typeAEdge(i),typeBEdge(i),typeCEdge(i),typeDEdge(i),typeEEdge(i)]; % array of all types of edge
     [v_AdjNew(i), v_Type(i)]= min(compare);
 end
 

@@ -6,7 +6,8 @@ clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [21, 76, 81, 1, 56]
+GLNSSolution = [1, 56, 31, 66, 81]
+
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
