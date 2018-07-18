@@ -20,7 +20,7 @@ i = numClusters*2; % number of vertices needed to be multiplied by battery level
 j = max_Distance;             % number of battery levels
 tTO = 10;           % take off cost
 tL = 10;            % landing cost
-rRate = 100;         % rate of recharge
+rRate = 0;         % rate of recharge
 UGVS = 1;          % time to travel one unit for the UGV (greater than 1 means UGV is slower)
 method = 1;        % 1 = GLNS, 0 = concorde
 %     filename = [num2str(i) '_' num2str(j) 'GNLS' num2str(z)];
@@ -30,12 +30,11 @@ filename = ['rando1'];
 pathName = '/home/klyu/lab/coverageWork/coverage/GTSP';
 [ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName);
 
-
-
+% making GLNS matrix input
 roundedGtspMatrix = round(gtspMatrix);
 roundedGtspMatrix(roundedGtspMatrix == -1) = 999999;
 filename = ['/home/klyu/software/GLNS-master-15e0b991963271496d00b5177399961d11857d96/test/rando2.gtsp'];
-createGTSPFile(filename,roundedGtspMatrix, i, j, v_Cluster)
+createGTSPFile(filename,roundedGtspMatrix, i, j, v_Cluster) % creating GLNS file
 filename = ['rando3'];
 f = fullfile(pathName, filename);
 save(f);

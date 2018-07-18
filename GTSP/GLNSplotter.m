@@ -1,13 +1,18 @@
+% GLNSplotter.m
+% plots the output from the GLNS solver. This file requires the output from
+% GLNS in "GLNSSolution" and the two files rando3.mat and rando1.mat.
+
 clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [41, 16, 75, 30, 81]
+GLNSSolution = [21, 76, 81, 1, 56]
 
+v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
     GLNSSolution = circshift(GLNSSolution, 1);
 end
-v_Cluster = cell2mat(v_Cluster);
+GLNSSolution(end+1) = GLNSSolution(1);
 GLNSSolutionOriginalPoints = ceil(GLNSSolution./numBatteryLevels);
 
 orig_V_Cluster = zeros([numPointsInit, 1]);
@@ -54,7 +59,7 @@ axis equal
 title('Initial Graph Without Edge Costs Edges are Euclidean Distance Between Points')
 S2 = zeros(1,numel(GLNSx)-1);
 T2 = S2;
-for a = 1:numel(GLNSx)-1
+for a = 1:numel(GLNSx)
     S2(a) = GLNSSolutionWithAllPoints(a);
     T2(a) = GLNSSolutionWithAllPoints(a+1);
 end
@@ -72,58 +77,46 @@ T5 = S3;
 T6 = S3;
 T7 = S3;
 
-for a = 1:(numPointsInit/2)
-    if GLNSSolutionOriginalPoints(a) > numel(x1) || GLNSSolutionOriginalPoints(a+1) > numel(x1)
-        
+for a = 2:(numPointsInit/2)+1
+    if a == (numPointsInit/2)+1
+        typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
+        locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
+        locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1),1,'last');
     else
         typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
-        if typeChecker == 1 % typeA
-            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
-            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
-            S3(end+1) = GLNSSolutionWithAllPoints(locationStart);
-            T3(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-            S3(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-            T3(end+1) = GLNSSolutionWithAllPoints(locationEnd);
-        elseif typeChecker == 2 % typeB
-            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
-            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
-            S4(end+1) = GLNSSolutionWithAllPoints(locationStart);
-            T4(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-            S4(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-            T4(end+1) = GLNSSolutionWithAllPoints(locationEnd);
-        elseif typeChecker == 3 % typeC
-            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
-            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
-            S5(end+1) = GLNSSolutionWithAllPoints(locationStart);
-            T5(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-            S5(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-            T5(end+1) = GLNSSolutionWithAllPoints(locationEnd);
-%             S5(end+1) = a;
-%             T5(end+1) = a+1;
-        elseif typeChecker == 4 % typeD
-            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
-            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
-            S6(end+1) = GLNSSolutionWithAllPoints(locationStart);
-            T6(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-            S6(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-            T6(end+1) = GLNSSolutionWithAllPoints(locationEnd);
-%             S6(end+1) = a;
-%             T6(end+1) = a+1;
-        elseif typeChecker == 5 % typeE
-            locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
-            locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
-            S7(end+1) = GLNSSolutionWithAllPoin
-% x = 0;ts(locationStart);
-            T7(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);[50, 11, 30, 71, 81]
-
-            S7(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-            T7(end+1) = GLNSSolutionWithAllPoints(locationEnd);
-%             S7(end+1) = a;
-%             T7(end+1) = a+1;
-        else
-            disp('error')
-        end
+        locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
+        locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
     end
+    if typeChecker == 1 % typeA
+        S3(end+1) = GLNSSolutionWithAllPoints(locationStart);
+        T3(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+        S3(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+        T3(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+    elseif typeChecker == 2 % typeB
+        S4(end+1) = GLNSSolutionWithAllPoints(locationStart);
+        T4(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+        S4(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+        T4(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+    elseif typeChecker == 3 % typeC
+        
+        S5(end+1) = GLNSSolutionWithAllPoints(locationStart);
+        T5(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+        S5(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+        T5(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+    elseif typeChecker == 4 % typeD
+        S6(end+1) = GLNSSolutionWithAllPoints(locationStart);
+        T6(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+        S6(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+        T6(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+    elseif typeChecker == 5 % typeE
+        S7(end+1) = GLNSSolutionWithAllPoints(locationStart);
+        T7(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+        S7(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+        T7(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+    else
+        disp('error')
+    end
+    
 end
 
 S8 = [];
@@ -141,7 +134,7 @@ GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeColor', '
 axis equal
 groupedPoints = cell2mat(groupedPoints);
 
-for i = 2:length(GLNSSolution)
+for i = 2:length(GLNSSolution)-1
     text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(v_ClusterLevels(GLNSSolution(i))), 'FontSize', 16)
 end
 hold on
@@ -166,6 +159,6 @@ end
 % highlight(GLNSPlot, S8, T8, 'EdgeColor', 'r', 'LineWidth', 4)
 
 highlight(GLNSPlot, S2)             %highlights nodes
-highlight(GLNSPlot, numel(S2)+1)    %highlights last node
+highlight(GLNSPlot, numel(S2))    %highlights last node
 % close all;
 

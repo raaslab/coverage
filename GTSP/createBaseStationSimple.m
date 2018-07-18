@@ -34,6 +34,4 @@ end
 tempCostArray(end+1) = -1;
 v_Adj(end+1, :) = tempCostArray';
 
-
-
 end

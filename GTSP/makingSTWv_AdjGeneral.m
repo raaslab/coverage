@@ -6,11 +6,7 @@
 % UGVSpeed = the time to travel one unit for the UGV (has to be greater than equal to 1)
 % OUTPUTS
 
-% SUPPRESSING ERRORS
-%#ok<*NASGU>
-
-
-function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints)
+function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels, FDU] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints)
 
 v_ClusterLevels = [];
 for i = 1:numPoints
@@ -38,23 +34,14 @@ for i = 1:sizeOfv_Cluster
 end
 
 v_Cluster = tempV_Cluster(:,1);
-clusterDirection = tempV_Cluster(:,2);
 
-% make these into functions for each type
-% edge type combos: These edges are only external edges
-% combinations of edge types above
+% make these into functions for each type of edge combo
+% edge type combos: These edges are only external edges and the combination of the above edges
 typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
-% typeBEdge = typeB(F, FDU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
-% typeCEdge = typeC(FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
-% typeDEdge = typeD(F, FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
+typeBEdge = typeB(F, FDU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
+typeCEdge = typeC(FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
+typeDEdge = typeD(F, FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
 typeEEdge = typeE(F, DTU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
-
-% creating charging edges (UAV riding UGV and charging/ bat' >= bat)
-% [type2] = makingSTWType2(numPoints, numLevels, type1, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed);
-
-% creating charge vertex edges (UAV flying to vertex and then charging on UGV at
-% vertex/ bat' can be anything compared to bat)
-% [type3] = makingSTWType3(numPoints, numLevels, type1, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate);
 
 % pick the minimum cost edge here
 numOfTotalPoints = numPoints * numLevels;
@@ -63,7 +50,7 @@ v_AdjNew(1:numOfTotalPoints, 1:numOfTotalPoints) = Inf;
 v_Type(1:numOfTotalPoints, 1:numOfTotalPoints) = 0;
 
 for i = 1:numberOfEdges
-    compare = [typeAEdge(i), typeEEdge(i)]; % array of all types of edge
+    compare = [typeAEdge(i),typeBEdge,typeCEdge,typeDEdge,typeEEdge(i)]; % array of all types of edge
     [v_AdjNew(i), v_Type(i)]= min(compare);
 end
 
