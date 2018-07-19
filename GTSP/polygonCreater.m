@@ -4,23 +4,25 @@
 
 fileName = 'testInput.txt';
 numberOfPolygons = 10;
+randNum = 100;
+
 x1 = Inf([1,numberOfPolygons]);
 y1 = Inf([1,numberOfPolygons]);
 x2 = Inf([1,numberOfPolygons]);
 y2 = Inf([1,numberOfPolygons]);
-[x1, y1, x2, y2] = updateXYs(x1, y1, x2, y2, 1, 'rand', 1);
+[x1, y1, x2, y2] = updateXYs(x1, y1, x2, y2, 1, 'rand', 1, randNum);
 
 i = 2;
 while i < numberOfPolygons+1
     repeat = 0;
-    [x1, y1, x2, y2] = updateXYs(x1, y1, x2, y2, i, 'rand', 1);
+    [x1, y1, x2, y2] = updateXYs(x1, y1, x2, y2, i, 'rand', 1, randNum);
     newLine = [x1(i), y1(i), x2(i), y2(i)]; % get new line
     
     for j = 1:i-1
         tempLine = [x1(j), y1(j), x2(j), y2(j)]; % get all previous lines
         intersect = lineSegmentIntersect(tempLine, newLine); % check if lines intersect
         if intersect.intAdjacencyMatrix == 1
-            [x1, y1, x2, y2] = updateXYs(x1, y1, x2, y2, i, Inf, 0); % remove newline segment
+            [x1, y1, x2, y2] = updateXYs(x1, y1, x2, y2, i, Inf, 0, randNum); % remove newline segment
             repeat = 1;
             break;
         end
@@ -42,6 +44,7 @@ while i < numberOfPolygons+1
     clf
     hold on
     for j = 1:length(tempX1)
+        figure(1)
         plot([tempX1; tempX2], [tempY1; tempY2]);
     end
 end

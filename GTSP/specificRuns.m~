@@ -12,7 +12,7 @@ y = [data(:,2), data(:,5)];
 UGVCapable = [data(:,3), data(:,6)];
 max_Distance = maxDistance(x, y);
 max_Distance = ceil(max_Distance);
-max_Distance = 100;   % if max_Distance == j then discharge is unit rate per distance
+max_Distance = 10;   % if max_Distance == j then discharge is unit rate per distance
 G = 0;
 % x = 0;
 % y = 0;

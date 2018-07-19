@@ -6,7 +6,10 @@ clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [1, 56, 31, 66, 81]
+GLNSSolution = [1001, 528, 207, 485, 110, 646, 725, 1358, 1808, 1955, 2001]
+
+
+
 
 
 v_Cluster = cell2mat(v_Cluster);
