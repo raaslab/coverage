@@ -2,7 +2,7 @@
 % This adds the base station, but gives costs to go to the base station,
 % but not to come from the base station.
 
-function [v_Adj,v_Type] = createBaseStationComplex(v_Adj,numPoints,numLevels,FDU,v_Cluster,groupedPoints,x,y,UGVSpeed,maxDistance,v_Type)
+function [v_Adj,v_Type] = createBaseStationComplex(v_Adj,numPoints,numLevels,FDU,v_Cluster,groupedPoints,x,y,UGVSpeed,maxDistance,v_Type,F,v_ClusterLevels)
 
 
 numInV_Adj = numel(v_Adj);
@@ -42,7 +42,9 @@ for i = 1:(numPoints*numLevels)
     
     edgeE = pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') + (pdist([x(id2),y(id2);x(id3),y(id3)],'euclidean')*UGVSpeed);% F, DTU
     % check if E is possible
-    if pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') > maxDistance
+    if pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') > maxDistance % TODO: This needs to take into account the battery level
+        edgeE = Inf;
+    elseif pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') > (v_ClusterLevels(i)*(maxDistance/numLevels));
         edgeE = Inf;
     end
     

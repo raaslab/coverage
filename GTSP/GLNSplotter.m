@@ -6,11 +6,7 @@ clear
 close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [1001, 528, 207, 485, 110, 646, 725, 1358, 1808, 1955, 2001]
-
-
-
-
+GLNSSolution = [56, 23, 88, 89, 1]
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
@@ -80,7 +76,7 @@ T4 = S3;
 T5 = S3;
 T6 = S3;
 T7 = S3;
-
+impossible = 0;
 for a = 2:(numPointsInit/2)+1
     if a == (numPointsInit/2)+1
         typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
@@ -118,7 +114,9 @@ for a = 2:(numPointsInit/2)+1
         S7(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
         T7(end+1) = GLNSSolutionWithAllPoints(locationEnd);
     else
+        impossible = 1;
         disp('error')
+        break
     end
     
 end
@@ -132,37 +130,51 @@ for i = 1:numel(GLNSx)
     end
 end
 
-% GLNSg = addedge(GLNSg,S8,T8);
-figure(2)
-GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeColor', 'b');
-axis equal
-groupedPoints = cell2mat(groupedPoints);
+if impossible == 0
+    % GLNSg = addedge(GLNSg,S8,T8);
+    figure(2)
+    GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeColor', 'b');
+    GLNSPlot.NodeLabel = {};
+    axis equal
+    groupedPoints = cell2mat(groupedPoints);
+    
+    for i = 2:length(GLNSSolution)-1
+        text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(v_ClusterLevels(GLNSSolution(i))), 'FontSize', 16)
+    end
+    hold on
+    
+    % highlight edges for UAV
+    if isempty(S3) == 0                 %highlight type 1 edges: F-F
+        highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
+    end
+    if isempty(S4) == 0                 %highlight type 2 edges: F-FDU
+        highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
+    end
+    if isempty(S5) == 0                 %highlight type 3 edges: FDU-FDU
+        highlight(GLNSPlot,S5, T5,'EdgeColor','g','LineWidth',4, 'LineStyle', '-')
+    end
+    if isempty(S6) == 0                 %highlight type 4 edges: FDU-F
+        highlight(GLNSPlot,S6, T6,'EdgeColor','y','LineWidth',4, 'LineStyle', '-')
+    end
+    if isempty(S7) == 0                 %highlight type 5 edges: F-DTU
+        highlight(GLNSPlot,S7, T7,'EdgeColor','m','LineWidth',4, 'LineStyle', '-')
+    end
+    % highlighting edges for UGV
+    % highlight(GLNSPlot, S8, T8, 'EdgeColor', 'r', 'LineWidth', 4)
+    
+    highlight(GLNSPlot, S2)             %highlights nodes
+    highlight(GLNSPlot, numel(S2))    %highlights last node
+    
+    h = zeros(5, 1);
+    h(1) = plot(NaN,NaN,'b');
+    h(2) = plot(NaN,NaN,'r');
+    h(3) = plot(NaN,NaN,'g');
+    h(4) = plot(NaN,NaN,'y');
+    h(5) = plot(NaN,NaN,'m');
+    legend(h, 'F-F','F-FDU','FDU-FDU','FDU-F','F-DTU');
+else
+    disp('impossible input');
+end
 
-for i = 2:length(GLNSSolution)-1
-    text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(v_ClusterLevels(GLNSSolution(i))), 'FontSize', 16)
-end
-hold on
-
-% highlight edges for UAV
-if isempty(S3) == 0                 %highlight type 1 edges: F-F
-    highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
-end
-if isempty(S4) == 0                 %highlight type 2 edges: F-FDU
-    highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
-end
-if isempty(S5) == 0                 %highlight type 3 edges: FDU-FDU
-    highlight(GLNSPlot,S5, T5,'EdgeColor','g','LineWidth',4, 'LineStyle', '-')
-end
-if isempty(S6) == 0                 %highlight type 4 edges: FDU-F
-    highlight(GLNSPlot,S6, T6,'EdgeColor','y','LineWidth',4, 'LineStyle', '-')
-end
-if isempty(S7) == 0                 %highlight type 5 edges: F-DTU
-    highlight(GLNSPlot,S7, T7,'EdgeColor','m','LineWidth',4, 'LineStyle', '-')
-end
-% highlighting edges for UGV
-% highlight(GLNSPlot, S8, T8, 'EdgeColor', 'r', 'LineWidth', 4)
-
-highlight(GLNSPlot, S2)             %highlights nodes
-highlight(GLNSPlot, numel(S2))    %highlights last node
 % close all;
 

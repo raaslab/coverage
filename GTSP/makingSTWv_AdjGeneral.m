@@ -6,7 +6,7 @@
 % UGVSpeed = the time to travel one unit for the UGV (has to be greater than equal to 1)
 % OUTPUTS
 
-function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels, FDU] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints)
+function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels, FDU,F] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints)
 
 v_ClusterLevels = [];
 for i = 1:numPoints
