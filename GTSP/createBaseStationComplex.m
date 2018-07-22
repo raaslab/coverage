@@ -42,7 +42,7 @@ for i = 1:(numPoints*numLevels)
     
     edgeE = pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') + (pdist([x(id2),y(id2);x(id3),y(id3)],'euclidean')*UGVSpeed);% F, DTU
     % check if E is possible
-    if pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') > maxDistance % TODO: This needs to take into account the battery level
+    if pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') > maxDistance
         edgeE = Inf;
     elseif pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') > (v_ClusterLevels(i)*(maxDistance/numLevels));
         edgeE = Inf;
