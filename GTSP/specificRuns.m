@@ -5,19 +5,24 @@ dbstop error
 clc; clear all; close all;
 addpath('edgeTypes')
 addpath('combos')
-data = readData('sampleInput.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+
+polygonCreater('testInput.txt',3,100,1) % creates random polygons.
+
+% use 'testInput.txt' if you want the file from polygonCreater
+data = readData('testInput.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
 x = [data(:,1), data(:,4)];
 y = [data(:,2), data(:,5)];
 UGVCapable = [data(:,3), data(:,6)];
-max_Distance = maxDistance(x, y);
-max_Distance = ceil(max_Distance);
-max_Distance = 11;   % if max_Distance == j then discharge is unit rate per distance
+% max_Distance = maxDistance(x, y);
+% max_Distance = ceil(max_Distance);
+
+max_Distance = 100;   % if max_Distance == j then discharge is unit rate per distance
 G = 0;
 % x = 0;
 % y = 0;
 i = numClusters*2; % number of vertices needed to be multiplied by battery levels
-j = 11;             % number of battery levels
+j = 10;             % number of battery levels
 tTO = 1;           % take off cost
 tL = 1;            % landing cost
 rRate = 1;         % rate of recharge

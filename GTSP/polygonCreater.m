@@ -1,10 +1,13 @@
 % polygonCreater.m
 % creates n number of line segments which represent the middle line of a
 % polygon.
+% INPUT
+% fileName: the name of the file, saved in local directory
+% numberOfPolygons: the number of random rectangular strips
+% randNum: number is uniformily choosen from [1,randNum] when randomly created
+% showFigs: 1 == show, 0 == don't show
 
-fileName = 'testInput.txt';
-numberOfPolygons = 10;
-randNum = 100;
+function [] = polygonCreater(fileName,numberOfPolygons,randNum,showFigs)
 
 x1 = Inf([1,numberOfPolygons]);
 y1 = Inf([1,numberOfPolygons]);
@@ -46,6 +49,7 @@ while i < numberOfPolygons+1
     for j = 1:length(tempX1)
         figure(1)
         plot([tempX1; tempX2], [tempY1; tempY2]);
+        axis equal
     end
 end
 
@@ -53,3 +57,8 @@ ugvPossible1 = ones([1, length(x1)]);
 ugvPossible2 = ones([1, length(x2)]);
 
 createPolygonFile(fileName, x1, y1, ugvPossible1, x2, y2, ugvPossible2)
+if showFigs == 0
+    close all;
+end
+
+end

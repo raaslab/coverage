@@ -3,10 +3,16 @@
 % GLNS in "GLNSSolution" and the two files rando3.mat and rando1.mat.
 
 clear
-close all
+% close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [56, 23, 88, 89, 1]
+GLNSSolution = [11, 40, 53, 61]
+
+
+
+
+
+
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
@@ -53,10 +59,10 @@ GLNSx = circshift(GLNSx, -1);
 GLNSy = circshift(GLNSy, -1);
 GLNSg = digraph;
 GLNSg = addnode(GLNSg, numPointsInit+1);
-figure(1)
-plot(GLNSx, GLNSy,'.')
-axis equal
-title('Initial Graph Without Edge Costs Edges are Euclidean Distance Between Points')
+% figure(1)
+% plot(GLNSx, GLNSy,'.')
+% axis equal
+% title('Initial Graph Without Edge Costs Edges are Euclidean Distance Between Points')
 S2 = zeros(1,numel(GLNSx)-1);
 T2 = S2;
 for a = 1:numel(GLNSx)

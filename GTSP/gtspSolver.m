@@ -8,6 +8,15 @@
 % xOut = x point locations
 % yOut = y point locations corresponding to x
 % method = 1 is GLNS, 0 is concorde
+% FDU = is the Fly Down Up edge created in makingSTWv_AdjGeneral.m
+% groupedPoints = points grouped by original point not cluster
+% x = original location of x coordinates
+% y = original location of y coordinates
+% UGVSpeed = speed of UGV
+% maxDistance = budget of UAV
+% v_Type = type of edge being used same for v_AdjChecker
+% F = is the Fly edge created in makingSTWv_AdjGeneral
+% v_ClusterLevels = battery level of every site
 % OUTPUTS
 % finalMatrix = the matrix that will be used to create UAV/UGV tours
 % G_init = used for plotting purposes outside of the function

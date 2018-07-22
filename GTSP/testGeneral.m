@@ -42,6 +42,6 @@ gtspTime = toc;
 
 f = fullfile(pathName, filename);
 save(f);
-close all;
+
 end
 
