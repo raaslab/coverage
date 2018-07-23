@@ -6,11 +6,7 @@ clear
 % close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [11, 40, 53, 61]
-
-
-
-
+GLNSSolution = [51, 35, 50, 61]
 
 
 

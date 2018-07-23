@@ -14,9 +14,9 @@ fprintf(fileID, 'GTSP_SETS: %d\n', (vertices/2)+1);
 fprintf(fileID, 'EDGE_WEIGHT_TYPE: EXPLICIT\n');
 fprintf(fileID, 'EDGE_WEIGHT_FORMAT: FULL_MATRIX\n');
 fprintf(fileID, 'EDGE_WEIGHT_SECTION\n');
-% fprintf(fileID, '%d ', matrix');
+% fprintf(fileID, '%d\n', matrix');
 for i = 1:(vertices*batteryLevels)+1
-    fprintf(fileID, '%d ', matrix(i,:));
+    fprintf(fileID, '%d ', matrix(i,:)');
     fprintf(fileID, '\n');
 end
 
