@@ -27,18 +27,21 @@ tTO = 1;           % take off cost
 tL = 1;            % landing cost
 rRate = 1;         % rate of recharge
 UGVS = 1;          % time to travel one unit for the UGV (greater than 1 means UGV is slower)
-method = 1;        % 1 = GLNS, 0 = concorde
+method = 1;        % 1 = GLNS, 0 = con  corde
 %     filename = [num2str(i) '_' num2str(j) 'GNLS' num2str(z)];
 
 
 filename = ['rando1'];
-pathName = '/home/klyu/lab/coverageWork/coverage/GTSP';
+% pathName = '/home/klyu/lab/coverageWork/coverage/GTSP';
+pathName = '/home/klyu/lab/coverageWork/testForCoverage/errorInstance'; % for error instances
 [ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName);
 
 % making GLNS matrix input
 roundedGtspMatrix = round(gtspMatrix);
 roundedGtspMatrix(roundedGtspMatrix == -1) = 999999;
-filename = ['/home/klyu/software/GLNS-master-15e0b991963271496d00b5177399961d11857d96/test/rando2.gtsp'];
+roundedGtspMatrix(roundedGtspMatrix == Inf) = 999999;
+% filename = ['/home/klyu/software/GLNS-master-15e0b991963271496d00b5177399961d11857d96/test/rando2.gtsp'];
+filename = ['/home/klyu/lab/coverageWork/testForCoverage/errorInstance/rando2.gtsp'];
 createGTSPFile(filename,roundedGtspMatrix, i, j, v_Cluster) % creating GLNS file
 filename = ['rando3'];
 f = fullfile(pathName, filename);
