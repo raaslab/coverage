@@ -6,8 +6,7 @@ clear
 % close all
 load rando3.mat
 load rando1.mat
-GLNSSolution =  [21, 47, 1, 61]
-
+GLNSSolution =  [81, 162, 49, 128, 20, 201]
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
@@ -60,9 +59,9 @@ GLNSg = addnode(GLNSg, numPointsInit+1);
 % title('Initial Graph Without Edge Costs Edges are Euclidean Distance Between Points')
 S2 = zeros(1,numel(GLNSx)-1);
 T2 = S2;
-for a = 1:numel(GLNSx)
-    S2(a) = GLNSSolutionWithAllPoints(a);
-    T2(a) = GLNSSolutionWithAllPoints(a+1);
+for a = 2:numel(GLNSx)
+    S2(a-1) = GLNSSolutionWithAllPoints(a);
+    T2(a-1) = GLNSSolutionWithAllPoints(a+1);
 end
 
 GLNSg = addedge(GLNSg,S2,T2);

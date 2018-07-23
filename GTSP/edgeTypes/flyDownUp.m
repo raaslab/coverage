@@ -8,7 +8,8 @@ function [v_AdjNew, distances] = flyDownUp(numPoints, numLevels, v_Adj, v_Cluste
 
 % v_Cluster = cell2mat(v_Cluster);
 totalPoints = numPoints * numLevels;
-v_AdjNew = v_Adj;
+v_AdjTemp = v_Adj;
+v_AdjNew = v_Adj*Inf;
 groupedPoints = cell2mat(groupedPoints);
 
 for i = 1:totalPoints
@@ -20,7 +21,7 @@ for i = 1:totalPoints
             pointA = i;
             pointB = find(groupedPoints == j);
             correctPointB = flipud(pointB);
-            originalEdge = find(v_AdjNew(pointA, pointB(1):pointB(end)) ~= Inf); % Not based on only fly, but possible to fly
+            originalEdge = find(v_AdjTemp(pointA, pointB(1):pointB(end)) ~= Inf); % Not based on only fly, but possible to fly
             lowestLevel = v_ClusterLevels(pointB(originalEdge));
             if lowestLevel == numLevels
                 for k = 1:numLevels
