@@ -1,4 +1,4 @@
-% GLNSplotter.m
+    % GLNSplotter.m
 % plots the output from the GLNS solver. This file requires the output from
 % GLNS in "GLNSSolution" and the two files rando3.mat and rando1.mat.
 
@@ -6,8 +6,7 @@ clear
 % close all
 load rando3.mat
 load rando1.mat
-GLNSSolution =  [401, 807, 213, 619, 25, 1001]
-
+GLNSSolution =  [281, 582, 363, 1884, 905, 1246, 447, 528, 1469, 1630, 1051, 392, 1773, 1334, 1975, 1236, 517, 38, 1799, 20, 1642, 423, 844, 185, 1726, 1687, 1208, 989, 1870, 1271, 812, 493, 1934, 175, 1836, 1557, 1958, 1579, 360, 1604, 85, 1746, 127, 1068, 709, 1150, 311, 1672, 113, 414, 2001]
 
 
 v_Cluster = cell2mat(v_Cluster);
