@@ -7,13 +7,12 @@ groupedPoints = cell2mat(groupedPoints);
 dType = Inf(sites*levels);
 for i = 1:(sites*levels)
     for j = 1:(sites*levels)
-        firstLeg = [];
-        indexOfFirstLeg = [];
-        for k = 1:(sites*levels)
-            if v_Cluster(i) == v_Cluster(k) && groupedPoints(i) ~= groupedPoints(k)
-                firstLeg(end+1) = FDU(i,k);
-                indexOfFirstLeg(end+1) = k;
-            end
+        conA = find(v_Cluster(i) == v_Cluster);
+        conB = find(groupedPoints(i) ~= groupedPoints);
+        indexOfFirstLeg = intersect(conA, conB);
+        firstLeg = Inf([1,length(indexOfFirstLeg)]);
+        for k = 1:length(indexOfFirstLeg)
+            firstLeg(k) = FDU(i,indexOfFirstLeg(k));
         end
         secondLeg = [];
         for k = 1:length(firstLeg)
