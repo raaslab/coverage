@@ -1,4 +1,4 @@
-    % GLNSplotter.m
+% GLNSplotter.m
 % plots the output from the GLNS solver. This file requires the output from
 % GLNS in "GLNSSolution" and the two files rando3.mat and rando1.mat.
 
@@ -6,7 +6,7 @@ clear
 % close all
 load rando3.mat
 load rando1.mat
-GLNSSolution =  [6001, 2536, 6232, 2767, 6401, 2936, 6672, 5933, 2268, 5701, 2035, 5569, 1801, 5335, 1669, 5101, 1435, 4968, 1202, 6736, 3265, 6901, 3430, 7160, 4732, 1065, 4501, 835, 4367, 601, 4135, 469, 3903, 233, 3766, 100, 7201]
+GLNSSolution =  [3001, 6503, 2807, 6311, 2615, 6119, 2423, 5927, 2231, 5735, 2039, 5543, 1847, 5351, 1655, 5159, 1463, 4967, 1271, 6775, 3278, 6981, 3448, 7151, 4756, 1060, 4564, 868, 4372, 676, 4180, 484, 3988, 292, 3796, 100, 7201]
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
