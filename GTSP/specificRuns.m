@@ -9,7 +9,7 @@ addpath('combos')
 % polygonCreater('testInput.txt',50,100,1,1) % creates random polygons.
 
 % use 'testInput.txt' if you want the file from polygonCreater
-data = readData('homeField.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('homeField1.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
 x = [data(:,1), data(:,4)];
 y = [data(:,2), data(:,5)];
@@ -34,7 +34,7 @@ method = 1;        % 1 = GLNS, 0 = con  corde
 filename = ['rando1'];
 pathName = '/home/klyu/lab/coverageWork/coverage/GTSP';
 % pathName = '/home/klyu/lab/coverageWork/testForCoverage/errorInstance'; % for error instances
-[ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName);
+[ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName,UGVCapable);
 
 % making GLNS matrix input
 roundedGtspMatrix = round(gtspMatrix);

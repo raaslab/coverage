@@ -6,15 +6,27 @@
 % UGVSpeed = the time to travel one unit for the UGV (has to be greater than equal to 1)
 % OUTPUTS
 
-function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels, FDU,F] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints)
+function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels, FDU,F] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints,UGVCapable)
 
-v_ClusterLevels = [];
+v_ClusterLevels = Inf([1, numPoints*numLevels]);
+counter = 1;
 for i = 1:numPoints
     for j = numLevels:-1:1
-        v_ClusterLevels(end+1) = j;
+        v_ClusterLevels(counter) = j;
+        counter = counter+1;
     end
 end
 v_ClusterLevels = v_ClusterLevels';
+
+v_UGVCapable = Inf([1, numPoints*numLevels]);
+counter = 1;
+for i = 1:numPoints
+    for j = 1:numLevels
+        v_UGVCapable(counter) = UGVCapable(i);
+        counter = counter+1;
+    end
+end
+v_UGVCapable = v_UGVCapable';
 
 % create all types of edges
 % creating flying edges (only UAV and bat' < bat)
@@ -32,8 +44,12 @@ for i = 1:sizeOfv_Cluster
         tempV_Cluster(i, 2) = 1;
     end
 end
-
 v_Cluster = tempV_Cluster(:,1);
+
+FDUNew = checkUGVPossibility(FDU,v_UGVCapable,1);
+DTUNew = checkUGVPossibility(DTU,v_UGVCapable,2);
+
+
 
 % make these into functions for each type of edge combo
 % edge type combos: These edges are only external edges and the combination of the above edges
@@ -42,6 +58,7 @@ typeBEdge = typeB(F, FDU, v_Cluster, allDistances, numLevels, numPoints, grouped
 typeCEdge = typeC(FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
 typeDEdge = typeD(F, FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
 typeEEdge = typeE(F, DTU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
+
 
 % pick the minimum cost edge here
 numOfTotalPoints = numPoints * numLevels;
