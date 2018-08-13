@@ -54,10 +54,10 @@ DTUNew = checkUGVPossibility(DTU,v_UGVCapable,2);
 % make these into functions for each type of edge combo
 % edge type combos: These edges are only external edges and the combination of the above edges
 typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
-typeBEdge = typeB(F, FDU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
-typeCEdge = typeC(FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
-typeDEdge = typeD(F, FDU, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
-typeEEdge = typeE(F, DTU, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
+typeBEdge = typeB(F, FDUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
+typeCEdge = typeC(FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
+typeDEdge = typeD(F, FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
+typeEEdge = typeE(F, DTUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
 
 
 % pick the minimum cost edge here
