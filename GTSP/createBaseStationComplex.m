@@ -22,34 +22,16 @@ v_Cluster = cell2mat(v_Cluster);
 for i = 1:(numPoints*numLevels)
     id1 = groupedPoints(i);
     id2 = find((groupedPoints ~= groupedPoints(i)) & (v_Cluster == v_Cluster(i)),1,'last')/numLevels;
-    id3 = numPoints+1;
-    edgeA = pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') + pdist([x(id2),y(id2);x(id3),y(id3)],'euclidean'); % F-F
-    % check if A is possible
-    if edgeA > maxDistance
-        edgeA = Inf;
+    
+    % check if we have enough battery to travel from id1 to id2
+    % if we have enough battery then place that cost into id1 to depotID.
+    if pdist([x(id1),y(id1);x(id2),y(id2)], 'euclidean')/(maxDistance/numLevels) <= v_ClusterLevels(i)
+        v_Adj(i,depotID) = pdist([x(id1),y(id1);x(id2),y(id2)], 'euclidean');
+    else
+        v_Adj(i,depotID) = Inf;
     end
     
-    % edgeB and edgeC will never be used because this is the last leg to the depot
-    % and there will never be a reason to charge at the depot.
-    edgeB = Inf;
-    edgeC = Inf;
-    
-    edgeD = FDU(id1,id2) + pdist([x(id2),y(id2);x(id3),y(id3)],'euclidean');% FDU, F
-    % check if D is possible
-    if pdist([x(id2),y(id2);x(id3),y(id3)],'euclidean') > maxDistance
-        edgeD = Inf;
-    end
-    
-    edgeE = pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') + (pdist([x(id2),y(id2);x(id3),y(id3)],'euclidean')*UGVSpeed);% F, DTU
-    % check if E is possible
-    if pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') > maxDistance
-        edgeE = Inf;
-    elseif pdist([x(id1),y(id1);x(id2),y(id2)],'euclidean') > (v_ClusterLevels(i)*(maxDistance/numLevels));
-        edgeE = Inf;
-    end
-    
-    [v_Adj(i,depotID), tempID] = min([edgeA,edgeB,edgeC,edgeD,edgeE]); % minimum of all 5 types of edges
-    v_Type(i,depotID) = tempID;
+    v_Type(i,depotID) = 1;
 end
 
 % adds last row for depot to any site

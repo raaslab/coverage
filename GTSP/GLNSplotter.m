@@ -6,7 +6,8 @@ clear
 % close all
 load rando3.mat
 load rando1.mat
-GLNSSolution = [92, 187, 67, 162, 40, 135, 22, 117, 209]
+GLNSSolution = [105, 18, 139, 46, 167, 68, 189, 102, 209]
+
 
 
 v_Cluster = cell2mat(v_Cluster);
