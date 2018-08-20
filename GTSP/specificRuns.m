@@ -9,7 +9,7 @@ addpath('combos')
 % polygonCreater('testInput.txt',50,100,1,1) % creates random polygons.
 
 % use 'testInput.txt' if you want the file from polygonCreater
-data = readData('UGVExample.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('inputs/UGVExample.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
 x = [data(:,1), data(:,4)];
 y = [data(:,2), data(:,5)];
