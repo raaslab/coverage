@@ -6,6 +6,7 @@
 % numberOfPolygons: the number of random rectangular strips
 % randNum: number is uniformily choosen from [1,randNum] when randomly created
 % showFigs: 1 == show, 0 == don't show
+% TSPReplica: make unit size of rectangles
 
 function [] = polygonCreater(fileName,numberOfPolygons,randNum,showFigs,TSPReplica)
 
@@ -35,16 +36,16 @@ while i < numberOfPolygons+1
         i = i+1;
     end
     
-    tempX1 = x1; tempY1 = y1; tempX2 = x2; tempY2 = y2;
-    tempX1(isinf(x1)) = []; tempY1(isinf(y1)) = []; tempX2(isinf(x2)) = []; tempY2(isinf(y2)) = [];
+%     tempX1 = x1; tempY1 = y1; tempX2 = x2; tempY2 = y2;
+%     tempX1(isinf(x1)) = []; tempY1(isinf(y1)) = []; tempX2(isinf(x2)) = []; tempY2(isinf(y2)) = [];
     
-    clf
-    hold on
-    for j = 1:length(tempX1)
-        figure(1)
-        plot([tempX1; tempX2], [tempY1; tempY2]);
-        axis equal
-    end
+%     clf
+%     hold on
+%     for j = 1:length(tempX1)
+%         figure(1)
+%         plot([tempX1; tempX2], [tempY1; tempY2]);
+%         axis equal
+%     end
 end
 
 ugvPossible1 = ones([1, length(x1)]);

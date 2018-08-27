@@ -4,7 +4,6 @@
 
 function [v_Adj,v_Type] = createBaseStationComplex(v_Adj,numPoints,numLevels,FDU,v_Cluster,groupedPoints,x,y,UGVSpeed,maxDistance,v_Type,F,v_ClusterLevels)
 
-
 numInV_Adj = numel(v_Adj);
 for i = 1:numInV_Adj
     if v_Adj(i) == 0;
@@ -23,14 +22,11 @@ for i = 1:(numPoints*numLevels)
     id1 = groupedPoints(i);
     id2 = find((groupedPoints ~= groupedPoints(i)) & (v_Cluster == v_Cluster(i)),1,'last')/numLevels;
     
-    % check if we have enough battery to travel from id1 to id2
-    % if we have enough battery then place that cost into id1 to depotID.
     if pdist([x(id1),y(id1);x(id2),y(id2)], 'euclidean')/(maxDistance/numLevels) <= v_ClusterLevels(i)
         v_Adj(i,depotID) = pdist([x(id1),y(id1);x(id2),y(id2)], 'euclidean');
     else
         v_Adj(i,depotID) = Inf;
     end
-    
     v_Type(i,depotID) = 1;
 end
 

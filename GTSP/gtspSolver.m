@@ -72,7 +72,6 @@ switch method
         
         % [finalMatrix, finalTour, problem2] = concordeReconvert(G_atsp2_tsp, Out_sol, v_Cluster, v_AdjChecker, numLevels);
         
-        
         [G_final, weights] = getWeights(G_init, finalMatrix, finalTour);
         
     case 1
