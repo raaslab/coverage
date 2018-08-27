@@ -2,10 +2,10 @@
 % this will run a specific case for if there's an error within "time"
 % variable
 dbstop error
-clc; clear all; close all;
+% clc; clear all; close all;
 addpath('edgeTypes')
 addpath('combos')
-time = [];
+% time = [];
 max_Distance = 100;   % if max_Distance == j then discharge is unit rate per distance (budget)
 G = 0;
 % x = 0;
