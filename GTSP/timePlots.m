@@ -7,10 +7,12 @@
 
 
 dbstop error
+clear all
 close all
 
 load plotData.mat
 
+% plot for cost vs budget
 figure(1)
 plot(costVSbudgetnonUnit(:,1), costVSbudgetnonUnit(:,2))
 hold on
@@ -21,5 +23,48 @@ legend(['NonUnit Budget'],['Unit Budget'])
 xlabel('Budget')
 ylabel('Tour Cost')
 
+% plot for time vs sites
 figure(2)
-plot(timeVSsite(:,2),timeVSsite(:,3))
+neg = [];
+pos = [];
+avgTimeVSsite = [];
+
+for i = 10:7:80
+    index = find(timeVSsite(:,2)==i);
+    averageArray = Inf([1,length(index)]);
+    for j = 1:length(index)
+        averageArray(j) = timeVSsite(index(j),3);
+    end
+    averageTime = sum(averageArray)/length(averageArray);
+    neg(end+1,:) = [i,abs(min(averageArray)-averageTime)];
+    pos(end+1,:) = [i,abs(max(averageArray)-averageTime)];
+    avgTimeVSsite(end+1,:) = [i,averageTime];
+end
+errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2))
+axis([8, 82,0,14])
+title('Computational Time vs Input Sites')
+xlabel('Number of Input Sites')
+ylabel('Computational Time (secondes)')
+
+% plot for time vs battery levels
+figure(3)
+neg = [];
+pos = [];
+averageTimeVSlevel =[];
+
+for i = 10:7:80
+    index = find(timeVSlevels(:,2)==i);
+    averageArray = Inf([1,length(index)]);
+    for j = 1:length(index)
+        averageArray(j) = timeVSlevels(index(j),3);
+    end
+    averageTime = sum(averageArray)/length(averageArray);
+    neg(end+1,:) = [i,abs(min(averageArray)-averageTime)];
+    pos(end+1,:) = [i, abs(max(averageArray)-averageTime)];
+    avgTimeVSlevels(end+1,:) = [i,averageTime];
+end
+errorbar(avgTimeVSlevel(:,1), avgTimeVSlevel(:,2),neg(:,2),pos(:,2))
+axis([8,82,0,14])
+title('Computational Time vs Battery Levels')
+xlabel('Number of Battery Levels')
+ylabel('Computational Time (secondes)')

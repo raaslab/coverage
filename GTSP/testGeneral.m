@@ -37,9 +37,9 @@ groupedPoints = num2cell(groupedPoints);
 [xOut, yOut] = graphingCluster(x1, y1, numPointsInit, numBatteryLevels, S1, T1, 0, nodeArray, method);            % graph in cluster format
 
 % GTSP solver
-tic;
+% tic;
 [finalMatrix, G_init, edgeWeightsFinal, finalTour, gtspWeightMatrix, gtspWeightMatrix2,v_Type] = gtspSolver(v_Cluster,v_Adj,numPointsInit,numBatteryLevels,method,FDU,groupedPoints,x1,y1,UGVSpeed,maxDistance,v_Type,F,v_ClusterLevels);
-gtspTime = toc;
+gtspTime = 0;
 
 f = fullfile(pathName, filename);
 save(f);
