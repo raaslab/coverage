@@ -10,18 +10,18 @@ dbstop error
 clear all
 close all
 
-load plotData.mat
+load timeValues_checkIfRight.mat
 
 % plot for cost vs budget
-figure(1)
-plot(costVSbudgetnonUnit(:,1), costVSbudgetnonUnit(:,2))
-hold on
-plot(costVSbudgetUnit(:,1),costVSbudgetUnit(:,2))
-
-title('Cost VS. Budget')
-legend(['NonUnit Budget'],['Unit Budget'])
-xlabel('Budget')
-ylabel('Tour Cost')
+% figure(1)
+% plot(costVSbudgetnonUnit(:,1), costVSbudgetnonUnit(:,2))
+% hold on
+% plot(costVSbudgetUnit(:,1),costVSbudgetUnit(:,2))
+% 
+% title('Cost VS. Budget')
+% legend(['NonUnit Budget'],['Unit Budget'])
+% xlabel('Budget')
+% ylabel('Tour Cost')
 
 % plot for time vs sites
 figure(2)
@@ -30,18 +30,18 @@ pos = [];
 avgTimeVSsite = [];
 
 for i = 10:7:80
-    index = find(timeVSsite(:,2)==i);
+    index = find(timei(:,2)==i);
     averageArray = Inf([1,length(index)]);
     for j = 1:length(index)
-        averageArray(j) = timeVSsite(index(j),3);
+        averageArray(j) = timei(index(j),3);
     end
     averageTime = sum(averageArray)/length(averageArray);
     neg(end+1,:) = [i,abs(min(averageArray)-averageTime)];
     pos(end+1,:) = [i,abs(max(averageArray)-averageTime)];
     avgTimeVSsite(end+1,:) = [i,averageTime];
 end
-errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2))
-axis([8, 82,0,14])
+errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2),'MarkerEdgeColor','b','LineWidth', 2)
+% axis([8, 82,0,14])
 title('Computational Time vs Input Sites')
 xlabel('Number of Input Sites')
 ylabel('Computational Time (secondes)')
@@ -53,18 +53,18 @@ pos = [];
 averageTimeVSlevel =[];
 
 for i = 10:7:80
-    index = find(timeVSlevels(:,2)==i);
+    index = find(timej(:,2)==i);
     averageArray = Inf([1,length(index)]);
     for j = 1:length(index)
-        averageArray(j) = timeVSlevels(index(j),3);
+        averageArray(j) = timej(index(j),3);
     end
     averageTime = sum(averageArray)/length(averageArray);
     neg(end+1,:) = [i,abs(min(averageArray)-averageTime)];
     pos(end+1,:) = [i, abs(max(averageArray)-averageTime)];
-    avgTimeVSlevels(end+1,:) = [i,averageTime];
+    averageTimeVSlevel(end+1,:) = [i,averageTime];
 end
-errorbar(avgTimeVSlevel(:,1), avgTimeVSlevel(:,2),neg(:,2),pos(:,2))
-axis([8,82,0,14])
+errorbar(averageTimeVSlevel(:,1), averageTimeVSlevel(:,2),neg(:,2),pos(:,2),'MarkerEdgeColor','b','LineWidth', 2)
+% axis([8,82,0,14])
 title('Computational Time vs Battery Levels')
 xlabel('Number of Battery Levels')
 ylabel('Computational Time (secondes)')
