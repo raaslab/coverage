@@ -3,8 +3,7 @@
 % variable
 dbstop error
 clc; clear all; close all;
-addpath('edgeTypes')
-addpath('combos')
+
 G = 0;
 % x = 0;
 % y = 0;
@@ -98,4 +97,3 @@ for forLoopVariable = 10:25
     timeTriple(end+1, :) = [double(forLoopVariable), trialTime];
 end
 
-save('costVSbudget.mat')

@@ -3,8 +3,6 @@
 % variable
 dbstop error
 % clc; clear all; close all;
-addpath('edgeTypes')
-addpath('combos')
 % timei = [];
 max_Distance = 100;   % if max_Distance == j then discharge is unit rate per distance (budget)
 G = 0;
@@ -95,5 +93,3 @@ for trialsLoop = 1:5
         timej(end+1, :) = [double(trialsLoop), double(forLoopVariable), trialTime];
     end
 end
-
-save('timeValues_checkIfRight.mat')

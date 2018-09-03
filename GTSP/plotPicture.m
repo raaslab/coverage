@@ -2,7 +2,7 @@
 % plots a .png image and allows you to click to store locations of vertices
 
 figure()
-yourImage = imread('homefield.png');
+yourImage = imread('figures/homefield.png');
 imshow(yourImage);
 hold on;
 % impoint
