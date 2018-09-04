@@ -1,4 +1,5 @@
-
+% createGTSPFile
+% creates the file for GLNS input
 
 function [] = createGTSPFile(filename, matrix, vertices, batteryLevels, v_Clusters)
 

@@ -1,6 +1,11 @@
 % specificRuns
 % this will run a specific case for if there's an error within "time"
 % variable
+
+% FINISHED USE DON'T CHANGE FILE
+% USE "specificRuns" IF YOU WANT TO DO MORE RUNS
+% OR MAKE A COPY OF "specificRuns" AND USE THAT
+
 dbstop error
 clc; clear all; close all;
 

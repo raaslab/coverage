@@ -3,12 +3,12 @@
 % GLNS in "GLNSSolution" and the two files rando3.mat and rando1.mat.
 
 clear
-% close all
-load rando3.mat
-load rando1.mat
-GLNSSolution = [105, 18, 139, 46, 167, 68, 189, 102, 209]
+close all
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/23.mat
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/21.mat
+GLNSSolution = [841, 940, 1141, 430, 1108, 162, 1, 1007, 62, 206, 1201]
 
-
+plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/fieldExperiment2.txt')
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
@@ -55,10 +55,12 @@ GLNSx = circshift(GLNSx, -1);
 GLNSy = circshift(GLNSy, -1);
 GLNSg = digraph;
 GLNSg = addnode(GLNSg, numPointsInit+1);
+
 % figure(1)
-% plot(GLNSx, GLNSy,'.')
+% plot(GLNSx, GLNSy,'-')
 % axis equal
 % title('Initial Graph Without Edge Costs Edges are Euclidean Distance Between Points')
+
 S2 = zeros(1,numel(GLNSx)-1);
 T2 = S2;
 for a = 2:numel(GLNSx)
@@ -140,9 +142,9 @@ if impossible == 0
     axis equal
     groupedPoints = cell2mat(groupedPoints);
     
-    for i = 2:length(GLNSSolution)-1
-        text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(v_ClusterLevels(GLNSSolution(i))), 'FontSize', 16)
-    end
+%     for i = 2:length(GLNSSolution)-1
+%         text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(v_ClusterLevels(GLNSSolution(i))), 'FontSize', 16)
+%     end
     hold on
     
     % highlight edges for UAV
@@ -177,6 +179,7 @@ if impossible == 0
 else
     disp('impossible input');
 end
+title('Output Tour')
 
 % close all;
 

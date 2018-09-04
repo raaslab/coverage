@@ -6,7 +6,7 @@
 % numberOfPolygons: the number of random rectangular strips
 % randNum: number is uniformily choosen from [1,randNum] when randomly created
 % showFigs: 1 == show, 0 == don't show
-% TSPReplica: make unit size of rectangles
+% TSPReplica: 1 == make unit size of rectangles;0 == random size rectangles
 
 function [] = polygonCreater(fileName,numberOfPolygons,randNum,showFigs,TSPReplica)
 
