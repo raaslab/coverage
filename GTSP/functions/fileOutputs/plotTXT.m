@@ -11,6 +11,7 @@ Y2 = data(:,5)';
 plot([X1; X2], [Y1; Y2], 'linewidth', 2)
 hold on
 plot(0,0)
-axis equal
+% axis equal
+axis([-20 119 -9 101])
 title('Input Boustrophedon Cells')
 end

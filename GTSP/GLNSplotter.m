@@ -137,7 +137,9 @@ end
 if impossible == 0
     % GLNSg = addedge(GLNSg,S8,T8);
     figure(2)
+    GLNSg = rmedge(GLNSg, 14,i);
     GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeColor', 'b');
+    
     GLNSPlot.NodeLabel = {};
     axis equal
     groupedPoints = cell2mat(groupedPoints);
@@ -148,9 +150,9 @@ if impossible == 0
     hold on
     
     % highlight edges for UAV
-    if isempty(S3) == 0                 %highlight type 1 edges: F-F
-        highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
-    end
+%     if isempty(S3) == 0                 %highlight type 1 edges: F-F
+%         highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
+%     end
     if isempty(S4) == 0                 %highlight type 2 edges: F-FDU
         highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
     end
