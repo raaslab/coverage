@@ -4,14 +4,14 @@
 dbstop error
 clc; clear all; close all;
 
-trial = 1;
+trial = 2;
 numBC = 10;
 
 % filename4 = sprintf('inputs/fieldExperiments/fieldExperiment%d.txt',trial);
 % polygonCreater(filename4,numBC,100,0,0) % creates random polygons.
 
 % use 'testInput.txt' if you want the file from polygonCreater
-data = readData('inputs/fieldExperiments/kentLand1.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('inputs/fieldExperiments/kentLand2.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
 x = [data(:,1), data(:,4)];
 y = [data(:,2), data(:,5)];

@@ -4,11 +4,13 @@
 
 clear
 close all
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/23.mat
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/21.mat
-GLNSSolution = [841, 940, 1141, 430, 1108, 162, 1, 1007, 62, 206, 1201]
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentLand23.mat
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentLand21.mat
+GLNSSolution = [2301, 918, 2130, 707, 1955, 1101, 2521, 555, 1763, 371, 1579, 187, 1395, 2601]
 
-plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/fieldExperiment2.txt')
+
+
+plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/kentLand2.txt')
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
@@ -182,6 +184,8 @@ else
     disp('impossible input');
 end
 title('Output Tour')
+set(gca,'Ydir','reverse')
+
 
 % close all;
 

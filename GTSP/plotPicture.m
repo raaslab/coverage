@@ -17,4 +17,4 @@ plot(x, y, 'b*', 'LineWidth', 2, 'MarkerSize', 15);
 
 ugvPossible1 = ones([1, length(x1)]); % all one side of rectangles
 ugvPossible2 = ones([1, length(x2)]); % corresponding other side of rectangles
-createPolygonFile('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/kentLand1.txt', x1, y1, ugvPossible1, x2, y2, ugvPossible2)
+createPolygonFile('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/kentLand2.txt', x1, y1, ugvPossible1, x2, y2, ugvPossible2)
