@@ -3,10 +3,17 @@
 % GLNS in "GLNSSolution" and the two files rando3.mat and rando1.mat.
 
 clear
-% close all
-load rando3.mat
-load rando1.mat
-GLNSSolution =  [3001, 6503, 2807, 6311, 2615, 6119, 2423, 5927, 2231, 5735, 2039, 5543, 1847, 5351, 1655, 5159, 1463, 4967, 1271, 6775, 3278, 6981, 3448, 7151, 4756, 1060, 4564, 868, 4372, 676, 4180, 484, 3988, 292, 3796, 100, 7201]
+close all
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentLand23.mat
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentLand21.mat
+
+GLNSSolution = [2301, 918, 2130, 707, 1955, 1101, 2521, 555, 1763, 371, 1579, 187, 1395, 2601] % kentLand2
+
+% GLNSSolution = [781, 702, 361, 625, 735, 510, 1059, 594, 305, 268, 1201] % fieldExperiment2
+
+
+
+plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/kentLand2.txt')
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
@@ -53,13 +60,15 @@ GLNSx = circshift(GLNSx, -1);
 GLNSy = circshift(GLNSy, -1);
 GLNSg = digraph;
 GLNSg = addnode(GLNSg, numPointsInit+1);
+
 % figure(1)
-% plot(GLNSx, GLNSy,'.')
+% plot(GLNSx, GLNSy,'-')
 % axis equal
 % title('Initial Graph Without Edge Costs Edges are Euclidean Distance Between Points')
-S2 = zeros(1,numel(GLNSx)-1);
+
+S2 = zeros(1,numel(GLNSx)-2);
 T2 = S2;
-for a = 2:numel(GLNSx)
+for a = 2:numel(GLNSx)-1
     S2(a-1) = GLNSSolutionWithAllPoints(a);
     T2(a-1) = GLNSSolutionWithAllPoints(a+1);
 end
@@ -77,8 +86,10 @@ T5 = S3;
 T6 = S3;
 T7 = S3;
 impossible = 0;
+lastPoint = 0;
 for a = 2:(numPointsInit/2)+1
     if a == (numPointsInit/2)+1
+        lastPoint = 1;
         typeChecker = v_Type(GLNSSolution(a),GLNSSolution(a+1));
         locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
         locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1),1,'last');
@@ -90,35 +101,44 @@ for a = 2:(numPointsInit/2)+1
     if typeChecker == 1 % typeA
         S3(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T3(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-        S3(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-        T3(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        if lastPoint == 0
+            S3(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T3(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        end
     elseif typeChecker == 2 % typeB
         S4(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T4(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-        S4(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-        T4(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        if lastPoint == 0
+            S4(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T4(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        end
     elseif typeChecker == 3 % typeC
-        
         S5(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T5(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-        S5(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-        T5(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        if lastPoint == 0
+            S5(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T5(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        end
     elseif typeChecker == 4 % typeD
         S6(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T6(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-        S6(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-        T6(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        if lastPoint == 0
+            S6(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T6(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        end
     elseif typeChecker == 5 % typeE
         S7(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T7(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-        S7(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-        T7(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        if lastPoint == 0
+            S7(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T7(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        end
     else
         impossible = 1;
         disp('error')
         break
     end
-    
+    lastPoint = 0;
 end
 
 S8 = [];
@@ -134,19 +154,21 @@ if impossible == 0
     % GLNSg = addedge(GLNSg,S8,T8);
     figure(2)
     GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeColor', 'b');
+    
     GLNSPlot.NodeLabel = {};
-    axis equal
+%     axis equal
+    axis([200 900 0 550])
     groupedPoints = cell2mat(groupedPoints);
     
-    for i = 2:length(GLNSSolution)-1
-        text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(v_ClusterLevels(GLNSSolution(i))), 'FontSize', 16)
-    end
+    %     for i = 2:length(GLNSSolution)-1
+    %         text(GLNSx(groupedPoints(GLNSSolution(i))), GLNSy(groupedPoints(GLNSSolution(i)))+0.1, num2str(v_ClusterLevels(GLNSSolution(i))), 'FontSize', 16)
+    %     end
     hold on
     
     % highlight edges for UAV
-    if isempty(S3) == 0                 %highlight type 1 edges: F-F
-        highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
-    end
+    %     if isempty(S3) == 0                 %highlight type 1 edges: F-F
+    %         highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
+    %     end
     if isempty(S4) == 0                 %highlight type 2 edges: F-FDU
         highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
     end
@@ -175,6 +197,8 @@ if impossible == 0
 else
     disp('impossible input');
 end
+title('Output Tour')
+set(gca,'Ydir','reverse')
 
 % close all;
 
