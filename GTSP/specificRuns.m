@@ -32,7 +32,7 @@ method = 1;        % 1 = GLNS, 0 = con  corde
 
 
 filename = ['rando1'];
-pathName = '/home/klyu/lab/coverageWork/coverage/GTSP';
+pathName = 'D:\Documents\User_Created\School\School_Virginia_tech\Lab_work\coverage\GTSP';
 % pathName = '/home/klyu/lab/coverageWork/testForCoverage/errorInstance'; % for error instances
 [ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName);
 
@@ -40,7 +40,7 @@ pathName = '/home/klyu/lab/coverageWork/coverage/GTSP';
 roundedGtspMatrix = round(gtspMatrix);
 roundedGtspMatrix(roundedGtspMatrix == -1) = 999999;
 roundedGtspMatrix(roundedGtspMatrix == Inf) = 999999;
-filename = ['/home/klyu/software/GLNS-master-15e0b991963271496d00b5177399961d11857d96/test/rando2.gtsp'];
+filename = ['D:\Documents\User_Created\School\School_Virginia_tech\Lab_work\coverage\GTSP\rando2.gtsp'];
 % filename = ['/home/klyu/lab/coverageWork/testForCoverage/errorInstance/rando2.gtsp'];
 createGTSPFile(filename,roundedGtspMatrix, i, j, v_Cluster) % creating GLNS file
 filename = ['rando3'];
