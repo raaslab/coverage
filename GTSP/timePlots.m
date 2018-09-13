@@ -7,19 +7,33 @@ clear all
 close all
 clc
 
-load timeData.mat
+% load timeData.mat
+% load timeVSi.mat
+load timeVSj.mat
+% load costVSbudget.mat
+load costVSbudgetGLNSOutput.mat
+load partialData.mat
 
 % plot for cost vs budget
 figure(1)
-plot(timeUnit(:,1), timeUnit(:,2),'Color','b', 'LineWidth',2)
-hold on
-plot(timeDouble(:,1),timeDouble(:,2),'Color','r', 'LineWidth',2)
-plot(timeTriple(:,1),timeTriple(:,2),'Color','g', 'LineWidth',2)
+neg = [];
+pos = [];
+avgTimeVSsite = [];
+for i = 1:41
+    tempTimes = times(i, 2:11);
+    averageTime = mean(tempTimes);
+    neg(end+1,:) = [i,abs(min(tempTimes)-averageTime)];
+    pos(end+1,:) = [i,abs(max(tempTimes)-averageTime)];
+    avgTimeVSsite(end+1,:) = [times(i,1),averageTime];
+end
+% plot(times(:,1), times(:,5),'b-o', 'LineWidth',2,'MarkerFaceColor',[0,0,1])
+% figure(4)
+errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2),'b-o','LineWidth', 2)
 
 title('Cost VS. Budget')
-legend(['1m per Battery Level'],['2m per Battery Level'], ['3m per Battery Level'])
-xlabel('Budget')
-ylabel('Tour Cost')
+% legend(['1m per Battery Level'],['2m per Battery Level'], ['3m per Battery Level'])
+xlabel('Total Budget (meters)')
+ylabel('Tour Cost (seconds)')
 
 % plot for time vs sites
 figure(2)
@@ -51,10 +65,10 @@ pos = [];
 averageTimeVSlevel =[];
 
 for i = 10:7:80
-    index = find(timej(:,2)==i);
+    index = find(timeJ(:,2)==i);
     averageArray = Inf([1,length(index)]);
     for j = 1:length(index)
-        averageArray(j) = timej(index(j),3);
+        averageArray(j) = timeJ(index(j),3);
     end
     averageTime = sum(averageArray)/length(averageArray);
     neg(end+1,:) = [i,abs(min(averageArray)-averageTime)];

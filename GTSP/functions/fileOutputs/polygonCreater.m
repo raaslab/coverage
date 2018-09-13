@@ -6,7 +6,8 @@
 % numberOfPolygons: the number of random rectangular strips
 % randNum: number is uniformily choosen from [1,randNum] when randomly created
 % showFigs: 1 == show, 0 == don't show
-% TSPReplica: 1 == make unit size of rectangles;0 == random size rectangles
+% TSPReplica: 1 == make unit size of rectangles; 0 == random size rectangles
+% belowNum: if TSPReplica == 0, then below this number
 
 function [] = polygonCreater(fileName,numberOfPolygons,randNum,showFigs,TSPReplica)
 
@@ -24,6 +25,9 @@ while i < numberOfPolygons+1
     
     for j = 1:i-1
         tempLine = [x1(j), y1(j), x2(j), y2(j)]; % get all previous lines
+        if isequal(tempLine,newLine) % check if the points are the same
+            repeat = 1;
+        end
         intersect = lineSegmentIntersect(tempLine, newLine); % check if lines intersect
         if intersect.intAdjacencyMatrix == 1
             [x1, y1, x2, y2] = updateXYs(x1, y1, x2, y2, i, Inf, 0, randNum,TSPReplica); % remove newline segment

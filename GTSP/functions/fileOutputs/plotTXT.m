@@ -9,6 +9,14 @@ X2 = data(:,4)';
 Y1 = data(:,2)';
 Y2 = data(:,5)';
 plot([X1; X2], [Y1; Y2], 'linewidth', 2)
+hold on;
+
+for i = 1:length(X1)
+    rectangleCoord = createRectangle(X1(i),Y1(i),X2(i),Y2(i));
+    plot(rectangleCoord(:,1),rectangleCoord(:,2))
+    
+end
+
 hold on
 plot(0,0)
 axis equal

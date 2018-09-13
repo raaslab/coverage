@@ -13,7 +13,7 @@ tL = 100;            % landing cost
 rRate = 2;         % rate of recharge
 UGVS = 5;          % time to travel one unit for the UGV (greater than 1 means UGV is slower)
 method = 1;        % 1 = GLNS, 0 = con  corde
-
+timeI = [];
 % changing number of input BC
 for trial  = 1:10
     for numBC = 10:7:80
@@ -48,7 +48,8 @@ for trial  = 1:10
         createGTSPFile(filename2,roundedGtspMatrix, i, j, v_Cluster) % creating GLNS file
         f = fullfile(pathName, filename3);
         save(f);
-        toc
+        trialTime = toc
+        timeI(end+1, :) = [trial, double(numBC), trialTime];
     end
 end
 
