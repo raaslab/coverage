@@ -153,10 +153,10 @@ end
 if impossible == 0
     % GLNSg = addedge(GLNSg,S8,T8);
     figure(2)
-    GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',4, 'EdgeColor', 'b');
+    GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',3, 'EdgeColor', 'b');
     
     GLNSPlot.NodeLabel = {};
-%     axis equal
+    %     axis equal
     axis([200 900 0 550])
     groupedPoints = cell2mat(groupedPoints);
     
@@ -170,16 +170,16 @@ if impossible == 0
     %         highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
     %     end
     if isempty(S4) == 0                 %highlight type 2 edges: F-FDU
-        highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',4, 'LineStyle', '-')
+        highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',3, 'LineStyle', '-')
     end
     if isempty(S5) == 0                 %highlight type 3 edges: FDU-FDU
-        highlight(GLNSPlot,S5, T5,'EdgeColor','g','LineWidth',4, 'LineStyle', '-')
+        highlight(GLNSPlot,S5, T5,'EdgeColor','g','LineWidth',3, 'LineStyle', '-')
     end
     if isempty(S6) == 0                 %highlight type 4 edges: FDU-F
-        highlight(GLNSPlot,S6, T6,'EdgeColor','y','LineWidth',4, 'LineStyle', '-')
+        highlight(GLNSPlot,S6, T6,'EdgeColor','y','LineWidth',3, 'LineStyle', '-')
     end
     if isempty(S7) == 0                 %highlight type 5 edges: F-DTU
-        highlight(GLNSPlot,S7, T7,'EdgeColor','m','LineWidth',4, 'LineStyle', '-')
+        highlight(GLNSPlot,S7, T7,'EdgeColor','m','LineWidth',3, 'LineStyle', '-')
     end
     % highlighting edges for UGV
     % highlight(GLNSPlot, S8, T8, 'EdgeColor', 'r', 'LineWidth', 4)
@@ -197,8 +197,15 @@ if impossible == 0
 else
     disp('impossible input');
 end
+
+hold on
+for i = 2:2:length(GLNSx)-1
+    [cord,~,~] = createRectangle(GLNSx(GLNSSolutionWithAllPoints(i)), GLNSy(GLNSSolutionWithAllPoints(i)), GLNSx(GLNSSolutionWithAllPoints(i+1)), GLNSy(GLNSSolutionWithAllPoints(i+1)));
+    plot(cord(:,1),cord(:,2), 'color', 'k', 'linewidth',2)
+    
+end
+
 title('Output Tour')
 set(gca,'Ydir','reverse')
 
 % close all;
-

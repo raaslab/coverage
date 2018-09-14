@@ -8,11 +8,11 @@ close all
 clc
 
 % load timeData.mat
-% load timeVSi.mat
+load timeVSi.mat
 load timeVSj.mat
 % load costVSbudget.mat
-load costVSbudgetGLNSOutput.mat
-load partialData.mat
+% load costVSbudgetGLNSOutput.mat
+load glnsOutput.mat
 
 % plot for cost vs budget
 figure(1)
@@ -42,10 +42,10 @@ pos = [];
 avgTimeVSsite = [];
 
 for i = 10:7:80
-    index = find(timei(:,2)==i);
+    index = find(timeI(:,2)==i);
     averageArray = Inf([1,length(index)]);
     for j = 1:length(index)
-        averageArray(j) = timei(index(j),3);
+        averageArray(j) = timeI(index(j),3);
     end
     averageTime = sum(averageArray)/length(averageArray);
     neg(end+1,:) = [i,abs(min(averageArray)-averageTime)];
