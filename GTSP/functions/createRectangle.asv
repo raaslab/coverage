@@ -1,8 +1,8 @@
 % createRectangle.m
 
-function [output, output1, output2] = createRectangle(x1, y1, x2, y2)
+function [output1, output2] = createRectangle(x1, y1, x2, y2)
 
-sensingRange = 1;
+sensingRange = 0.5;
 angle = atan2(y2-y1,x2-x1);
 
 TL = [-sensingRange, +sensingRange];
@@ -27,26 +27,31 @@ BL2 = BL + [x2,y2];
 output2 = [TL2;TR2;BR2;BL2;TL2];
 
 % find which point is on left
-if x1<x2 && y1>y2
-    output = [BL1;TL1;TR2;BR2;BL1];
-elseif x1>x2 && y1>y2
-    output = [BL1;TL1;TR2;BR2;BL1];
-elseif x1>x2 && y1<y2
-    output = [BL1;TL1;TR2;BR2;BL1];
-elseif x1<x2 && y1<y2
-    output = [BL1;TL1;TR2;BR2;BL1];
+if x1 < x2 && y1 > y2
     
-elseif x1==x2 && y1<y2
-    output = [TR1;BR1;BL2;TL2;TR1];
-elseif x1==x2 && y1>y2
-    output = [BL1;TL1;TR2;BR2;BL1];
-elseif x1>x2 && y1==y2
-    output = [BL1;TL1;TR2;BR2;BL1];
-elseif x1<x2 && y1==y2
-    output = [BL1;TL1;TR2;BR2;BL1];
+elseif x1 > x2 && y1>y2
+    
+elseif
+    
+elseif
+    
 else
-    output = [0;0;0;0;0];
-    disp('error')
+    
 end
+    
+else
+    if y1 > y2
+        
+    elseif y1 < y2
+        
+    else
+        TL = [0,0];
+        TR = [0,0];
+        BR = [0,0];
+        BL = [0,0];
+        disp('ERROR')
+    end
+end
+
 
 end
