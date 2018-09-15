@@ -4,16 +4,17 @@
 
 clear
 close all
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentLand23.mat
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentLand21.mat
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC3.mat
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC1.mat
 
-GLNSSolution = [2301, 918, 2130, 707, 1955, 1101, 2521, 555, 1763, 371, 1579, 187, 1395, 2601] % kentLand2
-
+% GLNSSolution = [2301, 918, 2130, 707, 1955, 1101, 2521, 555, 1763, 371, 1579, 187, 1395, 2601] % kentLand2
 % GLNSSolution = [781, 702, 361, 625, 735, 510, 1059, 594, 305, 268, 1201] % fieldExperiment2
+% exampleFigureBC
+GLNSSolution = [621, 1972, 825, 2133, 786, 2094, 742, 2049, 701, 2008, 661, 1929, 581, 1872, 522, 1831, 484, 1793, 325, 1627, 230, 1574, 277, 1601, 184, 1530, 175, 1462, 109, 1402, 134, 344, 1370, 5, 1349, 63, 1696, 383, 1726, 1891, 446, 1754, 2268, 969, 2242, 896, 2182, 2164, 907, 2301, 1012, 2343, 1052, 2381, 1087, 1314, 2605, 1263, 2570, 1227, 2534, 1183, 2490, 1141, 2448, 1115, 2641]
 
 
 
-plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/kentLand2.txt')
+plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC.txt')
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
@@ -156,8 +157,8 @@ if impossible == 0
     GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',3, 'EdgeColor', 'b');
     
     GLNSPlot.NodeLabel = {};
-    %     axis equal
-    axis([200 900 0 550])
+    axis equal
+    axis([0 1700 0 800])
     groupedPoints = cell2mat(groupedPoints);
     
     %     for i = 2:length(GLNSSolution)-1
