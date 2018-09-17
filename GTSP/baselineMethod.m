@@ -3,7 +3,7 @@
 % calculates the tour cost for each one
 % connect each polygon
 
-data = readData('D:\Documents\User_Created\School\School_Virginia_tech\Lab_work\coverage\GTSP\inputs\fieldExperiments\exampleFigureBC1.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('inputs/fieldExperiments/exampleFigureBC1.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 x1 = [data(:,1), data(:,4)];
 y1 = [data(:,2), data(:,5)];
 [m,n] = size(x1);
@@ -25,7 +25,7 @@ for i = 1:m
 end
 
 
-data = readData('D:\Documents\User_Created\School\School_Virginia_tech\Lab_work\coverage\GTSP\inputs\fieldExperiments\exampleFigureBC2.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('inputs/fieldExperiments/exampleFigureBC2.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 x2 = [data(:,1), data(:,4)];
 y2 = [data(:,2), data(:,5)];
 [m,n] = size(x2);
@@ -47,7 +47,7 @@ for i = 1:m
 end
 
 
-data = readData('D:\Documents\User_Created\School\School_Virginia_tech\Lab_work\coverage\GTSP\inputs\fieldExperiments\exampleFigureBC3.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('inputs/fieldExperiments/exampleFigureBC3.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 x3 = [data(:,1), data(:,4)];
 y3 = [data(:,2), data(:,5)];
 [m,n] = size(x3);
@@ -69,7 +69,7 @@ for i = 1:m
 end
 
 
-data = readData('D:\Documents\User_Created\School\School_Virginia_tech\Lab_work\coverage\GTSP\inputs\fieldExperiments\exampleFigureBC4.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('inputs/fieldExperiments/exampleFigureBC4.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 x4 = [data(:,1), data(:,4)];
 y4 = [data(:,2), data(:,5)];
 [m,n] = size(x4);
