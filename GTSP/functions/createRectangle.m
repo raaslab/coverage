@@ -2,7 +2,7 @@
 
 function [output, output1, output2] = createRectangle(x1, y1, x2, y2)
 
-sensingRange = 1.5;
+sensingRange = 0.5;
 angle = atan2(y2-y1,x2-x1);
 
 TL = [-sensingRange, +sensingRange];
@@ -37,7 +37,7 @@ elseif x1<x2 && y1<y2
     output = [BL1;TL1;TR2;BR2;BL1];
     
 elseif x1==x2 && y1<y2
-    output = [TR1;BR1;BL2;TL2;TR1];
+    output = [BL1;TL1;TR2;BR2;BL1];
 elseif x1==x2 && y1>y2
     output = [BL1;TL1;TR2;BR2;BL1];
 elseif x1>x2 && y1==y2

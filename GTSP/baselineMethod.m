@@ -110,10 +110,10 @@ xCon(end+1) = x4(end);
 yCon(end+1) = y4(end);
 
 j = 20;
-tl = 100;
-tto = 100;
+tl = 45;
+tto = 5;
 r = 2;
-max_distance = 1000;
+max_distance = 1800;
 totalDist0 = 0;
 totalDist1 = 0;
 totalDist2 = 0;

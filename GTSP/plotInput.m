@@ -1,4 +1,4 @@
 % plots the input .txt file
 close all
-plotTXT('inputs/fieldExperiments/exampleFigureBC4.txt')
+plotTXT('inputs/qualitative.txt')
 % plotTXT('D:\Documents\User_Created\School\School_Virginia_tech\Lab_work\coverage\GTSP\inputs\costVSbudget1.txt')

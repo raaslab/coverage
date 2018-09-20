@@ -4,8 +4,8 @@
 
 clear
 close all
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC3.mat
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC1.mat
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC13.mat
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC11.mat
 
 % GLNSSolution = [2301, 918, 2130, 707, 1955, 1101, 2521, 555, 1763, 371, 1579, 187, 1395, 2601] % kentLand2
 % GLNSSolution = [781, 702, 361, 625, 735, 510, 1059, 594, 305, 268, 1201] % fieldExperiment2

@@ -5,10 +5,10 @@ clc; clear all; close all;
 
 % numBC = 20;
 
-max_Distance = 1000;   % if max_Distance == j then discharge is unit rate per distance (budget)
+max_Distance = 1800;   % if max_Distance == j then discharge is unit rate per distance (budget)
 j = 20;
-tTO = 100;           % take off cost
-tL = 100;            % landing cost
+tTO = 5;           % take off cost
+tL = 45;            % landing cost
 rRate = 2;         % rate of recharge
 UGVS = 5;          % time to travel one unit for the UGV (greater than 1 means UGV is slower)
 method = 1;        % 1 = GLNS, 0 = con  corde
@@ -29,9 +29,9 @@ G = 0;
 i = numClusters*2; % number of vertices needed to be multiplied by battery levels
 
 
-filename1 = sprintf('exampleFigureBC1');
-filename2 = sprintf('/home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC2.gtsp');
-filename3 = sprintf('exampleFigureBC3');
+filename1 = sprintf('exampleFigureBC11');
+filename2 = sprintf('/home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC12.gtsp');
+filename3 = sprintf('exampleFigureBC13');
 
 tic
 pathName = '/home/klyu/lab/coverageWork/testForCoverage/fieldExperiments';
