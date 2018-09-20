@@ -4,14 +4,16 @@
 
 clear
 close all
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC13.mat
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC11.mat
+load /home/klyu/lab/coverageWork/testForCoverage/qualitative/qualitative33.mat
+load /home/klyu/lab/coverageWork/testForCoverage/qualitative/qualitative31.mat
 
 % GLNSSolution = [2301, 918, 2130, 707, 1955, 1101, 2521, 555, 1763, 371, 1579, 187, 1395, 2601] % kentLand2
 % GLNSSolution = [781, 702, 361, 625, 735, 510, 1059, 594, 305, 268, 1201] % fieldExperiment2
 % exampleFigureBC
-GLNSSolution = [621, 1972, 825, 2133, 786, 2094, 742, 2049, 701, 2008, 661, 1929, 581, 1872, 522, 1831, 484, 1793, 325, 1627, 230, 1574, 277, 1601, 184, 1530, 175, 1462, 109, 1402, 134, 344, 1370, 5, 1349, 63, 1696, 383, 1726, 1891, 446, 1754, 2268, 969, 2242, 896, 2182, 2164, 907, 2301, 1012, 2343, 1052, 2381, 1087, 1314, 2605, 1263, 2570, 1227, 2534, 1183, 2490, 1141, 2448, 1115, 2641]
+% GLNSSolution = [581, 1927, 633, 2021, 725, 2069, 773, 2117, 802, 2147, 693, 1997, 645, 1890, 556, 1842, 507, 1812, 437, 1763, 468, 414, 1715, 377, 1342, 9, 1361, 108, 1675, 1442, 86, 1393, 143, 1487, 191, 1534, 237, 1561, 263, 1605, 307, 1648, 2233, 881, 2183, 2164, 946, 2254, 962, 2309, 1021, 2326, 1052, 2397, 1084, 1109, 2453, 1157, 2484, 1188, 2532, 1236, 2565, 1269, 2613, 1317, 2641]
 
+% qualitative work
+GLNSSolution = [281, 23, 325, 67, 369, 111, 135, 438, 169, 472, 215, 267, 532, 237, 561]
 
 
 % plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC.txt')
@@ -159,7 +161,7 @@ if impossible == 0
 
     GLNSPlot.NodeLabel = {};
     axis equal
-    axis([40 1675 50 800])
+%     axis([40 1675 50 800])
     groupedPoints = cell2mat(groupedPoints);
     
     %     for i = 2:length(GLNSSolution)-1
@@ -187,8 +189,8 @@ if impossible == 0
     % highlighting edges for UGV
     % highlight(GLNSPlot, S8, T8, 'EdgeColor', 'r', 'LineWidth', 4)
     
-    highlight(GLNSPlot, S2)             %highlights nodes
-    highlight(GLNSPlot, numel(S2))    %highlights last node
+%     highlight(GLNSPlot, S2)             %highlights nodes
+%     highlight(GLNSPlot, numel(S2))    %highlights last node
     
     h = zeros(5, 1);
     h(1) = plot(NaN,NaN,'color', [0,0,1]);
@@ -197,7 +199,7 @@ if impossible == 0
     h(4) = plot(NaN,NaN,'color', [1,0.1034,0.7241]);
     h(5) = plot(NaN,NaN,'color', [1,0.8276,0]);
     legg = legend(h, 'F-F','F-FDU','F-DUFDU','F-DUF','F-DTU');
-    legg.FontSize = 16;
+    legg.FontSize = 9;
 else
     disp('impossible input');
 end
@@ -209,7 +211,7 @@ for i = 2:2:length(GLNSx)-1
     
 end
 
-title('Output Tour', 'Fontsize', 36)
-set(gca,'Ydir','reverse')
+title('Output Tour', 'Fontsize', 16)
+% set(gca,'Ydir','reverse')
 
 % close all;
