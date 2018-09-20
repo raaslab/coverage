@@ -24,5 +24,5 @@ hold on
 plot(0,0)
 axis equal
 % axis([-20 119 -9 101])
-title('Input Boustrophedon Cells')
+title('Input Boustrophedon Cells', 'FontSize', 16)
 end

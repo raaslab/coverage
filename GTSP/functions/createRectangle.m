@@ -2,7 +2,7 @@
 
 function [output, output1, output2] = createRectangle(x1, y1, x2, y2)
 
-sensingRange = 1;
+sensingRange = 1.5;
 angle = atan2(y2-y1,x2-x1);
 
 TL = [-sensingRange, +sensingRange];

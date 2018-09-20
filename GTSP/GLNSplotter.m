@@ -14,7 +14,7 @@ GLNSSolution = [621, 1972, 825, 2133, 786, 2094, 742, 2049, 701, 2008, 661, 1929
 
 
 
-plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC.txt')
+% plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC.txt')
 
 v_Cluster = cell2mat(v_Cluster);
 while GLNSSolution(1) ~= (numPointsInit * numBatteryLevels)+1
@@ -154,11 +154,12 @@ end
 if impossible == 0
     % GLNSg = addedge(GLNSg,S8,T8);
     figure(2)
-    GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',3, 'EdgeColor', 'b');
-    
+    GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',3, 'EdgeColor', [0,0,1]);
+    GLNSPlot.EdgeAlpha = 1;
+
     GLNSPlot.NodeLabel = {};
     axis equal
-    axis([0 1700 0 800])
+    axis([40 1675 50 800])
     groupedPoints = cell2mat(groupedPoints);
     
     %     for i = 2:length(GLNSSolution)-1
@@ -171,17 +172,18 @@ if impossible == 0
     %         highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
     %     end
     if isempty(S4) == 0                 %highlight type 2 edges: F-FDU
-        highlight(GLNSPlot,S4, T4,'EdgeColor','r','LineWidth',3, 'LineStyle', '-')
+        highlight(GLNSPlot,S4, T4,'EdgeColor',[1,0,0],'LineWidth',3, 'LineStyle', '-')
     end
     if isempty(S5) == 0                 %highlight type 3 edges: FDU-FDU
-        highlight(GLNSPlot,S5, T5,'EdgeColor','g','LineWidth',3, 'LineStyle', '-')
+        highlight(GLNSPlot,S5, T5,'EdgeColor',[0,1,0],'LineWidth',3, 'LineStyle', '-')
     end
     if isempty(S6) == 0                 %highlight type 4 edges: FDU-F
-        highlight(GLNSPlot,S6, T6,'EdgeColor','y','LineWidth',3, 'LineStyle', '-')
+        highlight(GLNSPlot,S6, T6,'EdgeColor',[1,0.1034,0.7241],'LineWidth',3, 'LineStyle', '-')
     end
     if isempty(S7) == 0                 %highlight type 5 edges: F-DTU
-        highlight(GLNSPlot,S7, T7,'EdgeColor','m','LineWidth',3, 'LineStyle', '-')
+        highlight(GLNSPlot,S7, T7,'EdgeColor',[1,0.8276,0],'LineWidth',3, 'LineStyle', '-')
     end
+
     % highlighting edges for UGV
     % highlight(GLNSPlot, S8, T8, 'EdgeColor', 'r', 'LineWidth', 4)
     
@@ -189,12 +191,13 @@ if impossible == 0
     highlight(GLNSPlot, numel(S2))    %highlights last node
     
     h = zeros(5, 1);
-    h(1) = plot(NaN,NaN,'b');
-    h(2) = plot(NaN,NaN,'r');
-    h(3) = plot(NaN,NaN,'g');
-    h(4) = plot(NaN,NaN,'y');
-    h(5) = plot(NaN,NaN,'m');
-    legend(h, 'F-F','F-FDU','FDU-FDU','FDU-F','F-DTU');
+    h(1) = plot(NaN,NaN,'color', [0,0,1]);
+    h(2) = plot(NaN,NaN,'color', [1,0,0]);
+    h(3) = plot(NaN,NaN,'color', [0,1,0]);
+    h(4) = plot(NaN,NaN,'color', [1,0.1034,0.7241]);
+    h(5) = plot(NaN,NaN,'color', [1,0.8276,0]);
+    legg = legend(h, 'F-F','F-FDU','F-DUFDU','F-DUF','F-DTU');
+    legg.FontSize = 16;
 else
     disp('impossible input');
 end
@@ -206,7 +209,7 @@ for i = 2:2:length(GLNSx)-1
     
 end
 
-title('Output Tour')
+title('Output Tour', 'Fontsize', 36)
 set(gca,'Ydir','reverse')
 
 % close all;

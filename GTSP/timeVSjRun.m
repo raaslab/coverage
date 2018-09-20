@@ -16,7 +16,7 @@ method = 1;        % 1 = GLNS, 0 = con  corde
 timeJ = [];
 % changing number of input BC
 for trial  = 1:10
-    for j = 10:7:80
+    for j = 87:7:101
         
         filename4 = sprintf('inputs/timeVSj/%d_%d.txt',trial,j);
         polygonCreater(filename4,numBC,100,0,0) % creates random polygons.
@@ -53,4 +53,4 @@ for trial  = 1:10
     end
 end
 
-save('timeVSj.mat')
+save('timeVSj2.mat')
