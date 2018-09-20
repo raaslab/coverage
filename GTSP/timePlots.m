@@ -30,10 +30,9 @@ end
 % figure(4)
 errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2),'b-o','LineWidth', 2)
 
-title('Cost VS. Budget')
-% legend(['1m per Battery Level'],['2m per Battery Level'], ['3m per Battery Level'])
-xlabel('Total Budget (meters)')
-ylabel('Tour Cost (seconds)')
+title('Cost VS. Budget','FontSize', 16)
+xlabel('D_{max} (meters)','FontSize', 14)
+ylabel('Tour Cost (seconds)','FontSize', 14)
 
 % plot for time vs sites
 figure(2)
@@ -52,11 +51,11 @@ for i = 10:7:80
     pos(end+1,:) = [i,abs(max(averageArray)-averageTime)];
     avgTimeVSsite(end+1,:) = [i,averageTime];
 end
-errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2),'MarkerEdgeColor','b','LineWidth', 2)
+errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2),'b-o','LineWidth', 2)
 % axis([8, 82,0,14])
-title('Computational Time vs Input Sites')
-xlabel('Number of Input Sites')
-ylabel('Computational Time (secondes)')
+title('Computational Time vs Input Sites', 'FontSize', 16)
+xlabel('Number of Input Boustrophedon Cells','FontSize', 14)
+ylabel('Computational Time (secondes)','FontSize', 14)
 
 % plot for time vs battery levels
 figure(3)
@@ -75,10 +74,10 @@ for i = 10:7:80
     pos(end+1,:) = [i, abs(max(averageArray)-averageTime)];
     averageTimeVSlevel(end+1,:) = [i,averageTime];
 end
-errorbar(averageTimeVSlevel(:,1), averageTimeVSlevel(:,2),neg(:,2),pos(:,2),'MarkerEdgeColor','b','LineWidth', 2)
+errorbar(averageTimeVSlevel(:,1), averageTimeVSlevel(:,2),neg(:,2),pos(:,2),'b-o','LineWidth', 2)
 % axis([8,82,0,14])
-title('Computational Time vs Battery Levels')
-xlabel('Number of Battery Levels')
-ylabel('Computational Time (secondes)')
+title('Computational Time vs Battery Levels','FontSize', 16)
+xlabel('Number of Battery Levels','FontSize', 14)
+ylabel('Computational Time (secondes)','FontSize', 14)
 
 plotTXT('inputs/costVSbudget1.txt')
