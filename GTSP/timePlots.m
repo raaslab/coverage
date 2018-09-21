@@ -9,7 +9,13 @@ clc
 
 % load timeData.mat
 load timeVSi.mat
+timeIall = timeI;
+load timeVSi2.mat
+timeIall = [timeIall;timeI];
 load timeVSj.mat
+timeJall = timeJ;
+load timeVSj2.mat
+timeJall = [timeJall;timeJ];
 % load costVSbudget.mat
 % load costVSbudgetGLNSOutput.mat
 load glnsOutput.mat
@@ -40,11 +46,11 @@ neg = [];
 pos = [];
 avgTimeVSsite = [];
 
-for i = 10:7:80
-    index = find(timeI(:,2)==i);
+for i = 10:7:101
+    index = find(timeIall(:,2)==i);
     averageArray = Inf([1,length(index)]);
     for j = 1:length(index)
-        averageArray(j) = timeI(index(j),3);
+        averageArray(j) = timeIall(index(j),3);
     end
     averageTime = sum(averageArray)/length(averageArray);
     neg(end+1,:) = [i,abs(min(averageArray)-averageTime)];
@@ -52,6 +58,7 @@ for i = 10:7:80
     avgTimeVSsite(end+1,:) = [i,averageTime];
 end
 errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2),'b-o','LineWidth', 2)
+xlim([8,104])
 % axis([8, 82,0,14])
 title('Computational Time vs Input Sites', 'FontSize', 16)
 xlabel('Number of Input Boustrophedon Cells','FontSize', 14)
@@ -63,11 +70,11 @@ neg = [];
 pos = [];
 averageTimeVSlevel =[];
 
-for i = 10:7:80
-    index = find(timeJ(:,2)==i);
+for i = 10:7:101
+    index = find(timeJall(:,2)==i);
     averageArray = Inf([1,length(index)]);
     for j = 1:length(index)
-        averageArray(j) = timeJ(index(j),3);
+        averageArray(j) = timeJall(index(j),3);
     end
     averageTime = sum(averageArray)/length(averageArray);
     neg(end+1,:) = [i,abs(min(averageArray)-averageTime)];
@@ -75,9 +82,10 @@ for i = 10:7:80
     averageTimeVSlevel(end+1,:) = [i,averageTime];
 end
 errorbar(averageTimeVSlevel(:,1), averageTimeVSlevel(:,2),neg(:,2),pos(:,2),'b-o','LineWidth', 2)
-% axis([8,82,0,14])
+xlim([8,104])
+% axis([8,104,~,~])
 title('Computational Time vs Battery Levels','FontSize', 16)
 xlabel('Number of Battery Levels','FontSize', 14)
 ylabel('Computational Time (secondes)','FontSize', 14)
 
-plotTXT('inputs/costVSbudget1.txt')
+% plotTXT('inputs/costVSbudget1.txt')
