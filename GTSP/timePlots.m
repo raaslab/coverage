@@ -60,7 +60,7 @@ end
 errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2),'b-o','LineWidth', 2)
 xlim([8,104])
 % axis([8, 82,0,14])
-title('Computational Time vs Input Sites', 'FontSize', 16)
+title('Computational Time vs Boustrophedon Cells', 'FontSize', 16)
 xlabel('Number of Input Boustrophedon Cells','FontSize', 14)
 ylabel('Computational Time (secondes)','FontSize', 14)
 
