@@ -36,7 +36,7 @@ end
 % figure(4)
 errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2),'b-o','LineWidth', 2)
 
-title('Cost VS. Budget','FontSize', 16)
+title('Cost vs. Budget','FontSize', 16)
 xlabel('D_{max} (meters)','FontSize', 14)
 ylabel('Tour Cost (seconds)','FontSize', 14)
 
@@ -60,7 +60,7 @@ end
 errorbar(avgTimeVSsite(:,1),avgTimeVSsite(:,2),neg(:,2), pos(:,2),'b-o','LineWidth', 2)
 xlim([8,104])
 % axis([8, 82,0,14])
-title('Computational Time vs Boustrophedon Cells', 'FontSize', 16)
+title('Computational Time vs. Boustrophedon Cells', 'FontSize', 16)
 xlabel('Number of Input Boustrophedon Cells','FontSize', 14)
 ylabel('Computational Time (secondes)','FontSize', 14)
 
@@ -84,7 +84,7 @@ end
 errorbar(averageTimeVSlevel(:,1), averageTimeVSlevel(:,2),neg(:,2),pos(:,2),'b-o','LineWidth', 2)
 xlim([8,104])
 % axis([8,104,~,~])
-title('Computational Time vs Battery Levels','FontSize', 16)
+title('Computational Time vs. Battery Levels','FontSize', 16)
 xlabel('Number of Battery Levels','FontSize', 14)
 ylabel('Computational Time (secondes)','FontSize', 14)
 
