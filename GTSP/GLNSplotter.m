@@ -4,16 +4,17 @@
 
 clear
 close all
-load /home/klyu/lab/coverageWork/testForCoverage/qualitative/qualitative33.mat
-load /home/klyu/lab/coverageWork/testForCoverage/qualitative/qualitative31.mat
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentlandVideo1.mat
+load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentlandVideo3.mat
 
 % GLNSSolution = [2301, 918, 2130, 707, 1955, 1101, 2521, 555, 1763, 371, 1579, 187, 1395, 2601] % kentLand2
 % GLNSSolution = [781, 702, 361, 625, 735, 510, 1059, 594, 305, 268, 1201] % fieldExperiment2
 % exampleFigureBC
 % GLNSSolution = [581, 1927, 633, 2021, 725, 2069, 773, 2117, 802, 2147, 693, 1997, 645, 1890, 556, 1842, 507, 1812, 437, 1763, 468, 414, 1715, 377, 1342, 9, 1361, 108, 1675, 1442, 86, 1393, 143, 1487, 191, 1534, 237, 1561, 263, 1605, 307, 1648, 2233, 881, 2183, 2164, 946, 2254, 962, 2309, 1021, 2326, 1052, 2397, 1084, 1109, 2453, 1157, 2484, 1188, 2532, 1236, 2565, 1269, 2613, 1317, 2641]
-
 % qualitative work
-GLNSSolution = [281, 23, 325, 67, 369, 111, 135, 438, 169, 472, 215, 267, 532, 237, 561]
+% GLNSSolution = [281, 23, 325, 67, 369, 111, 135, 438, 169, 472, 215, 267, 532, 237, 561]
+% kentlandVideo
+GLNSSolution = [141, 503, 105, 467, 69, 431, 33, 395, 164, 569, 213, 617, 361, 723, 246, 648, 330, 692, 294, 761]
 
 
 % plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC.txt')
@@ -161,7 +162,7 @@ if impossible == 0
 
     GLNSPlot.NodeLabel = {};
     axis equal
-%     axis([40 1675 50 800])
+    axis([200 900 50 800])
     groupedPoints = cell2mat(groupedPoints);
     
     %     for i = 2:length(GLNSSolution)-1
@@ -212,6 +213,6 @@ for i = 2:2:length(GLNSx)-1
 end
 
 title('Output Tour', 'Fontsize', 16)
-% set(gca,'Ydir','reverse')
+set(gca,'Ydir','reverse')
 
 % close all;

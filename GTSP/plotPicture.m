@@ -2,7 +2,7 @@
 % plots a .png image and allows you to click to store locations of vertices
 
 figure()
-yourImage = imread('figures/exampleFigureBC.png');
+yourImage = imread('figures/kentlandVideoBC.png');
 imshow(yourImage);
 hold on;
 % impoint
@@ -17,4 +17,4 @@ plot(x, y, 'b*', 'LineWidth', 2, 'MarkerSize', 15);
 
 ugvPossible1 = ones([1, length(x1)]); % all one side of rectangles
 ugvPossible2 = ones([1, length(x2)]); % corresponding other side of rectangles
-createPolygonFile('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC5.txt', x1, y1, ugvPossible1, x2, y2, ugvPossible2)
+createPolygonFile('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/kentlandVideo.txt', x1, y1, ugvPossible1, x2, y2, ugvPossible2)

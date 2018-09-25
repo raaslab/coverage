@@ -10,7 +10,7 @@ j = 20;
 tTO = 5;           % take off cost
 tL = 45;            % landing cost
 rRate = 2;         % rate of recharge
-UGVS = 5;          % time to travel one unit for the UGV (greater than 1 means UGV is slower)
+UGVS = 1;          % time to travel one unit for the UGV (greater than 1 means UGV is slower)
 method = 1;        % 1 = GLNS, 0 = con  corde
 timeI = [];
 % changing number of input BC
@@ -19,7 +19,7 @@ timeI = [];
 % polygonCreater(filename4,numBC,100,0,0) % creates random polygons.
 
 % use 'testInput.txt' if you want the file from polygonCreater
-data = readData('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/kentlandVideo.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
 x = [data(:,1), data(:,4)];
 y = [data(:,2), data(:,5)];
@@ -29,9 +29,9 @@ G = 0;
 i = numClusters*2; % number of vertices needed to be multiplied by battery levels
 
 
-filename1 = sprintf('exampleFigureBC11');
-filename2 = sprintf('/home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/exampleFigureBC12.gtsp');
-filename3 = sprintf('exampleFigureBC13');
+filename1 = sprintf('kentlandVideo1');
+filename2 = sprintf('/home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentlandVideo2.gtsp');
+filename3 = sprintf('kentlandVideo3');
 
 tic
 pathName = '/home/klyu/lab/coverageWork/testForCoverage/fieldExperiments';
