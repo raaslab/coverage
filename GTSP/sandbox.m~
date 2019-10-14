@@ -28,13 +28,13 @@ beta = mod2pi(leyaw-theta);
 planners = ['LSL', 'RSR', 'LSR', 'RSL', 'RLR', 'LRL'];
 
 bcost = float("inf");
-bt
-bp
-bq
-bmode = None, None, None, None;
+bt = 0;
+bp = 0;
+bq = 0;
+bmode = 0;
 
 for planner in planners:
-    solution = general_planner(planner, alpha, beta, d)
+    solution = general_planner(planner, alpha, beta, d);
 
     if solution is None:
         continue
@@ -53,6 +53,11 @@ zip(bmode, [bt*c, bp*c, bq*c], [c] * 3)
 
 function [output] = mod2pi(theta)
 	output = theta - 2.0*pi*floor(theta/2.0/pi);
+end
+
+function [output] = planner()
+
+
 end
 
 function [path, mode, cost] = general_planner(planner, alpha, beta, d)

@@ -17,9 +17,9 @@ ey = ey - sy;
 lex = cos(syaw)*ex + sin(syaw)*ey;
 ley = -sin(syaw)*ex + cos(syaw)*ey;
 leyaw = eyaw - syaw;
-D = math.sqrt(lex^2.0 + ley^2.0);
+D = sqrt(lex^2.0 + ley^2.0);
 d = D / c;
-print('D:', D)
+fprintf('D: %.4f\n', D)
 
 theta = mod2pi(atan2(ley, lex));
 alpha = mod2pi(-theta);
@@ -27,109 +27,124 @@ beta = mod2pi(leyaw-theta);
 
 planners = ['LSL', 'RSR', 'LSR', 'RSL', 'RLR', 'LRL'];
 
-bcost = float("inf");
+bcost = Inf;
 bt = 0;
 bp = 0;
 bq = 0;
 bmode = 0;
 
-for planner in planners:
-    solution = general_planner(planner, alpha, beta, d);
-
-    if solution is None:
+for i = 1:length(planners) % planner in planners:
+    [t,p,q,mode,cost,finished] = general_planner(planners(i), alpha, beta, d);
+    if finished == 1 % if no solution was found skip to next type of planner
         continue
     end
-
-    (path, mode, cost) = solution
-    (t, p, q) = path
-    if bcost > cost:
-        bt, bp, bq, bmode = t, p, q, mode
-        bcost = cost
+    if bcost > cost
+        bt = t;
+        bp = p;
+        bq = q;
+        bmode = mode;
+        bcost = cost;
     end
+end
 
-zip(bmode, [bt*c, bp*c, bq*c], [c] * 3)
+% zip(bmode, [bt*c, bp*c, bq*c], [c] * 3)
 
 
 
 function [output] = mod2pi(theta)
-	output = theta - 2.0*pi*floor(theta/2.0/pi);
+output = theta - 2.0*pi*floor(theta/2.0/pi);
 end
 
-function [path, mode, cost] = general_planner(planner, alpha, beta, d)
-	sa = math.sin(alpha);
-	sb = math.sin(beta);
-	ca = math.cos(alpha);
-	cb = math.cos(beta);
-	c_ab = math.cos(alpha - beta);
-	mode = list(planner);
-	planner_uc = planner.upper();
-
-	if planner_uc == 'LSL'
-		tmp0 = d + sa - sb;
-		p_squared = 2 + (d * d) - (2 * c_ab) + (2 * d * (sa - sb));
-		if p_squared < 0
-			return 0;
-        end
-		tmp1 = math.atan2((cb - ca), tmp0);
-		t = mod2pi(-alpha + tmp1);
-		p = math.sqrt(p_squared);
-		q = mod2pi(beta - tmp1);
-    elseif planner_uc == 'RSR'
-		tmp0 = d - sa + sb;
-		p_squared = 2 + (d * d) - (2 * c_ab) + (2 * d * (sb - sa));
-		if p_squared < 0
-			return 0;
-        end
-		tmp1 = math.atan2((ca - cb), tmp0);
-		t = mod2pi(alpha - tmp1);
-		p = math.sqrt(p_squared);
-		q = mod2pi(-beta + tmp1);
-    elseif planner_uc == 'LSR'
-		p_squared = -2 + (d * d) + (2 * c_ab) + (2 * d * (sa + sb));
-		if p_squared < 0
-			return 0;
-        end
-		p = math.sqrt(p_squared);
-		tmp2 = math.atan2((-ca - cb), (d + sa + sb)) - math.atan2(-2.0, p);
-		t = mod2pi(-alpha + tmp2);
-		q = mod2pi(-mod2pi(beta) + tmp2);
-    elseif planner_uc == 'RSL'
-		p_squared = (d * d) - 2 + (2 * c_ab) - (2 * d * (sa + sb));
-		if p_squared < 0
-			return 0;
-        end
-		p = math.sqrt(p_squared);
-		tmp2 = math.atan2((ca + cb), (d - sa - sb)) - math.atan2(2.0, p);
-		t = mod2pi(alpha - tmp2);
-		q = mod2pi(beta - tmp2);
-    elseif planner_uc == 'RLR'
-		tmp_rlr = (6.0 - d * d + 2.0 * c_ab + 2.0 * d * (sa - sb)) / 8.0;
-		if abs(tmp_rlr) > 1.0
-			return 0;
-        end
-		p = mod2pi(2 * math.pi - math.acos(tmp_rlr));
-		t = mod2pi(alpha - math.atan2(ca - cb, d - sa + sb) + mod2pi(p / 2.0));
-		q = mod2pi(alpha - beta - t + mod2pi(p));
-    elseif planner_uc == 'LRL'
-		tmp_lrl = (6. - d * d + 2 * c_ab + 2 * d * (- sa + sb)) / 8.;
-		if abs(tmp_lrl) > 1
-			return 0;
-        end
-		p = mod2pi(2 * math.pi - math.acos(tmp_lrl));
-		t = mod2pi(-alpha - math.atan2(ca - cb, d + sa - sb) + p / 2.);
-		q = mod2pi(mod2pi(beta) - alpha - t + mod2pi(p));
-    else
-		print('bad planner:', planner);
+function [t,p,q,mode,cost,finished] = general_planner(planner, alpha, beta, d)
+sa = sin(alpha);
+sb = sin(beta);
+ca = cos(alpha);
+cb = cos(beta);
+c_ab = cos(alpha - beta);
+planner_uc = planner;
+impossible = 0;
+t = 0;
+p = 0;
+q = 0;
+if strcmp(planner_uc,'LSL') == 1
+    tmp0 = d + sa - sb;
+    p_squared = 2 + (d * d) - (2 * c_ab) + (2 * d * (sa - sb));
+    if p_squared < 0
+        impossible = 1;
+        mode = 0;
+        cost = 0;
     end
-
-	path = [t, p, q];
-
-	% Lowercase directions are driven in reverse.
+    tmp1 = atan2((cb - ca), tmp0);
+    t = mod2pi(-alpha + tmp1);
+    p = sqrt(p_squared);
+    q = mod2pi(beta - tmp1);
+elseif strcmp(planner_uc,'RSR') == 1
+    tmp0 = d - sa + sb;
+    p_squared = 2 + (d * d) - (2 * c_ab) + (2 * d * (sb - sa));
+    if p_squared < 0
+        impossible = 1;
+        mode = 0;
+        cost = 0;
+    end
+    tmp1 = atan2((ca - cb), tmp0);
+    t = mod2pi(alpha - tmp1);
+    p = sqrt(p_squared);
+    q = mod2pi(-beta + tmp1);
+elseif strcmp(planner_uc,'LSR') == 1
+    p_squared = -2 + (d * d) + (2 * c_ab) + (2 * d * (sa + sb));
+    if p_squared < 0
+        impossible = 1;
+        mode = 0;
+        cost = 0;
+    end
+    p = sqrt(p_squared);
+    tmp2 = atan2((-ca - cb), (d + sa + sb)) - math.atan2(-2.0, p);
+    t = mod2pi(-alpha + tmp2);
+    q = mod2pi(-mod2pi(beta) + tmp2);
+elseif strcmp(planner_uc,'RSL') == 1
+    p_squared = (d * d) - 2 + (2 * c_ab) - (2 * d * (sa + sb));
+    if p_squared < 0
+        impossible = 1;
+        mode = 0;
+        cost = 0;
+    end
+    p = sqrt(p_squared);
+    tmp2 = atan2((ca + cb), (d - sa - sb)) - math.atan2(2.0, p);
+    t = mod2pi(alpha - tmp2);
+    q = mod2pi(beta - tmp2);
+elseif strcmp(planner_uc,'RLR') == 1
+    tmp_rlr = (6.0 - d * d + 2.0 * c_ab + 2.0 * d * (sa - sb)) / 8.0;
+    if abs(tmp_rlr) > 1.0
+        impossible = 1;
+        mode = 0;
+        cost = 0;
+    end
+    p = mod2pi(2 * pi - acos(tmp_rlr));
+    t = mod2pi(alpha - atan2(ca - cb, d - sa + sb) + mod2pi(p / 2.0));
+    q = mod2pi(alpha - beta - t + mod2pi(p));
+elseif strcmp(planner_uc,'LRL') == 1
+    tmp_lrl = (6. - d * d + 2 * c_ab + 2 * d * (- sa + sb)) / 8.;
+    if abs(tmp_lrl) > 1
+        impossible = 1;
+        mode = 0;
+        cost = 0;
+    end
+    p = mod2pi(2 * math.pi - acos(tmp_lrl));
+    t = mod2pi(-alpha - atan2(ca - cb, d + sa - sb) + p / 2.);
+    q = mod2pi(mod2pi(beta) - alpha - t + mod2pi(p));
+else
+    fprintf('bad planner');
+end
+finished = impossible;
+if finished == 0
+    mode = planner;
+end
+% Lowercase directions are driven in reverse.
 % 	for i in [0, 2]
 % 		if planner[i].islower()
 % 			path[i] = (2 * math.pi) - path[i]
 %         end
 %     end
-	% This will screw up whatever is in the middle.
+% This will screw up whatever is in the middle.
 % 	cost = sum(map(abs, path));
-    end
+end
