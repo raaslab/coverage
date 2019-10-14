@@ -19,7 +19,7 @@ timeI = [];
 % polygonCreater(filename4,numBC,100,0,0) % creates random polygons.
 
 % use 'testInput.txt' if you want the file from polygonCreater
-data = readData('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/kentlandVideo.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('/home/user01/Kevin_Yu/coverage/GTSP/inputs/fieldExperiments/kentlandVideo.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
 x = [data(:,1), data(:,4)];
 y = [data(:,2), data(:,5)];
@@ -29,12 +29,12 @@ G = 0;
 i = numClusters*2; % number of vertices needed to be multiplied by battery levels
 
 
-filename1 = sprintf('kentlandVideo1');
-filename2 = sprintf('/home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentlandVideo2.gtsp');
-filename3 = sprintf('kentlandVideo3');
+filename1 = sprintf('test1');
+filename2 = sprintf('/home/user01/Kevin_Yu/coverage/GTSP/test2.gtsp');
+filename3 = sprintf('test3');
+pathName = '/home/user01/Kevin_Yu/coverage/GTSP';
 
 tic
-pathName = '/home/klyu/lab/coverageWork/testForCoverage/fieldExperiments';
 % pathName = '/home/klyu/lab/coverageWork/testForCoverage/errorInstance'; % for error instances
 [ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename1, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName,UGVCapable);
 
