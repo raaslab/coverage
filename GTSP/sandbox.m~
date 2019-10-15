@@ -51,8 +51,7 @@ end
 disp(bt)
 disp(bp)
 disp(bq)
-disp(bmode)
-disp(bcost)
+bmode
 
 
 function [output] = mod2pi(theta)
