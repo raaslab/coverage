@@ -123,6 +123,7 @@ function path = dubins_curve(p1, p2, r, stepsize, quiet)
         text(p1(1), p1(2),'start','HorizontalAlignment','center');
         text(p2(1), p2(2),'end','VerticalAlignment','top');
         disp('plot drawing time'); toc;
+        title('Dubins Curve')
     end
 end
 
