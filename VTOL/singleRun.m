@@ -13,6 +13,9 @@ rRate = 2;         % rate of recharge
 UGVS = 1;          % time to travel one unit for the UGV (greater than 1 means UGV is slower)
 method = 1;        % 1 = GLNS, 0 = con  corde
 timeI = [];
+fixedRatio = 5;     % ratio of multi-rotor to fixed-wing battery usage per distance (1lvl/5m : 1lvl/10m = 2) (greater than 1 means fixed wing goes farther on one battery level)
+turnRadius = 4;     % turn radius for dubins constraints in 
+
 % changing number of input BC
 
 % filename4 = sprintf('inputs/timeVSi/%d_%d.txt',trial,numBC);
