@@ -6,7 +6,7 @@
 % method = 1 is GLNS, 0 is concorde
 % OUTPUTS
 
-function [time,gtspWeightMatrix2, gtspTime, v_Cluster] = testGeneral(numPointsInit, numBatteryLevels, filename, timeTO, timeL, rechargeRate, UGVSpeed, G1, x, y, method, maxDistance, pathName,UGVCapable)
+function [time,gtspWeightMatrix2, gtspTime, v_Cluster] = testGeneral(numPointsInit, numBatteryLevels, filename, timeTO, timeL, rechargeRate, UGVSpeed, G1, x, y, method, maxDistance, pathName,UGVCapable,fixedRatio,turnRadius)
 
 time = 0;
 rotation = 51; % value used for rotating in graphMakingNew, in degrees
@@ -32,7 +32,7 @@ v_Cluster = num2cell(v_Cluster);
 [groupedPoints] = makingGroupedPoints(numPointsInit, numBatteryLevels);
 groupedPoints = num2cell(groupedPoints);
 
-[v_Adj, v_Type, S1, T1, weights, v_ClusterLevels,FDU,F] = makingSTWv_AdjGeneral(maxDistance, x1, y1, numPointsInit, numBatteryLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints,UGVCapable1);
+[v_Adj, v_Type, S1, T1, weights, v_ClusterLevels,FDU,F] = makingSTWv_AdjGeneral(maxDistance, x1, y1, numPointsInit, numBatteryLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints,UGVCapable1,fixedRatio,turnRadius);
 
 [xOut, yOut] = graphingCluster(x1, y1, numPointsInit, numBatteryLevels, S1, T1, 0, nodeArray, method);            % graph in cluster format
 

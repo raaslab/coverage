@@ -14,13 +14,10 @@ for i = 1:numberOfEdges
         v_AdjNew(i) = Inf;
     end
 end
-
 numOfTotalPoints = numPoints*numLevels;
-
 for i = 1:numOfTotalPoints
     if v_ClusterLevel(i) == numLevels
         v_AdjNew(:, i) = Inf;
     end
 end
-
 end

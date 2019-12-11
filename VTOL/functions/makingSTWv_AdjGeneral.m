@@ -6,7 +6,7 @@
 % UGVSpeed = the time to travel one unit for the UGV (has to be greater than equal to 1)
 % OUTPUTS
 
-function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels, FDU,M] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints,UGVCapable)
+function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels, FDU,M] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints,UGVCapable,fixedRatio,turnRadius)
 
 v_ClusterLevels = Inf([1, numPoints*numLevels]);
 counter = 1;
@@ -31,7 +31,7 @@ v_UGVCapable = v_UGVCapable';
 % create all types of edges
 % creating flying edges (only UAV and bat' < bat)
 % edge types: These edges are also internal of clusters
-[M, allDistances] = flyingM(maxDistance, x, y, numPoints, numLevels, v_Cluster, v_ClusterLevels, groupedPoints); % fly multi-rotor
+[M, allDistancesM] = flyingM(maxDistance, x, y, numPoints, numLevels, v_Cluster, v_ClusterLevels, groupedPoints); % fly multi-rotor
 % TODO: need to make fixed wings battery last longer. Do this by changing
 % the battery level that the Drone goes to if going a certain distance.
 % (e.g. multi 10m/1lvl, fixed 10m/1lvl)
@@ -40,10 +40,10 @@ v_UGVCapable = v_UGVCapable';
 % distance value as the distance instaed of the euclidean distance.
 % DUBIN'S FUNCTION: ([x,y,theta],[x,y,theta],radius) theta is in radians,
 % radius is in meters?
-[F, allDistancesTOL] = flyingF(maxDistance, x, y, numPoints, numLevels, v_Cluster, v_ClusterLevels, groupedPoints); % fly fixed-wing
-[FDUM] = flyDownUpM(numPoints, numLevels, M, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints, maxDistance); % flyDownUp mutli-rotor
-[FDUF] = flyDownUpF(numPoints, numLevels, M, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints, maxDistance); % flyDownUp fixed-wing
-[DTU] = downTravelUp(numPoints, numLevels, M, v_Cluster, timeTO, timeL, allDistances, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints); % downTravelUp
+[F, allDistancesF] = flyingF(maxDistance, x, y, numPoints, numLevels, v_Cluster, v_ClusterLevels, groupedPoints,fixedRatio,turnRadius); % fly fixed-wing
+[FDUM] = flyDownUpM(numPoints, numLevels, M, v_Cluster, timeTO, timeL, allDistancesM, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints, maxDistance); % flyDownUp mutli-rotor
+[FDUF] = flyDownUpF(numPoints, numLevels, M, v_Cluster, timeTO, timeL, allDistancesF, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints, maxDistance); % flyDownUp fixed-wing
+[DTU] = downTravelUp(numPoints, numLevels, M, v_Cluster, timeTO, timeL, allDistancesM, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints); % downTravelUp
 
 sizeOfv_Cluster = size(v_Cluster);
 tempV_Cluster = cell2mat(v_Cluster);
@@ -61,6 +61,7 @@ DTUNew = checkUGVPossibility(DTU,v_UGVCapable,2);
 
 % make these into functions for each type of edge combo
 % edge type combos: These edges are only external edges and the combination of the above edges
+% TODO: make all the combination edges possible
 % typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
 % typeBEdge = typeB(M, FDUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
 % typeCEdge = typeC(FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU

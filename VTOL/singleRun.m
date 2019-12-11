@@ -39,7 +39,7 @@ pathName = '/home/user01/Kevin_Yu/coverage/GTSP';
 
 tic
 % pathName = '/home/klyu/lab/coverageWork/testForCoverage/errorInstance'; % for error instances
-[ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename1, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName,UGVCapable);
+[ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename1, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName,UGVCapable,fixedRatio,turnRadius);
 
 % making GLNS matrix input
 roundedGtspMatrix = round(gtspMatrix);
