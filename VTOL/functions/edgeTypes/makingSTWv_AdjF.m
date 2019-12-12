@@ -27,6 +27,8 @@ for i = 1:numPoints
     for j = 1:numPoints
 %         comparingPoints = [x(i), y(i); x(j), y(j)];
 %         allDistances(i, j) = pdist(comparingPoints, 'euclidean');
+        % TODO: find all BC nodes for i and j
+        % Then caculate theta by atan2(y,x)
         p1 = [x(i),y(i),theta(i)]; % TODO: find theta for i and j
         p2 = [x(j),y(j),theta(j)]; % Sould be along the path of the BC
         dubinsOut = dubins_core(p1,p2,turnRadius);

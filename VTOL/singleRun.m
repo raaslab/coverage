@@ -50,5 +50,8 @@ f = fullfile(pathName, filename3);
 trialTime = toc
 save(f);
 
+% Run GLNS after this
+% Run Plotter after this
+
 
 
