@@ -56,7 +56,7 @@ sNew = [];
 tNew = [];
 weights = [];
 matGroupedPoints = cell2mat(groupedPoints);
-for i = 1:numPoints                     % TODO: this won't for for making the adjacency matrix. Need to find another way
+for i = 1:numPoints
 %     pointA = find(matGroupedPoints == i);
     for j = 1:numPoints
         node = find(matGroupedPoints == i, 1);

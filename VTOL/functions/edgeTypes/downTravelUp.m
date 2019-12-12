@@ -7,12 +7,10 @@
 
 
 function [v_AdjNew] = downTravelUp(numPoints, numLevels, ~, v_Cluster, timeTO, timeL, distances, v_ClusterLevels, rRate, UGVratio, groupedPoints)
-
 v_Cluster = cell2mat(v_Cluster);
 totalPoints = numPoints * numLevels;
 v_AdjNew(1:totalPoints, 1:totalPoints) = Inf;
 groupedPoints = cell2mat(groupedPoints);
-
 for i = 1:totalPoints
     for j = 1:totalPoints
         if v_ClusterLevels(j) >= v_ClusterLevels(i)
@@ -28,7 +26,6 @@ for i = 1:totalPoints
         end
     end
 end
-
 for i = 1:totalPoints
     for j = 1:totalPoints
         if groupedPoints(i) == groupedPoints(j)
@@ -36,7 +33,4 @@ for i = 1:totalPoints
         end
     end
 end
-
-
-
 end

@@ -32,17 +32,9 @@ v_UGVCapable = v_UGVCapable';
 % creating flying edges (only UAV and bat' < bat)
 % edge types: These edges are also internal of clusters
 [M, allDistancesM] = flyingM(maxDistance, x, y, numPoints, numLevels, v_Cluster, v_ClusterLevels, groupedPoints); % fly multi-rotor
-% TODO: need to make fixed wings battery last longer. Do this by changing
-% the battery level that the Drone goes to if going a certain distance.
-% (e.g. multi 10m/1lvl, fixed 10m/1lvl)
-% TODO: add dubin's constraints for fixed-wing. Need to input the start and
-% end point into the dubins constraints calculator and then use that
-% distance value as the distance instaed of the euclidean distance.
-% DUBIN'S FUNCTION: ([x,y,theta],[x,y,theta],radius) theta is in radians,
-% radius is in meters?
 [F, allDistancesF] = flyingF(maxDistance, x, y, numPoints, numLevels, v_Cluster, v_ClusterLevels, groupedPoints,fixedRatio,turnRadius); % fly fixed-wing
 [FDUM] = flyDownUpM(numPoints, numLevels, M, v_Cluster, timeTO, timeL, allDistancesM, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints, maxDistance); % flyDownUp mutli-rotor
-[FDUF] = flyDownUpF(numPoints, numLevels, M, v_Cluster, timeTO, timeL, allDistancesF, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints, maxDistance); % flyDownUp fixed-wing
+[FDUF] = flyDownUpF(numPoints, numLevels, F, v_Cluster, timeTO, timeL, allDistancesF, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints, maxDistance); % flyDownUp fixed-wing
 [DTU] = downTravelUp(numPoints, numLevels, M, v_Cluster, timeTO, timeL, allDistancesM, v_ClusterLevels, rechargeRate, UGVSpeed, groupedPoints); % downTravelUp
 
 sizeOfv_Cluster = size(v_Cluster);

@@ -5,13 +5,11 @@
 % OUTPUTS
 
 function [v_AdjNew, distances] = flyDownUpM(numPoints, numLevels, v_Adj, v_Cluster, timeTO, timeL, distances, v_ClusterLevels, rRate, UGVratio, groupedPoints, maxDistance)
-
 % v_Cluster = cell2mat(v_Cluster);
 totalPoints = numPoints * numLevels;
 v_AdjTemp = v_Adj;
 v_AdjNew = v_Adj*Inf;
 groupedPoints = cell2mat(groupedPoints);
-
 for i = 1:totalPoints
     for j = 1:numPoints
         if groupedPoints(i) ~= j
@@ -48,7 +46,6 @@ for i = 1:totalPoints
         end
     end
 end
-
 for i = 1:totalPoints
     for j = 1:totalPoints
         if groupedPoints(i) == groupedPoints(j)
@@ -56,9 +53,4 @@ for i = 1:totalPoints
         end
     end
 end
-
-
 end
-
-
-
