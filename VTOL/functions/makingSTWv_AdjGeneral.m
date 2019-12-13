@@ -48,17 +48,30 @@ for i = 1:sizeOfv_Cluster
 end
 v_Cluster = tempV_Cluster(:,1);
 
-FDUNew = checkUGVPossibility(FDU,v_UGVCapable,1);
+FDUMNew = checkUGVPossibility(FDUM,v_UGVCapable,1);
+FDUFNew = checkUGVPossibility(FDUF,v_UGVCapable,1);
 DTUNew = checkUGVPossibility(DTU,v_UGVCapable,2);
 
 % make these into functions for each type of edge combo
 % edge type combos: These edges are only external edges and the combination of the above edges
 % TODO: make all the combination edges possible
-% typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
-% typeBEdge = typeB(M, FDUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
-% typeCEdge = typeC(FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
-% typeDEdge = typeD(M, FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
-% typeEEdge = typeE(M, DTUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
+typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
+typeBEdge = typeB(M, FDUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
+typeCEdge = typeC(FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
+typeDEdge = typeD(M, FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
+typeEEdge = typeE(M, DTUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
+Aedge = edgeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % MMM
+% Bedge = edgeB(); % MMF
+Cedge = edgeC(); % MGM
+% Dedge = edgeD(); % MGF
+Eedge = edgeE(); % MFM
+% Fedge = edgeF(); % MFF
+Gedge = edgeG(); % FMM
+% Hedge = edgeH(); % FMF
+Iedge = edgeI(); % FGM
+% Jedge = edgeJ(); % FGF
+Kedge = edgeK(); % FFM
+% Ledge = edgeL(); % FFF
 
 % pick the minimum cost edge here
 numOfTotalPoints = numPoints * numLevels;
