@@ -1,5 +1,6 @@
+% MG
 
-function [outputEdges] = edgeC(F, DTU, v_Cluster, distances, levels, sites, groupedPoints, aEdge, TO, L, RR)
+function [outputEdges] = edgeC(F, DTU, v_Cluster, distances, levels, sites, groupedPoints)
 groupedPoints = cell2mat(groupedPoints);
 outputEdges = Inf(sites*levels);
 for i = 1:(sites*levels)

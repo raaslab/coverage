@@ -65,19 +65,19 @@ DTUNew = checkUGVPossibility(DTU,v_UGVCapable,2);
 Aedge = edgeA(v_Cluster, allDistancesM, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % MMM
 % Bedge = edgeB(); % MMF
 % MG
-Cedge = edgeC(M, DTUNew, v_Cluster, allDistancesM, numLevels, numPoints, groupedPoints, Aedge, timeTO, timeL, rechargeRate); % MGM
+Cedge = edgeC(M, DTUNew, v_Cluster, allDistancesM, numLevels, numPoints, groupedPoints); % MGM
 % Dedge = edgeD(); % MGF
 % MF
-Eedge = edgeE(); % MFM
+Eedge = edgeE(v_Cluster, allDistancesM, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, allDistancesF,fixedRatio); % MFM
 % Fedge = edgeF(); % MFF
 % FM
-Gedge = edgeG(); % FMM
+Gedge = edgeG(v_Cluster, allDistancesM, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, allDistancesF,fixedRatio); % FMM
 % Hedge = edgeH(); % FMF
 % FG
-Iedge = edgeI(); % FGM
+Iedge = edgeI(F, DTUNew, v_Cluster, allDistancesF, numLevels, numPoints, groupedPoints); % FGM
 % Jedge = edgeJ(); % FGF
 % FF
-Kedge = edgeK(); % FFM
+Kedge = edgeK(v_Cluster, allDistancesF, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints,fixedRatio); % FFM
 % Ledge = edgeL(); % FFF
 
 % pick the minimum cost edge here
