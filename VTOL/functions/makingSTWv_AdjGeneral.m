@@ -55,21 +55,28 @@ DTUNew = checkUGVPossibility(DTU,v_UGVCapable,2);
 % make these into functions for each type of edge combo
 % edge type combos: These edges are only external edges and the combination of the above edges
 % TODO: make all the combination edges possible
-typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
-typeBEdge = typeB(M, FDUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
-typeCEdge = typeC(FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
-typeDEdge = typeD(M, FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
-typeEEdge = typeE(M, DTUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
-Aedge = edgeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % MMM
+% typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
+% typeBEdge = typeB(M, FDUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
+% typeCEdge = typeC(FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
+% typeDEdge = typeD(M, FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
+% typeEEdge = typeE(M, DTUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
+
+% MM
+Aedge = edgeA(v_Cluster, allDistancesM, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % MMM
 % Bedge = edgeB(); % MMF
-Cedge = edgeC(); % MGM
+% MG
+Cedge = edgeC(M, DTUNew, v_Cluster, allDistancesM, numLevels, numPoints, groupedPoints, Aedge, timeTO, timeL, rechargeRate); % MGM
 % Dedge = edgeD(); % MGF
+% MF
 Eedge = edgeE(); % MFM
 % Fedge = edgeF(); % MFF
+% FM
 Gedge = edgeG(); % FMM
 % Hedge = edgeH(); % FMF
+% FG
 Iedge = edgeI(); % FGM
 % Jedge = edgeJ(); % FGF
+% FF
 Kedge = edgeK(); % FFM
 % Ledge = edgeL(); % FFF
 
