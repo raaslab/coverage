@@ -80,14 +80,34 @@ Iedge = edgeI(F, DTUNew, v_Cluster, allDistancesF, numLevels, numPoints, grouped
 Kedge = edgeK(v_Cluster, allDistancesF, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints,fixedRatio); % FFM
 % Ledge = edgeL(); % FFF
 
+% check all below. Just used the standard combinations made previously, but used
+% different M and F
+Medge = edgeM(M,FDUMNew,v_Cluster,allDistancesM,numLevels,numPoints,groupedPoints,Aedge); % MMDU
+Nedge = edgeN(M,FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints); % MDUM
+Oedge = edgeO(FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints); % MDUMDU
+Pedge = edgeP(F,FDUFNew,v_Cluster,allDistancesF, numLevels,numPoints,groupedPoints,Kedge); % FFDU
+Qedge = edgeQ(F,FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints); % FDUF
+Redge = edgeR(FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints); % FDUFDU
+% check all below. Need to make sure that the M and F are not conflicting
+Sedge = edgeS(F,FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints); % MDUF
+% CONTINUE WORKING FROM HERE
+Tedge = edgeT(M,FDUFNew,v_Cluster,allDistancesM,numLevels,numPoints,groupedPoints,Aedge); % MFDU
+Uedge = edgeU(); % MDUFDU
+Vedge = edgeV(); % FDUM
+Wedge = edgeW(); % FMDU
+Xedge = edgeX(); % FDUMDU
+
+
+
+
 % pick the minimum cost edge here
 numOfTotalPoints = numPoints * numLevels;
-numberOfEdges = numel(typeAEdge);
+numberOfEdges = numel(Aedge);
 v_AdjNew(1:numOfTotalPoints, 1:numOfTotalPoints) = Inf;
 v_Type(1:numOfTotalPoints, 1:numOfTotalPoints) = 0;
 
 for i = 1:numberOfEdges
-    compare = [typeAEdge(i),typeBEdge(i),typeCEdge(i),typeDEdge(i),typeEEdge(i)]; % array of all types of edge
+    compare = [Aedge(i),Cedge(i),Eedge(i),Gedge(i),Iedge(i),Kedge(i)]; % array of all types of edge
     [v_AdjNew(i), v_Type(i)]= min(compare);
 end
 
