@@ -88,14 +88,12 @@ Oedge = edgeO(FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints); % MDUMDU
 Pedge = edgeP(F,FDUFNew,v_Cluster,allDistancesF, numLevels,numPoints,groupedPoints,Kedge); % FFDU
 Qedge = edgeQ(F,FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints); % FDUF
 Redge = edgeR(FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints); % FDUFDU
-% check all below. Need to make sure that the M and F are not conflicting
 Sedge = edgeS(F,FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints); % MDUF
-% CONTINUE WORKING FROM HERE
-Tedge = edgeT(M,FDUFNew,v_Cluster,allDistancesM,numLevels,numPoints,groupedPoints,Aedge); % MFDU
-Uedge = edgeU(); % MDUFDU
-Vedge = edgeV(); % FDUM
-Wedge = edgeW(); % FMDU
-Xedge = edgeX(); % FDUMDU
+Tedge = edgeT(M,FDUFNew,v_Cluster,allDistancesM,numLevels,numPoints,groupedPoints,Aedge); % MFDU % check alldistancesM
+Uedge = edgeU(FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints,FDUMNew); % MDUFDU
+Vedge = edgeV(M,FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints); % FDUM
+Wedge = edgeW(F,FDUMNew,v_Cluster,allDistancesM,numLevels,numPoints,groupedPoints,Aedge); % FMDU % check alldistancesM
+Xedge = edgeX(FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints,FDUFNew); % FDUMDU
 
 
 
