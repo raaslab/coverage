@@ -11,7 +11,7 @@ tTO = 5;           % take off cost
 tL = 45;            % landing cost
 rRate = 2;         % rate of recharge
 UGVS = 1;          % time to travel one unit for the UGV to multi-rotor (greater than 1 means UGV is slower)
-method = 1;        % 1 = GLNS, 0 = con  corde
+method = 1;        % 1 = GLNS, 0 = concorde
 timeI = [];
 fixedRatio = 5;     % ratio of multi-rotor to fixed-wing battery usage per distance (1lvl/5m : 1lvl/10m = 2) (greater than 1 means fixed wing goes farther on one battery level)
 turnRadius = 4;     % turn radius for dubins constraints in 

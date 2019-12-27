@@ -6,7 +6,7 @@ function [v_Adj,v_Type] = createBaseStationComplex(v_Adj,numPoints,numLevels,FDU
 
 numInV_Adj = numel(v_Adj);
 for i = 1:numInV_Adj
-    if v_Adj(i) == 0;
+    if v_Adj(i) == 0
         v_Adj(i) = -1;
     end
 end

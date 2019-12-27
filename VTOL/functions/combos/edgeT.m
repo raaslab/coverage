@@ -2,7 +2,6 @@
 % creates multi, fixed, down, up edge
 
 function [output] = edgeT(M, FDU, v_Cluster, distances, levels, sites, groupedPoints, aEdge)
-
 output =  aEdge;
 groupedPoints = cell2mat(groupedPoints);
 for i = 1:(sites*levels)
@@ -24,7 +23,6 @@ for i = 1:(sites*levels)
                 output(i,j) = Inf;
                 j = j+1;
             end
-            
         end
     end
 end

@@ -2,7 +2,6 @@
 % creates multi, down, up, fixed edge
 
 function [output] = edgeS(F, MDU, v_Cluster, levels, sites, groupedPoints)
-
 groupedPoints = cell2mat(groupedPoints);
 output = Inf(sites*levels);
 for i = 1:(sites*levels)
@@ -22,7 +21,6 @@ for i = 1:(sites*levels)
         output(i,j) = min(bothLegs);
     end
 end
-
 for i = 1:(sites*levels)
     for j = 1:(sites*levels)
         if groupedPoints(i) == groupedPoints(j)
@@ -30,5 +28,4 @@ for i = 1:(sites*levels)
         end
     end
 end
-
 end

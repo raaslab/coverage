@@ -2,7 +2,6 @@
 % creates multi, fixed, down, up edge
 
 function [output] = edgeW(F, MDU, v_Cluster, distances, levels, sites, groupedPoints, aEdge)
-
 output =  aEdge;
 groupedPoints = cell2mat(groupedPoints);
 for i = 1:(sites*levels)
@@ -17,14 +16,13 @@ for i = 1:(sites*levels)
             if max(F(i,tempLocations) ~= Inf) == 1
                 tempTempLocations = find(F(i,tempLocations) ~= Inf);
                 middlePoint = tempLocations(tempTempLocations);
-                tempPossiblePaths = distances(groupedPoints(i),groupedPoints(middlePoint)) + MDU(middlePoint,j); % M + MDU
+                tempPossiblePaths = distances(groupedPoints(i),groupedPoints(middlePoint)) + MDU(middlePoint,j); % F + MDU
                 output(i,j) = tempPossiblePaths;
                 j = j+1;
             else
                 output(i,j) = Inf;
                 j = j+1;
             end
-            
         end
     end
 end

@@ -2,7 +2,6 @@
 % creates fixed, fixed, down, up edge
 
 function [output] = edgeP(F, FDU, v_Cluster, distances, levels, sites, groupedPoints, kEdge)
-
 output =  kEdge;
 groupedPoints = cell2mat(groupedPoints);
 for i = 1:(sites*levels)
@@ -24,7 +23,6 @@ for i = 1:(sites*levels)
                 output(i,j) = Inf;
                 j = j+1;
             end
-            
         end
     end
 end

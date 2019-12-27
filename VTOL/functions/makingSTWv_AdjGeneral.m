@@ -6,7 +6,7 @@
 % UGVSpeed = the time to travel one unit for the UGV (has to be greater than equal to 1)
 % OUTPUTS
 
-function [v_AdjNew, v_Type, sNew, tNew, weights, v_ClusterLevels, FDU,M] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints,UGVCapable,fixedRatio,turnRadius)
+function [v_AdjNew,v_Type,sNew,tNew,weights,v_ClusterLevels,FDUMNew,M] = makingSTWv_AdjGeneral(maxDistance, x, y, numPoints, numLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints,UGVCapable,fixedRatio,turnRadius)
 
 v_ClusterLevels = Inf([1, numPoints*numLevels]);
 counter = 1;
@@ -52,36 +52,13 @@ FDUMNew = checkUGVPossibility(FDUM,v_UGVCapable,1);
 FDUFNew = checkUGVPossibility(FDUF,v_UGVCapable,1);
 DTUNew = checkUGVPossibility(DTU,v_UGVCapable,2);
 
-% make these into functions for each type of edge combo
 % edge type combos: These edges are only external edges and the combination of the above edges
-% TODO: make all the combination edges possible
-% typeAEdge = typeA(v_Cluster, allDistances, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % F, F
-% typeBEdge = typeB(M, FDUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, FDU
-% typeCEdge = typeC(FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, FDU
-% typeDEdge = typeD(M, FDUNew, v_Cluster, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % FDU, F
-% typeEEdge = typeE(M, DTUNew, v_Cluster, allDistances, numLevels, numPoints, groupedPoints, typeAEdge, timeTO, timeL, rechargeRate); % F, DTU
-
-% MM
 Aedge = edgeA(v_Cluster, allDistancesM, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints); % MMM
-% Bedge = edgeB(); % MMF
-% MG
 Cedge = edgeC(M, DTUNew, v_Cluster, allDistancesM, numLevels, numPoints, groupedPoints); % MGM
-% Dedge = edgeD(); % MGF
-% MF
 Eedge = edgeE(v_Cluster, allDistancesM, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, allDistancesF,fixedRatio); % MFM
-% Fedge = edgeF(); % MFF
-% FM
 Gedge = edgeG(v_Cluster, allDistancesM, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints, allDistancesF,fixedRatio); % FMM
-% Hedge = edgeH(); % FMF
-% FG
 Iedge = edgeI(F, DTUNew, v_Cluster, allDistancesF, numLevels, numPoints, groupedPoints); % FGM
-% Jedge = edgeJ(); % FGF
-% FF
 Kedge = edgeK(v_Cluster, allDistancesF, numLevels, numPoints, v_ClusterLevels, maxDistance, groupedPoints,fixedRatio); % FFM
-% Ledge = edgeL(); % FFF
-
-% check all below. Just used the standard combinations made previously, but used
-% different M and F
 Medge = edgeM(M,FDUMNew,v_Cluster,allDistancesM,numLevels,numPoints,groupedPoints,Aedge); % MMDU
 Nedge = edgeN(M,FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints); % MDUM
 Oedge = edgeO(FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints); % MDUMDU
@@ -89,14 +66,11 @@ Pedge = edgeP(F,FDUFNew,v_Cluster,allDistancesF, numLevels,numPoints,groupedPoin
 Qedge = edgeQ(F,FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints); % FDUF
 Redge = edgeR(FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints); % FDUFDU
 Sedge = edgeS(F,FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints); % MDUF
-Tedge = edgeT(M,FDUFNew,v_Cluster,allDistancesM,numLevels,numPoints,groupedPoints,Aedge); % MFDU % check alldistancesM
+Tedge = edgeT(M,FDUFNew,v_Cluster,allDistancesM,numLevels,numPoints,groupedPoints,Aedge); % MFDU
 Uedge = edgeU(FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints,FDUMNew); % MDUFDU
 Vedge = edgeV(M,FDUFNew,v_Cluster,numLevels,numPoints,groupedPoints); % FDUM
-Wedge = edgeW(F,FDUMNew,v_Cluster,allDistancesM,numLevels,numPoints,groupedPoints,Aedge); % FMDU % check alldistancesM
+Wedge = edgeW(F,FDUMNew,v_Cluster,allDistancesF,numLevels,numPoints,groupedPoints,Aedge); % FMDU
 Xedge = edgeX(FDUMNew,v_Cluster,numLevels,numPoints,groupedPoints,FDUFNew); % FDUMDU
-
-
-
 
 % pick the minimum cost edge here
 numOfTotalPoints = numPoints * numLevels;
@@ -105,7 +79,7 @@ v_AdjNew(1:numOfTotalPoints, 1:numOfTotalPoints) = Inf;
 v_Type(1:numOfTotalPoints, 1:numOfTotalPoints) = 0;
 
 for i = 1:numberOfEdges
-    compare = [Aedge(i),Cedge(i),Eedge(i),Gedge(i),Iedge(i),Kedge(i)]; % array of all types of edge
+    compare = [Aedge(i),Cedge(i),Eedge(i),Gedge(i),Iedge(i),Kedge(i),Medge(i),Nedge(i),Oedge(i),Pedge(i),Qedge(i),Redge(i),Sedge(i),Tedge(i),Uedge(i),Vedge(i),Wedge(i),Xedge(i)]; % array of all types of edge
     [v_AdjNew(i), v_Type(i)]= min(compare);
 end
 
@@ -128,5 +102,4 @@ for i = 1:numOfTotalPoints
         end
     end
 end
-
 end

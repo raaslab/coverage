@@ -34,11 +34,11 @@ groupedPoints = num2cell(groupedPoints);
 
 [v_Adj, v_Type, S1, T1, weights, v_ClusterLevels,FDU,F] = makingSTWv_AdjGeneral(maxDistance, x1, y1, numPointsInit, numBatteryLevels, v_Cluster, timeTO, timeL, rechargeRate, UGVSpeed, groupedPoints,UGVCapable1,fixedRatio,turnRadius);
 
-[xOut, yOut] = graphingCluster(x1, y1, numPointsInit, numBatteryLevels, S1, T1, 0, nodeArray, method);            % graph in cluster format
+[xOut, yOut] = graphingCluster(x1, y1, numPointsInit, numBatteryLevels, S1, T1, 0, nodeArray, method); % graph in cluster format
 
 % GTSP solver
 % tic;
-[finalMatrix, G_init, edgeWeightsFinal, finalTour, gtspWeightMatrix, gtspWeightMatrix2,v_Type] = gtspSolver(v_Cluster,v_Adj,numPointsInit,numBatteryLevels,method,FDU,groupedPoints,x1,y1,UGVSpeed,maxDistance,v_Type,F,v_ClusterLevels);
+[finalMatrix,G_init,edgeWeightsFinal,finalTour,gtspWeightMatrix,gtspWeightMatrix2,v_Type] = gtspSolver(v_Cluster,v_Adj,numPointsInit,numBatteryLevels,method,FDU,groupedPoints,x1,y1,UGVSpeed,maxDistance,v_Type,F,v_ClusterLevels);
 gtspTime = 0;
 
 f = fullfile(pathName, filename);
