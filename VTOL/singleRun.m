@@ -4,17 +4,16 @@
 clc; clear all; close all;
 
 % numBC = 20;
-
-max_Distance = 1800;   % if max_Distance == j then discharge is unit rate per distance (budget)
+max_Distance = 200;   % if max_Distance == j then discharge is unit rate per distance (budget)
 j = 20;
 tTO = 5;           % take off cost
 tL = 45;            % landing cost
 rRate = 2;         % rate of recharge
-UGVS = 1;          % time to travel one unit for the UGV to multi-rotor (greater than 1 means UGV is slower)
+UGVS = 5;          % time to travel one unit for the UGV to multi-rotor (greater than 1 means UGV is slower)
 method = 1;        % 1 = GLNS, 0 = concorde
 timeI = [];
-fixedRatio = 5;     % ratio of multi-rotor to fixed-wing battery usage per distance (1lvl/5m : 1lvl/10m = 2) (greater than 1 means fixed wing goes farther on one battery level)
-turnRadius = 4;     % turn radius for dubins constraints in 
+fixedRatio = 1;     % ratio of multi-rotor to fixed-wing battery usage per distance (1lvl/5m : 1lvl/10m = 2) (greater than 1 means fixed wing goes farther on one battery level)
+turnRadius = 5;     % turn radius for dubins constraints in 
 
 % changing number of input BC
 
@@ -22,7 +21,7 @@ turnRadius = 4;     % turn radius for dubins constraints in
 % polygonCreater(filename4,numBC,100,0,0) % creates random polygons.
 
 % use 'testInput.txt' if you want the file from polygonCreater
-data = readData('/home/user01/Kevin_Yu/coverage/GTSP/inputs/fieldExperiments/kentlandVideo.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('/home/user01/Kevin_Yu/coverage/VTOL/inputs/fieldExperiments/exampleFigureBC.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
 x = [data(:,1), data(:,4)];
 y = [data(:,2), data(:,5)];
@@ -31,15 +30,14 @@ UGVCapable = [data(:,3), data(:,6)];
 G = 0;
 i = numClusters*2; % number of vertices needed to be multiplied by battery levels
 
-
-filename1 = sprintf('test1');
-filename2 = sprintf('/home/user01/Kevin_Yu/coverage/GTSP/test2.gtsp');
-filename3 = sprintf('test3');
-pathName = '/home/user01/Kevin_Yu/coverage/GTSP';
+filename1 = sprintf('journal1');
+filename2 = sprintf('/home/user01/Kevin_Yu/coverage/VTOL/journal2.gtsp');
+filename3 = sprintf('journal3');
+pathName = '/home/user01/Kevin_Yu/coverage/VTOL';
 
 tic
 % pathName = '/home/klyu/lab/coverageWork/testForCoverage/errorInstance'; % for error instances
-[ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename1, tTO, tL, rRate, UGVS, G, x, y, method, max_Distance, pathName,UGVCapable,fixedRatio,turnRadius);
+[ansTime,gtspMatrix,gtspTime, v_Cluster] = testGeneral(i, j, filename1, tTO, tL, rRate, UGVS, x, y, method, max_Distance, pathName,UGVCapable,fixedRatio,turnRadius);
 
 % making GLNS matrix input
 roundedGtspMatrix = round(gtspMatrix);
@@ -52,6 +50,3 @@ save(f);
 
 % Run GLNS after this
 % Run Plotter after this
-
-
-

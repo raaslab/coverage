@@ -2,7 +2,7 @@
 % This adds the base station, but gives costs to go to the base station,
 % but not to come from the base station.
 
-function [v_Adj,v_Type] = createBaseStationComplex(v_Adj,numPoints,numLevels,FDU,v_Cluster,groupedPoints,x,y,UGVSpeed,maxDistance,v_Type,F,v_ClusterLevels)
+function [v_Adj,v_Type] = createBaseStationComplex(v_Adj,numPoints,numLevels,v_Cluster,groupedPoints,x,y,maxDistance,v_Type,v_ClusterLevels)
 
 numInV_Adj = numel(v_Adj);
 for i = 1:numInV_Adj
