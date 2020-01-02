@@ -20,8 +20,9 @@ turnRadius = 5;     % turn radius for dubins constraints in
 % filename4 = sprintf('inputs/timeVSi/%d_%d.txt',trial,numBC);
 % polygonCreater(filename4,numBC,100,0,0) % creates random polygons.
 
+% TEST1!!!
 % use 'testInput.txt' if you want the file from polygonCreater
-data = readData('/home/user01/Kevin_Yu/coverage/VTOL/inputs/fieldExperiments/exampleFigureBC.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
+data = readData('/home/user01/Kevin_Yu/coverage/VTOL/inputs/qualitative.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
 x = [data(:,1), data(:,4)];
 y = [data(:,2), data(:,5)];
@@ -30,9 +31,9 @@ UGVCapable = [data(:,3), data(:,6)];
 G = 0;
 i = numClusters*2; % number of vertices needed to be multiplied by battery levels
 
-filename1 = sprintf('journal1');
-filename2 = sprintf('/home/user01/Kevin_Yu/coverage/VTOL/journal2.gtsp');
-filename3 = sprintf('journal3');
+filename1 = sprintf('journalQ');
+filename2 = sprintf('/home/user01/Kevin_Yu/coverage/VTOL/journalQ.gtsp');
+filename3 = sprintf('journalQ');
 pathName = '/home/user01/Kevin_Yu/coverage/VTOL';
 
 tic
