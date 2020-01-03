@@ -1,21 +1,13 @@
 % GLNSplotter.m
 % plots the output from the GLNS solver. This file requires the output from
-% GLNS in "GLNSSolution" and the two files rando3.mat and rando1.mat.
+% GLNS in "GLNSSolution" and the two files rando1.mat and rando3.mat.
 
 clear
 close all
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentlandVideo1.mat
-load /home/klyu/lab/coverageWork/testForCoverage/fieldExperiments/kentlandVideo3.mat
+load /home/user01/Kevin_Yu/coverage/VTOL/outputs/journalQb1.mat
+load /home/user01/Kevin_Yu/coverage/VTOL/outputs/journalQb3.mat
 
-% GLNSSolution = [2301, 918, 2130, 707, 1955, 1101, 2521, 555, 1763, 371, 1579, 187, 1395, 2601] % kentLand2
-% GLNSSolution = [781, 702, 361, 625, 735, 510, 1059, 594, 305, 268, 1201] % fieldExperiment2
-% exampleFigureBC
-% GLNSSolution = [581, 1927, 633, 2021, 725, 2069, 773, 2117, 802, 2147, 693, 1997, 645, 1890, 556, 1842, 507, 1812, 437, 1763, 468, 414, 1715, 377, 1342, 9, 1361, 108, 1675, 1442, 86, 1393, 143, 1487, 191, 1534, 237, 1561, 263, 1605, 307, 1648, 2233, 881, 2183, 2164, 946, 2254, 962, 2309, 1021, 2326, 1052, 2397, 1084, 1109, 2453, 1157, 2484, 1188, 2532, 1236, 2565, 1269, 2613, 1317, 2641]
-% qualitative work
-% GLNSSolution = [281, 23, 325, 67, 369, 111, 135, 438, 169, 472, 215, 267, 532, 237, 561]
-% kentlandVideo
-GLNSSolution = [141, 503, 105, 467, 69, 431, 33, 395, 164, 569, 213, 617, 361, 723, 246, 648, 330, 692, 294, 761]
-
+GLNSSolution = [281, 22, 323, 64, 365, 106, 127, 428, 169, 470, 211, 273, 535, 237, 561]
 
 % plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC.txt')
 
@@ -79,18 +71,13 @@ end
 
 GLNSg = addedge(GLNSg,S2,T2);
 
-S3 = []; % typeA
-S4 = S3; % typeB
-S5 = S3; % typeC
-S6 = S3; % typeD
-S7 = S3; % typeE
-T3 = S3;
-T4 = S3;
-T5 = S3;
-T6 = S3;
-T7 = S3;
+% SPLITTING EDGES FROM SOLUTION
+[S3, S4, S5, T3, T4, T5] = deal([]);
 impossible = 0;
 lastPoint = 0;
+% LEGEND FOR EDGE TYPES BELOW:
+% typeChecker:EDGE; 1:A; 2:C; 3:E; 4:G; 5:I; 6:K; 7:M; 8:N; 9:O; 10:P;
+% 11:Q; 12:R; 13:S; 14:T; 15:U; 16:V; 17:W; 18:X
 for a = 2:(numPointsInit/2)+1
     if a == (numPointsInit/2)+1
         lastPoint = 1;
@@ -102,41 +89,31 @@ for a = 2:(numPointsInit/2)+1
         locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
         locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
     end
-    if typeChecker == 1 % typeA
+    if typeChecker == 1 % MM
         S3(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T3(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
         if lastPoint == 0
             S3(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
             T3(end+1) = GLNSSolutionWithAllPoints(locationEnd);
         end
-    elseif typeChecker == 2 % typeB
+    elseif typeChecker == 2 % MG
         S4(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T4(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
         if lastPoint == 0
             S4(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
             T4(end+1) = GLNSSolutionWithAllPoints(locationEnd);
         end
-    elseif typeChecker == 3 % typeC
+    elseif typeChecker == 3 % MF
         S5(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T5(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
         if lastPoint == 0
             S5(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
             T5(end+1) = GLNSSolutionWithAllPoints(locationEnd);
         end
-    elseif typeChecker == 4 % typeD
-        S6(end+1) = GLNSSolutionWithAllPoints(locationStart);
-        T6(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-        if lastPoint == 0
-            S6(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-            T6(end+1) = GLNSSolutionWithAllPoints(locationEnd);
-        end
-    elseif typeChecker == 5 % typeE
-        S7(end+1) = GLNSSolutionWithAllPoints(locationStart);
-        T7(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
-        if lastPoint == 0
-            S7(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
-            T7(end+1) = GLNSSolutionWithAllPoints(locationEnd);
-        end
+    elseif typeChecker == 4 % FM
+    elseif typeChecker == 5 % FG
+    elseif typeChecker == 6 % FF
+        
     else
         impossible = 1;
         disp('error')
@@ -145,15 +122,16 @@ for a = 2:(numPointsInit/2)+1
     lastPoint = 0;
 end
 
-S8 = [];
-T8 = [];
-for i = 1:numel(GLNSx)
-    for j = i+1:numel(GLNSx)
-        S8(end+1) = i;
-        T8(end+1) = j;
-    end
-end
+% S8 = [];
+% T8 = [];
+% for i = 1:numel(GLNSx)
+%     for j = i+1:numel(GLNSx)
+%         S8(end+1) = i;
+%         T8(end+1) = j;
+%     end
+% end
 
+% CREATING THE PLOT
 if impossible == 0
     % GLNSg = addedge(GLNSg,S8,T8);
     figure(2)
@@ -182,9 +160,6 @@ if impossible == 0
     end
     if isempty(S6) == 0                 %highlight type 4 edges: FDU-F
         highlight(GLNSPlot,S6, T6,'EdgeColor',[1,0.1034,0.7241],'LineWidth',3, 'LineStyle', '-')
-    end
-    if isempty(S7) == 0                 %highlight type 5 edges: F-DTU
-        highlight(GLNSPlot,S7, T7,'EdgeColor',[1,0.8276,0],'LineWidth',3, 'LineStyle', '-')
     end
 
     % highlighting edges for UGV
