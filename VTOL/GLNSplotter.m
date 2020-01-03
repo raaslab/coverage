@@ -4,8 +4,8 @@
 
 clear
 close all
-load /home/user01/Kevin_Yu/coverage/VTOL/outputs/journalQb1.mat
-load /home/user01/Kevin_Yu/coverage/VTOL/outputs/journalQb3.mat
+load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQb1.mat
+load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQb3.mat
 
 GLNSSolution = [281, 22, 323, 64, 365, 106, 127, 428, 169, 470, 211, 273, 535, 237, 561]
 
@@ -72,7 +72,7 @@ end
 GLNSg = addedge(GLNSg,S2,T2);
 
 % SPLITTING EDGES FROM SOLUTION
-[S3, S4, S5, T3, T4, T5] = deal([]);
+[S3, S4, S5, S6, S7, S8, T3, T4, T5, T6, T7, T8, downUpPoints] = deal([]);
 impossible = 0;
 lastPoint = 0;
 % LEGEND FOR EDGE TYPES BELOW:
@@ -89,7 +89,7 @@ for a = 2:(numPointsInit/2)+1
         locationStart = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a));
         locationEnd = find(GLNSSolutionWithAllPoints == GLNSSolutionOriginalPoints(a+1));
     end
-    if typeChecker == 1 % MM
+    if typeChecker == 1 || typeChecker == 7 || typeChecker == 8 || typeChecker == 9 % MM
         S3(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T3(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
         if lastPoint == 0
@@ -103,23 +103,50 @@ for a = 2:(numPointsInit/2)+1
             S4(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
             T4(end+1) = GLNSSolutionWithAllPoints(locationEnd);
         end
-    elseif typeChecker == 3 % MF
+    elseif typeChecker == 3 || typeChecker == 13 || typeChecker == 14 || typeChecker == 15 % MF
         S5(end+1) = GLNSSolutionWithAllPoints(locationStart);
         T5(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
         if lastPoint == 0
             S5(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
             T5(end+1) = GLNSSolutionWithAllPoints(locationEnd);
         end
-    elseif typeChecker == 4 % FM
+    elseif typeChecker == 4 || typeChecker == 16 || typeChecker == 17 || typeChecker == 18 % FM
+        S6(end+1) = GLNSSolutionWithAllPoints(locationStart);
+        T6(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+        if lastPoint == 0
+            S6(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T6(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        end
     elseif typeChecker == 5 % FG
-    elseif typeChecker == 6 % FF
-        
+        S7(end+1) = GLNSSolutionWithAllPoints(locationStart);
+        T7(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+        if lastPoint == 0
+            S7(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T7(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        end
+    elseif typeChecker == 6 || typeChecker == 10 || typeChecker == 11 || typeChecker == 12 % FF
+        S8(end+1) = GLNSSolutionWithAllPoints(locationStart);
+        T8(end+1) = GLNSSolutionWithAllPoints(locationEnd-1);
+        if lastPoint == 0
+            S8(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+            T8(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        end
     else
         impossible = 1;
         disp('error')
         break
     end
     lastPoint = 0;
+        if (typeChecker == 7 || typeChecker == 10 || typeChecker == 14 || typeChecker == 17) && lastPoint == 0 % _ _DU
+        downUpPoints(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+    elseif typeChecker == 8 || typeChecker == 11 || typeChecker == 13 || typeChecker == 16 % _DU_
+        downUpPoints(end+1) = GLNSSolutionOriginalPoints(locationStart+1);
+    elseif typeChecker == 9 || typeChecker == 12 || typeChecker == 15 || typeChecker == 18 % _DU_DU
+        downUpPoints(end+1) = GLNSSolutionWithAllPoints(locationStart+1);
+        if lastPoint == 0
+            downUpPoints(end+1) = GLNSSolutionWithAllPoints(locationEnd);
+        end
+    end
 end
 
 % S8 = [];
@@ -137,10 +164,10 @@ if impossible == 0
     figure(2)
     GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',3, 'EdgeColor', [0,0,1]);
     GLNSPlot.EdgeAlpha = 1;
-
+    
     GLNSPlot.NodeLabel = {};
     axis equal
-    axis([200 900 50 800])
+%     axis([200 900 50 800])
     groupedPoints = cell2mat(groupedPoints);
     
     %     for i = 2:length(GLNSSolution)-1
@@ -161,21 +188,21 @@ if impossible == 0
     if isempty(S6) == 0                 %highlight type 4 edges: FDU-F
         highlight(GLNSPlot,S6, T6,'EdgeColor',[1,0.1034,0.7241],'LineWidth',3, 'LineStyle', '-')
     end
-
+    
     % highlighting edges for UGV
     % highlight(GLNSPlot, S8, T8, 'EdgeColor', 'r', 'LineWidth', 4)
     
-%     highlight(GLNSPlot, S2)             %highlights nodes
-%     highlight(GLNSPlot, numel(S2))    %highlights last node
+    %     highlight(GLNSPlot, S2)             %highlights nodes
+    %     highlight(GLNSPlot, numel(S2))    %highlights last node
     
-    h = zeros(5, 1);
-    h(1) = plot(NaN,NaN,'color', [0,0,1]);
-    h(2) = plot(NaN,NaN,'color', [1,0,0]);
-    h(3) = plot(NaN,NaN,'color', [0,1,0]);
-    h(4) = plot(NaN,NaN,'color', [1,0.1034,0.7241]);
-    h(5) = plot(NaN,NaN,'color', [1,0.8276,0]);
-    legg = legend(h, 'F-F','F-FDU','F-DUFDU','F-DUF','F-DTU');
-    legg.FontSize = 9;
+%     h = zeros(5, 1);
+%     h(1) = plot(NaN,NaN,'color', [0,0,1]);
+%     h(2) = plot(NaN,NaN,'color', [1,0,0]);
+%     h(3) = plot(NaN,NaN,'color', [0,1,0]);
+%     h(4) = plot(NaN,NaN,'color', [1,0.1034,0.7241]);
+%     h(5) = plot(NaN,NaN,'color', [1,0.8276,0]);
+%     legg = legend(h, 'F-F','F-FDU','F-DUFDU','F-DUF','F-DTU');
+%     legg.FontSize = 9;
 else
     disp('impossible input');
 end
@@ -188,6 +215,6 @@ for i = 2:2:length(GLNSx)-1
 end
 
 title('Output Tour', 'Fontsize', 16)
-set(gca,'Ydir','reverse')
+% set(gca,'Ydir','reverse')
 
 % close all;
