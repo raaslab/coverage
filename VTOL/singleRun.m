@@ -4,7 +4,7 @@
 clc; clear all; close all;
 
 % numBC = 20;
-max_Distance = 200;   % if max_Distance == j then discharge is unit rate per distance (budget)
+max_Distance = 50;   % if max_Distance == j then discharge is unit rate per distance (budget)
 j = 20;
 tTO = 5;           % take off cost
 tL = 45;            % landing cost
@@ -20,7 +20,6 @@ turnRadius = 5;     % turn radius for dubins constraints in
 % filename4 = sprintf('inputs/timeVSi/%d_%d.txt',trial,numBC);
 % polygonCreater(filename4,numBC,100,0,0) % creates random polygons.
 
-% TEST1!!!
 % use 'testInput.txt' if you want the file from polygonCreater
 data = readData('/home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/inputs/qualitative.txt'); % get the size and shape from the data (this will tell you number of clusters points and so on)
 [numClusters, ~] = size(data);
@@ -32,9 +31,9 @@ G = 0;
 
 i = numClusters*2; % number of vertices needed to be multiplied by battery levels
 
-filename1 = sprintf('journalQb1');
-filename2 = sprintf('/home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQb2.gtsp');
-filename3 = sprintf('journalQb3');
+filename1 = sprintf('journalQd1');
+filename2 = sprintf('/home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQd2.gtsp');
+filename3 = sprintf('journalQd3');
 pathName = '/home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs';
 
 tic

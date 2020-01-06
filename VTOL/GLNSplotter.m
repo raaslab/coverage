@@ -4,10 +4,12 @@
 
 clear
 close all
-load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQb1.mat
-load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQb3.mat
+load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQd1.mat
+load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQd3.mat
 
-GLNSSolution = [281, 22, 323, 64, 365, 106, 127, 428, 169, 470, 211, 273, 535, 237, 561]
+% GLNSSolution = [281, 22, 323, 64, 365, 106, 127, 428, 169, 470, 211, 273, 535, 237, 561] % qualitative b
+% GLNSSolution = [281, 23, 325, 67, 369, 111, 135, 438, 163, 466, 209, 276, 532, 237, 561] % qualitative c
+% GLNSSolution = [281, 23, 325, 67, 369, 111, 122, 425, 168, 471, 481, 267, 532, 237, 561] % qualitative d
 
 % plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC.txt')
 
@@ -137,7 +139,7 @@ for a = 2:(numPointsInit/2)+1
         break
     end
     lastPoint = 0;
-        if (typeChecker == 7 || typeChecker == 10 || typeChecker == 14 || typeChecker == 17) && lastPoint == 0 % _ _DU
+    if (typeChecker == 7 || typeChecker == 10 || typeChecker == 14 || typeChecker == 17) && lastPoint == 0 % _ _DU
         downUpPoints(end+1) = GLNSSolutionWithAllPoints(locationEnd);
     elseif typeChecker == 8 || typeChecker == 11 || typeChecker == 13 || typeChecker == 16 % _DU_
         downUpPoints(end+1) = GLNSSolutionOriginalPoints(locationStart+1);
@@ -165,9 +167,9 @@ if impossible == 0
     GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',3, 'EdgeColor', [0,0,1]);
     GLNSPlot.EdgeAlpha = 1;
     
-    GLNSPlot.NodeLabel = {};
+%     GLNSPlot.NodeLabel = {};
     axis equal
-%     axis([200 900 50 800])
+    %     axis([200 900 50 800])
     groupedPoints = cell2mat(groupedPoints);
     
     %     for i = 2:length(GLNSSolution)-1
@@ -195,14 +197,14 @@ if impossible == 0
     %     highlight(GLNSPlot, S2)             %highlights nodes
     %     highlight(GLNSPlot, numel(S2))    %highlights last node
     
-%     h = zeros(5, 1);
-%     h(1) = plot(NaN,NaN,'color', [0,0,1]);
-%     h(2) = plot(NaN,NaN,'color', [1,0,0]);
-%     h(3) = plot(NaN,NaN,'color', [0,1,0]);
-%     h(4) = plot(NaN,NaN,'color', [1,0.1034,0.7241]);
-%     h(5) = plot(NaN,NaN,'color', [1,0.8276,0]);
-%     legg = legend(h, 'F-F','F-FDU','F-DUFDU','F-DUF','F-DTU');
-%     legg.FontSize = 9;
+    %     h = zeros(5, 1);
+    %     h(1) = plot(NaN,NaN,'color', [0,0,1]);
+    %     h(2) = plot(NaN,NaN,'color', [1,0,0]);
+    %     h(3) = plot(NaN,NaN,'color', [0,1,0]);
+    %     h(4) = plot(NaN,NaN,'color', [1,0.1034,0.7241]);
+    %     h(5) = plot(NaN,NaN,'color', [1,0.8276,0]);
+    %     legg = legend(h, 'F-F','F-FDU','F-DUFDU','F-DUF','F-DTU');
+    %     legg.FontSize = 9;
 else
     disp('impossible input');
 end
