@@ -1,15 +1,17 @@
+
 % GLNSplotter.m
 % plots the output from the GLNS solver. This file requires the output from
 % GLNS in "GLNSSolution" and the two files rando1.mat and rando3.mat.
 
 clear
 close all
-load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQd1.mat
-load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQd3.mat
+load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQe1.mat
+load /home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQe3.mat
 
 % GLNSSolution = [281, 22, 323, 64, 365, 106, 127, 428, 169, 470, 211, 273, 535, 237, 561] % qualitative b
 % GLNSSolution = [281, 23, 325, 67, 369, 111, 135, 438, 163, 466, 209, 276, 532, 237, 561] % qualitative c
 % GLNSSolution = [281, 23, 325, 67, 369, 111, 122, 425, 168, 471, 481, 267, 532, 237, 561] % qualitative d
+GLNSSolution = [501, 242, 543, 465, 146, 487, 168, 409, 390, 71, 312, 93, 334, 15, 561] % qualitative e
 
 % plotTXT('/home/klyu/lab/coverageWork/coverage/GTSP/inputs/fieldExperiments/exampleFigureBC.txt')
 
@@ -167,7 +169,7 @@ if impossible == 0
     GLNSPlot = plot(GLNSg,'XData',GLNSx,'YData',GLNSy, 'LineWidth',3, 'EdgeColor', [0,0,1]);
     GLNSPlot.EdgeAlpha = 1;
     
-%     GLNSPlot.NodeLabel = {};
+    %     GLNSPlot.NodeLabel = {};
     axis equal
     %     axis([200 900 50 800])
     groupedPoints = cell2mat(groupedPoints);
@@ -178,17 +180,23 @@ if impossible == 0
     hold on
     
     % highlight edges for UAV
-    %     if isempty(S3) == 0                 %highlight type 1 edges: F-F
-    %         highlight(GLNSPlot,S3, T3,'EdgeColor','b','LineWidth',4, 'LineStyle', '-')
-    %     end
+    if isempty(S3) == 0                 %highlight type 1 edges: F-F
+        highlight(GLNSPlot,S3, T3,'EdgeColor',[0,0,128]/255,'LineWidth',4, 'LineStyle', '-')
+    end
     if isempty(S4) == 0                 %highlight type 2 edges: F-FDU
-        highlight(GLNSPlot,S4, T4,'EdgeColor',[1,0,0],'LineWidth',3, 'LineStyle', '-')
+        highlight(GLNSPlot,S4, T4,'EdgeColor',[230,25,75]/255,'LineWidth',3, 'LineStyle', '-')
     end
     if isempty(S5) == 0                 %highlight type 3 edges: FDU-FDU
-        highlight(GLNSPlot,S5, T5,'EdgeColor',[0,1,0],'LineWidth',3, 'LineStyle', '-')
+        highlight(GLNSPlot,S5, T5,'EdgeColor',[245,130,48]/255,'LineWidth',3, 'LineStyle', '-')
     end
     if isempty(S6) == 0                 %highlight type 4 edges: FDU-F
-        highlight(GLNSPlot,S6, T6,'EdgeColor',[1,0.1034,0.7241],'LineWidth',3, 'LineStyle', '-')
+        highlight(GLNSPlot,S6, T6,'EdgeColor',[210,245,60]/255,'LineWidth',3, 'LineStyle', '-')
+    end
+    if isempty(S7) == 0                 %highlight type 4 edges: FDU-F
+        highlight(GLNSPlot,S7, T7,'EdgeColor',[70,240,240]/255,'LineWidth',3, 'LineStyle', '-')
+    end
+    if isempty(S8) == 0                 %highlight type 4 edges: FDU-F
+        highlight(GLNSPlot,S8, T8,'EdgeColor',[145,30,180]/255,'LineWidth',3, 'LineStyle', '-')
     end
     
     % highlighting edges for UGV
@@ -196,15 +204,6 @@ if impossible == 0
     
     %     highlight(GLNSPlot, S2)             %highlights nodes
     %     highlight(GLNSPlot, numel(S2))    %highlights last node
-    
-    %     h = zeros(5, 1);
-    %     h(1) = plot(NaN,NaN,'color', [0,0,1]);
-    %     h(2) = plot(NaN,NaN,'color', [1,0,0]);
-    %     h(3) = plot(NaN,NaN,'color', [0,1,0]);
-    %     h(4) = plot(NaN,NaN,'color', [1,0.1034,0.7241]);
-    %     h(5) = plot(NaN,NaN,'color', [1,0.8276,0]);
-    %     legg = legend(h, 'F-F','F-FDU','F-DUFDU','F-DUF','F-DTU');
-    %     legg.FontSize = 9;
 else
     disp('impossible input');
 end
@@ -216,6 +215,15 @@ for i = 2:2:length(GLNSx)-1
     
 end
 
+h = zeros(6, 1);
+h(1) = plot(NaN,NaN,'color', [0,0,128]/255);
+h(2) = plot(NaN,NaN,'color', [230,25,75]/255);
+h(3) = plot(NaN,NaN,'color', [245,130,48]/255);
+h(4) = plot(NaN,NaN,'color', [210,245,60]/255);
+h(5) = plot(NaN,NaN,'color', [70,240,240]/255);
+h(6) = plot(NaN,NaN,'color', [145,30,180]/255);
+legg = legend(h,'MM','MG','MF','FM','FG','FF');
+legg.FontSize = 9;
 title('Output Tour', 'Fontsize', 16)
 % set(gca,'Ydir','reverse')
 
