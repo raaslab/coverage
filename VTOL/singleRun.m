@@ -4,7 +4,7 @@
 clc; clear all; close all;
 
 % numBC = 20;
-max_Distance = 10;   % if max_Distance == j then discharge is unit rate per distance (budget)
+max_Distance = 20;   % if max_Distance == j then discharge is unit rate per distance (budget)
 j = 20;
 tTO = 5;           % take off cost
 tL = 45;            % landing cost
@@ -12,7 +12,7 @@ rRate = 2;         % rate of recharge
 UGVS = 5;          % time to travel one unit for the UGV to multi-rotor (greater than 1 means UGV is slower)
 method = 1;        % 1 = GLNS, 0 = concorde
 timeI = [];
-fixedRatio = 50;     % ratio of multi-rotor to fixed-wing battery usage per distance (1lvl/5m : 1lvl/10m = 2) (greater than 1 means fixed wing goes farther on one battery level)
+fixedRatio = 3;     % ratio of multi-rotor to fixed-wing battery usage per distance (1lvl/5m : 1lvl/10m = 2) (greater than 1 means fixed wing goes farther on one battery level)
 turnRadius = 1;     % turn radius for dubins constraints in 
 
 % changing number of input BC
@@ -31,9 +31,9 @@ G = 0;
 
 i = numClusters*2; % number of vertices needed to be multiplied by battery levels
 
-filename1 = sprintf('journalQe1');
-filename2 = sprintf('/home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQe2.gtsp');
-filename3 = sprintf('journalQe3');
+filename1 = sprintf('journalQg1');
+filename2 = sprintf('/home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs/journalQg2.gtsp');
+filename3 = sprintf('journalQg3');
 pathName = '/home/user01/Kevin_Yu/3D_bridge_meshes/coverage/VTOL/outputs';
 
 tic
